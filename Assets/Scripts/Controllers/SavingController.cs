@@ -52,7 +52,7 @@ public class SavingController : MonoBehaviour
 
     private void SavePlayerPrefs()
     {
-        PlayerPrefs.SetFloat(PrefKeys.Volume, AudioController.Instance.P_AudioVolume);
+        PlayerPrefs.SetFloat(PrefKeys.Volume, AudioController.Instance.AudioVolume);
         PlayerPrefs.SetInt(PrefKeys.ScreenWidth, Screen.width);
         PlayerPrefs.SetInt(PrefKeys.ScreenHeight, Screen.height);
         PlayerPrefs.SetInt(PrefKeys.FullScreen, Screen.fullScreenMode == FullScreenMode.FullScreenWindow ? 1 : 0);

@@ -26,22 +26,22 @@ public class AudioHolder : MonoBehaviour
             float pitch;
             float min;
             float max;
-            AudioData defaultData = new(m_audioData[i].P_Clip);
-            if (!m_audioData[i].P_IsPitchRandom)
+            AudioData defaultData = new(m_audioData[i].Clip);
+            if (!m_audioData[i].IsPitchRandom)
             {
-                pitch = m_audioData[i].P_Pitch;
-                if (m_audioData[i].P_Pitch == 0) pitch = defaultData.P_Pitch;
-                m_audioData[i] = new(m_audioData[i].P_Clip, pitch,
-                    m_audioData[i].P_IsPitchRandom, m_audioData[i].P_Min, m_audioData[i].P_Max);
+                pitch = m_audioData[i].Pitch;
+                if (m_audioData[i].Pitch == 0) pitch = defaultData.Pitch;
+                m_audioData[i] = new(m_audioData[i].Clip, pitch,
+                    m_audioData[i].IsPitchRandom, m_audioData[i].Min, m_audioData[i].Max);
             }
             else
             {
-                min = m_audioData[i].P_Min;
-                max = m_audioData[i].P_Max;
-                if (m_audioData[i].P_Min == 0) min = defaultData.P_Min;
-                if (m_audioData[i].P_Max == 0) max = defaultData.P_Max;
-                m_audioData[i] = new(m_audioData[i].P_Clip, m_audioData[i].P_Pitch,
-                    m_audioData[i].P_IsPitchRandom, min, max);
+                min = m_audioData[i].Min;
+                max = m_audioData[i].Max;
+                if (m_audioData[i].Min == 0) min = defaultData.Min;
+                if (m_audioData[i].Max == 0) max = defaultData.Max;
+                m_audioData[i] = new(m_audioData[i].Clip, m_audioData[i].Pitch,
+                    m_audioData[i].IsPitchRandom, min, max);
             }
         }
     }

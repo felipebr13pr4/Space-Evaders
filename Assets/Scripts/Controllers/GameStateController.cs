@@ -6,9 +6,9 @@ public class GameStateController : MonoBehaviour
     private bool m_isPlayerDead;
     private bool m_isLevelClear;
     private bool m_isGamePaused;
-    public bool P_IsPlayerDead => m_isPlayerDead;
-    public bool P_IsLevelClear => m_isLevelClear;
-    public bool P_IsGamePaused => m_isGamePaused;
+    public bool IsPlayerDead => m_isPlayerDead;
+    public bool IsLevelClear => m_isLevelClear;
+    public bool IsGamePaused => m_isGamePaused;
 
     public static event Action OnGamePaused;
 

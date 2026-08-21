@@ -10,11 +10,11 @@ public struct AudioData
     [SerializeField] private float m_min;
     [SerializeField] private float m_max;
 
-    public readonly AudioClip P_Clip => m_clip;
-    public readonly float P_Pitch => m_pitch;
-    public readonly bool P_IsPitchRandom => m_isPitchRandom;
-    public readonly float P_Min => m_min;
-    public readonly float P_Max => m_max;
+    public readonly AudioClip Clip => m_clip;
+    public readonly float Pitch => m_pitch;
+    public readonly bool IsPitchRandom => m_isPitchRandom;
+    public readonly float Min => m_min;
+    public readonly float Max => m_max;
 
     public AudioData(AudioClip clip)
     {

@@ -13,7 +13,7 @@ public class ShowSliderValueInText : MonoBehaviour
 
         float value = m_sliderType switch
         {
-            SliderType.Volume => AudioController.Instance.P_AudioVolume,
+            SliderType.Volume => AudioController.Instance.AudioVolume,
             _ => 1f
         };
 

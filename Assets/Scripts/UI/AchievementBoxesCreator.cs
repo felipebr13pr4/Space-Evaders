@@ -19,14 +19,14 @@ public class AchievementBoxesCreator : MonoBehaviour
     {
         GameObject boxPrefab;
         int increasedReq = 0;
-        for (int i = 0; i < boxesToSpawn.P_BoxesAmount; i++)
+        for (int i = 0; i < boxesToSpawn.BoxesAmount; i++)
         {
             boxPrefab = Instantiate(m_boxPrefab, transform);
-            string boxName = boxesToSpawn.P_BoxesName + " " + (i + 1);
+            string boxName = boxesToSpawn.BoxesName + " " + (i + 1);
             boxPrefab.name = boxName;
             AchievementBox box = boxPrefab.GetComponent<AchievementBox>();
-            box.Initialize(boxName, boxesToSpawn.P_BoxesType,boxesToSpawn.P_BoxesInitialReq + increasedReq);
-            increasedReq += boxesToSpawn.P_BoxesReqIncrease;
+            box.Initialize(boxName, boxesToSpawn.BoxesType,boxesToSpawn.BoxesInitialReq + increasedReq);
+            increasedReq += boxesToSpawn.BoxesReqIncrease;
         }
     }
 
@@ -50,11 +50,11 @@ public class AchievementBoxesCreator : MonoBehaviour
         [SerializeField] private int m_boxesInitialReq;
         [SerializeField] private int m_boxesReqIncrease;
 
-        public readonly string P_BoxesName => m_boxesName;
-        public readonly int P_BoxesAmount => m_boxesAmount;
-        public readonly AchievementType P_BoxesType => m_boxesType;
-        public readonly int P_BoxesInitialReq => m_boxesInitialReq;
-        public readonly int P_BoxesReqIncrease => m_boxesReqIncrease;
+        public readonly string BoxesName => m_boxesName;
+        public readonly int BoxesAmount => m_boxesAmount;
+        public readonly AchievementType BoxesType => m_boxesType;
+        public readonly int BoxesInitialReq => m_boxesInitialReq;
+        public readonly int BoxesReqIncrease => m_boxesReqIncrease;
 
     }
 }
