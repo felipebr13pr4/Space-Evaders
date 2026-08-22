@@ -28,6 +28,8 @@ Re-appearances from last project
 
 I learned
 - That unity packaging is really good.
+- A little bit more about lists (they're interesting).
+- Structs vs classes for small data.
 
 
 Next time i should
@@ -52,7 +54,7 @@ Did I actually do it? (Did i do past "Next times i should")
 
 
 General Thoughts
-- Empty for now.
+- Im starting to realize that there must be looots of situations where theres a better solution but i can't know that because i am not aware of that better solution, which also means i likely can't put it here on things i should learn or do next time as i just don't know about said thing.
 
 
 
