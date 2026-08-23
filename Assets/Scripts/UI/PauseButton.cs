@@ -28,8 +28,5 @@ public class PauseButton : MonoBehaviour
 
     private void UnableToPause() => gameObject.SetActive(false);
 
-    private void TogglePause()
-    {
-        GameStateController.Instance.TogglePause();
-    }
+    private void TogglePause() => GameStateController.Instance.TogglePause();
 }
