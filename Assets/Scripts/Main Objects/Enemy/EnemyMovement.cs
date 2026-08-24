@@ -2,16 +2,10 @@ using System.Collections;
 using UnityEngine;
 
 [RequireComponent(typeof(Rigidbody2D))]
-public class EnemyMovement : MonoBehaviour
+public class EnemyMovement : Entity
 {
-    private Rigidbody2D m_rb2d;
     private float m_moveSpeed;
     private EnemyPattern m_path;
-
-    private void Start()
-    {
-        m_rb2d = GetComponent<Rigidbody2D>();
-    }
 
     public void Initialize(float moveSpeed, EnemyPattern path, bool isXFlipped = false, bool isYFlipped = false)
     {
@@ -31,6 +25,8 @@ public class EnemyMovement : MonoBehaviour
                 for (int j = 0; j < m_path.Movements[i].RepeatAmount; j++)
                 {
                     yield return new WaitForSeconds(m_moveSpeed);
+
+                    ClampInBounds();
 
                     if (isXFlipped && m_path.Movements[i].Direction.x != 0) {
                         m_rb2d.position += -m_path.Movements[i].Direction; continue; }
