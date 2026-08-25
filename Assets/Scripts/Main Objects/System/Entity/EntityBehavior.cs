@@ -5,7 +5,7 @@ using UnityEngine;
 public class EntityBehavior : Entity
 {
     [SerializeField] protected int m_maxHealth = 3;
-    protected virtual int MaxHealth { get => m_maxHealth; set { m_maxHealth = value; m_health = value; } }
+    protected int MaxHealth { get => m_maxHealth; set { m_maxHealth = value; m_health = value; } }
     private int m_lastHealth;
     private int m_health;
     public int Health
@@ -49,8 +49,8 @@ public class EntityBehavior : Entity
         gameObject.SetActive(false);
     }
 
-    protected virtual void Initialize(int health)
+    public virtual void Initialize(int health)
     {
-        m_health = health;
+        MaxHealth = health;
     }
 }

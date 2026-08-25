@@ -1,5 +1,10 @@
 
-public class PlayerBehavior : EntityBehavior
+public class PlayerBehavior : RangedEntityBehavior
 {
-    // Yet to do.
+    protected override void Start()
+    {
+        base.Start();
+        FireRate = 3; // for testing.
+        Initialize(5); // for testing.
+    }
 }
