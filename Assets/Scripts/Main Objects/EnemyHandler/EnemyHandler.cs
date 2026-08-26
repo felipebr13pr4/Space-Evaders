@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -7,6 +8,7 @@ public class EnemyHandler : MonoBehaviour
     [SerializeField] private EnemyPattern[] m_patterns;
     [SerializeField] private List<EnemyMovement> m_enemyMovement = new();
     private int m_waveNumber;
+    public static event Action OnStartWave;
 
     private void Start()
     {
@@ -15,9 +17,13 @@ public class EnemyHandler : MonoBehaviour
 
     private IEnumerator StartWave()
     {
+        yield return null;
+        OnStartWave?.Invoke();
         yield return new WaitForSeconds(3);
         ErrorLogger.DebugLog("starting wave");
         foreach (EnemyMovement enemy in m_enemyMovement) {
+            enemy.gameObject.SetActive(true);
+            yield return null;
             enemy.Initialize(0.5f, m_patterns[0]);
             //enemy.Initialize(0.5f, m_patterns[0], true); // The three tested and working.
             //enemy.Initialize(0.5f, m_patterns[0], true, true); // I'll leave them for testing.

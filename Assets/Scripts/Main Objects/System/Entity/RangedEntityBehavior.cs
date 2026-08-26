@@ -5,7 +5,7 @@ public class RangedEntityBehavior : EntityBehavior
 {
     [SerializeField] protected float m_fireRate = 3;
     private GameObject[] m_bullets;
-    private readonly int m_maxBullets = 35;
+    private readonly int m_maxBullets = 55;
     protected BulletData m_bulletData;
 
     protected override void Start()
@@ -27,8 +27,7 @@ public class RangedEntityBehavior : EntityBehavior
         {   m_bullets[i] = new GameObject("Bullet " + (i+1));
             m_bullets[i].transform.SetParent(tempObj2.transform);
             Bullet bullet = m_bullets[i].AddComponent<Bullet>();
-            bullet.InitializeStats(m_bulletData);
-        }
+            bullet.InitializeStats(m_bulletData); }
 
         StartCoroutine(Shoot());
     }
