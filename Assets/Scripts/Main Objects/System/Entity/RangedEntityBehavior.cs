@@ -3,23 +3,30 @@ using UnityEngine;
 
 public class RangedEntityBehavior : EntityBehavior
 {
-    [SerializeField] private float m_fireRate = 3;
-    public float FireRate { set { m_fireRate = value; } }
+    [SerializeField] protected float m_fireRate = 3;
     private GameObject[] m_bullets;
     private readonly int m_maxBullets = 35;
-    private Vector2 m_shootDirection; // To be used to decide if the one shooting is enemy or player.
+    protected BulletData m_bulletData;
 
-    public override void Initialize(int health)
+    protected override void Start()
     {
-        base.Initialize(health);
+        base.Start();
+        Initialize();
+    }
+
+    public override void Initialize()
+    {
         m_bullets = new GameObject[m_maxBullets];
 
-        GameObject tempObj = new(name + " Bullets");
+        GameObject tempObj = new(name + "'s Bullets");
         tempObj.transform.SetParent(CreationsHolder.Transform);
+
         for (int i = 0; i < m_bullets.Length; i++)
-        {   m_bullets[i] = new GameObject("Bullet");
+        {   m_bullets[i] = new GameObject("Bullet " + (i+1));
             m_bullets[i].transform.SetParent(tempObj.transform);
-            m_bullets[i].SetActive(false); }
+            Bullet bullet = m_bullets[i].AddComponent<Bullet>();
+            bullet.InitializeStats(m_bulletData);
+        }
 
         StartCoroutine(Shoot());
     }

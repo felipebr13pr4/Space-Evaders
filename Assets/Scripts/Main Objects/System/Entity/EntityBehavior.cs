@@ -32,6 +32,7 @@ public class EntityBehavior : Entity
             if (takeAndDeal) hitter.TakeDamage(m_lastHealth);
             return; }
         Health -= damage;
+        ErrorLogger.DebugLog("took dmg, health: " + Health);
     }
 
     private IEnumerator FlashDamage()
@@ -49,8 +50,5 @@ public class EntityBehavior : Entity
         gameObject.SetActive(false);
     }
 
-    public virtual void Initialize(int health)
-    {
-        MaxHealth = health;
-    }
+    public virtual void Initialize() { }
 }

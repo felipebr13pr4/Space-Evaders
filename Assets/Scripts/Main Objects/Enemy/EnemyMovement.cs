@@ -24,9 +24,8 @@ public class EnemyMovement : Entity
             {
                 for (int j = 0; j < m_path.Movements[i].RepeatAmount; j++)
                 {
-                    yield return new WaitForSeconds(m_moveSpeed);
-
                     ClampInBounds();
+                    yield return new WaitForSeconds(m_moveSpeed);
 
                     if (isXFlipped && m_path.Movements[i].Direction.x != 0) {
                         m_rb2d.position += -m_path.Movements[i].Direction; continue; }
