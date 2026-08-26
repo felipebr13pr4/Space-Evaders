@@ -21,12 +21,30 @@ public class EntityBehavior : Entity
     }
     private bool m_isDead = false;
     public static event Action<GameObject, int> OnDamageTaken;
+    private DamageNumber[] m_damageNumbers;
+    private int m_maxDamageNumbers = 20;
+    private int m_damageNumberIndex;
+    private int DamageNumberIndex
+    {
+        get => m_damageNumberIndex;
+        set
+        {
+            m_damageNumberIndex = value;
+            m_damageNumberIndex = Mathf.Clamp(m_damageNumberIndex, 0, m_maxDamageNumbers);
+            if (m_damageNumberIndex >= m_maxDamageNumbers) m_damageNumberIndex = 0;
+        }
+    }
 
     public virtual void TakeDamage(int damage = 0, EntityBehavior hitter = null, bool takeAndDeal = false)
     {
         if (hitter != null) damage = hitter.Health;
         OnDamageTaken?.Invoke(gameObject, damage);
+
+        m_damageNumbers[DamageNumberIndex].Initialize(damage, transform.position);
+        DamageNumberIndex += 1;
+
         StartCoroutine(FlashDamage());
+
         if (hitter != null)
         {   Health -= damage;
             if (takeAndDeal) hitter.TakeDamage(m_lastHealth);
@@ -39,7 +57,7 @@ public class EntityBehavior : Entity
     {
         Color lastColor = m_spriteRenderer.color;
         m_spriteRenderer.color = Color.red;
-        yield return null;
+        yield return new WaitForSeconds(0.1f);
         m_spriteRenderer.color = lastColor;
     }
 
@@ -50,5 +68,16 @@ public class EntityBehavior : Entity
         gameObject.SetActive(false);
     }
 
-    public virtual void Initialize() { }
+    public virtual void Initialize()
+    {
+        m_damageNumbers = new DamageNumber[m_maxDamageNumbers];
+        GameObject tempObj = new(name + "'s Damage Numbers");
+        tempObj.transform.SetParent(CreationsHolder.Transform);
+        for (int i = 0; i < m_damageNumbers.Length; i++)
+        {
+            GameObject number = new GameObject("Damage Number " + (i + 1));
+            number.transform.SetParent(tempObj.transform);
+            m_damageNumbers[i] = number.AddComponent<DamageNumber>();
+        }
+    }
 }

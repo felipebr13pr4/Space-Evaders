@@ -16,14 +16,16 @@ public class RangedEntityBehavior : EntityBehavior
 
     public override void Initialize()
     {
+        base.Initialize();
+
         m_bullets = new GameObject[m_maxBullets];
 
-        GameObject tempObj = new(name + "'s Bullets");
-        tempObj.transform.SetParent(CreationsHolder.Transform);
+        GameObject tempObj2 = new(name + "'s Bullets");
+        tempObj2.transform.SetParent(CreationsHolder.Transform);
 
         for (int i = 0; i < m_bullets.Length; i++)
         {   m_bullets[i] = new GameObject("Bullet " + (i+1));
-            m_bullets[i].transform.SetParent(tempObj.transform);
+            m_bullets[i].transform.SetParent(tempObj2.transform);
             Bullet bullet = m_bullets[i].AddComponent<Bullet>();
             bullet.InitializeStats(m_bulletData);
         }

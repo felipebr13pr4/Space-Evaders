@@ -5,7 +5,7 @@ public class CreationsHolder : MonoBehaviour
 {
     public static Transform Transform;
 
-    private void Awake()
+    private void OnEnable()
     {
         Transform = GetComponent<Transform>();
     }
