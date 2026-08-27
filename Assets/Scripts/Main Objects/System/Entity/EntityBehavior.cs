@@ -4,6 +4,7 @@ using UnityEngine;
 
 public class EntityBehavior : Entity
 {
+    private static WaitForSeconds m_damageFlashDuration = new(0.1f);
     [SerializeField] protected int m_maxHealth = 3;
     public int MaxHealth { get => m_maxHealth; set { m_maxHealth = value; m_health = value; } }
     private int m_lastHealth;
@@ -39,7 +40,7 @@ public class EntityBehavior : Entity
     protected override void Start()
     {
         base.Start();
-        InitializeCreations();
+        Initialize();
     }
 
     public virtual void TakeDamage(int damage = 0, EntityBehavior hitter = null, bool takeAndDeal = false)
@@ -61,9 +62,12 @@ public class EntityBehavior : Entity
 
     private IEnumerator FlashDamage()
     {
+        // Known bug: if player is hit by two shots he gets permanently red as
+        // the color changes to red and the other saves the red. I'll probally make a
+        // color set system with vars instead of pulling the last color.
         Color lastColor = m_spriteRenderer.color;
         m_spriteRenderer.color = Color.red;
-        yield return new WaitForSeconds(0.1f);
+        yield return m_damageFlashDuration;
         m_spriteRenderer.color = lastColor;
     }
 
@@ -71,6 +75,7 @@ public class EntityBehavior : Entity
     {
         if (m_isDead) return;
         m_spriteRenderer.color = Color.white;
+        m_spriteRenderer.enabled = false;
         m_isDead = true;
         gameObject.SetActive(false);
         OnDeath?.Invoke(this);
@@ -81,7 +86,7 @@ public class EntityBehavior : Entity
         m_isDead = false;
     }
 
-    protected virtual void InitializeCreations()
+    public virtual void InitializeCreations()
     {
         m_damageNumbers = new DamageNumber[m_maxDamageNumbers];
         GameObject tempObj = new(name + "'s Damage Numbers");

@@ -28,10 +28,10 @@ Re-appearances from last project
 
 I learned
 - That unity packaging is really good.
-- A little more about lists (they're interesting), Coroutines and Inherited static events.
+- A little more about lists (they're interesting), Coroutines, Inherited static events, using the profiler, optimizing.
 - Structs vs classes for small data.
 - "is not" and "is" vs "!=" and "==".
-
+- Get Component In Childrens doesn't get unactive children unless you pass true inside it, but it does grab a directly referenced children (Technically i learned this in the last project).
 
 Next time i should
 - Empty for now.
@@ -57,7 +57,8 @@ Did I actually do it? (Did i do past "Next times i should")
 General Thoughts
 - Im starting to realize that there must be looots of situations where theres a better solution but i can't know that because i am not aware of that better solution, which also means i likely can't put it here on things i should learn or do next time as i just don't know about said thing.
 - Claude's kinda good at catching bugs, I was having a really annoying one with the waves that I basically understood how to make it happen but not why it happened. The solution was kinda simple tbh. Just some troubles with coroutines still going.
-
+- Once again Claude helped me, at optimizing when there are lots of enemies it was a bit laggy and he showed me to cache new waitforseconds, a small thing i forgot and a solution to just not using coroutine in the bullets movement. In general i learned to cache it. Anddd the Resource.Load was being used every time which was bad (that was what i forgot).
+- I've created a file called TheGraveyard, i decided to keep old things there for documentations purpose, otherwise i would have just deleted the things as its saved in between these commits anyways. But this file can be used to show differences from developing and the final build.
 
 # Project Plan
 

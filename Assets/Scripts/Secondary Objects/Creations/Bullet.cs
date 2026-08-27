@@ -5,14 +5,15 @@ public class Bullet : Entity
 {
     private BulletData m_data;
     private bool m_started = false;
+    private float m_moveTimer;
+    private float m_moveInterval;
+    private float m_moveDistance;
+    private Quaternion m_moveRotation;
 
     protected override void Start()
     {
-        GameObject spriteChild = new("Sprite");
-        spriteChild.transform.parent = transform;
-        spriteChild.transform.position = transform.position;
-        spriteChild.AddComponent<SpriteRenderer>();
         base.Start();
+        Initialize();
         InitializeBullet();
     }
 
@@ -35,6 +36,17 @@ public class Bullet : Entity
         }
     }
 
+    private void Update()
+    {
+        m_moveTimer += Time.deltaTime;
+        if (m_moveTimer >= m_moveInterval)
+        {   m_moveTimer -= m_moveInterval;
+            Vector3 fallDirection = -transform.up;
+            transform.position += fallDirection * m_moveDistance;
+            transform.rotation = m_moveRotation;
+            ClampInBounds(); }
+    }
+
     private void DealDamage(EntityBehavior target)
     {
         ErrorLogger.DebugLog("dealing dmg " + target.gameObject);
@@ -43,42 +55,35 @@ public class Bullet : Entity
         gameObject.SetActive(false);
     }
 
+    private void Initialize()
+    {
+        if (m_spriteRenderer.sprite == null)
+            m_spriteRenderer.sprite = Resources.Load<Sprite>("Square");
+        m_spriteRenderer.drawMode = SpriteDrawMode.Sliced;
+        m_spriteRenderer.sortingOrder = -1;
+
+        m_boxCol2d.isTrigger = true;
+
+        m_rb2d.bodyType = RigidbodyType2D.Kinematic;
+        m_rb2d.freezeRotation = true;
+    }
+
     private void InitializeBullet()
     {
         m_started = true;
 
         m_spriteRenderer.color = m_data.Color;
-        m_spriteRenderer.sprite = Resources.Load<Sprite>("Square");
-        m_spriteRenderer.drawMode = SpriteDrawMode.Sliced;
         m_spriteRenderer.size = m_data.Size;
-        m_spriteRenderer.sortingOrder = -1;
-
-        m_boxCol2d.isTrigger = true;
         m_boxCol2d.size = m_data.Size;
-
-        m_rb2d.bodyType = RigidbodyType2D.Kinematic;
-        m_rb2d.freezeRotation = true;
-
-        StartCoroutine(InitializeMovement(m_data.MoveTime, m_data.MoveDistance, m_data.Direction));
+        m_moveInterval = m_data.MoveInterval;
+        m_moveDistance = m_data.MoveDistance;
+        m_moveRotation = Quaternion.Euler(0f, 0f, m_data.Direction);
     }
 
     public void InitializeStats(BulletData data)
     {
         gameObject.SetActive(false);
         m_data = data;
-    }
-
-    private IEnumerator InitializeMovement(float time, float distance, float angleZ)
-    {
-        while (true)
-        {
-            yield return new WaitForSeconds(time);
-            Quaternion rotation = Quaternion.Euler(0f, 0f, angleZ);
-            Vector3 fallDirection = -transform.up;
-            transform.position += fallDirection * distance;
-            transform.rotation = rotation;
-            ClampInBounds();
-        }
     }
 
     protected override void ClampInBounds()

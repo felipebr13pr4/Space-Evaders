@@ -2,11 +2,11 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.InputSystem;
 
 public class EnemyHandler : MonoBehaviour
 {
     [SerializeField] private GameObject m_enemyPrefab;
-    [SerializeField] private EnemyPattern[] m_patterns;
     [SerializeField] private List<EnemyMovement> m_enemysMovement = new();
     [SerializeField] private List<EnemyBehavior> m_enemysBehavior = new();
     private int m_waveNumber;
@@ -15,10 +15,16 @@ public class EnemyHandler : MonoBehaviour
     public static event Action<int> OnWaveStartWithNumber;
     private int m_enemiesAlive;
     private Coroutine m_waveRoutine;
+    public static readonly int MaxEnemyAmount = 100;
 
     private void Start()
     {
         m_waveData = WaveData.Default();
+        foreach (RangedEntityBehavior enemy in m_enemysBehavior)
+        {
+            enemy.BulletData = m_waveData.Bullets;
+            enemy.InitializeCreations();
+        }
         m_waveRoutine = StartCoroutine(StartWave());
     }
 
@@ -30,6 +36,17 @@ public class EnemyHandler : MonoBehaviour
     private void OnDisable()
     {
         EntityBehavior.OnDeath -= EnemyDead;
+    }
+
+    private void Update()
+    {
+        if (Keyboard.current.digit2Key.wasPressedThisFrame)
+        {
+            if (m_waveRoutine != null) StopCoroutine(m_waveRoutine);
+            m_waveRoutine = StartCoroutine(StartWave());
+            // for testing.
+        }
+
     }
 
     private void EnemyDead(EntityBehavior entity)
@@ -49,12 +66,12 @@ public class EnemyHandler : MonoBehaviour
         OnWaveStart?.Invoke();
         OnWaveStartWithNumber?.Invoke(m_waveNumber);
 
-        m_waveData.EnemyAmount += 1;
+        m_waveData.EnemyAmount += 2;
         m_enemiesAlive = m_waveData.EnemyAmount;
-        m_waveData.Healths = m_waveNumber / 10;
-        m_waveData.FireRates = (10 / m_waveNumber) + (100 / (m_waveNumber+15));
-        m_waveData.MoveSpeeds -= 0.1f;
-        m_waveData.Bullets.MoveTime -= 0.0005f;
+        m_waveData.Healths = (m_waveNumber / 10) + 1;
+        m_waveData.FireRates -= 1;
+        m_waveData.MoveSpeeds -= 0.25f;
+        m_waveData.Bullets.MoveInterval -= 0.001f;
         ErrorLogger.DebugLog("supposed H: " + m_waveNumber / 10);
         ErrorLogger.DebugLog("current H: " + m_waveData.Healths);
         ErrorLogger.DebugLog("---");
@@ -80,10 +97,7 @@ public class EnemyHandler : MonoBehaviour
             m_enemysBehavior[i].gameObject.SetActive(true);
             m_enemysBehavior[i].StartShooting();
             yield return null;
-            m_enemysMovement[i].Initialize(m_waveData.MoveSpeeds, m_patterns[0]);
-            //m_enemysMovement[i].Initialize(0.5f, m_patterns[0], true); // The three tested and working.
-            //m_enemysMovement[i].Initialize(0.5f, m_patterns[0], true, true); // I'll leave them for testing.
-            //m_enemysMovement[i].Initialize(0.5f, m_patterns[0], false, true);
+            m_enemysMovement[i].Initialize(m_waveData.MoveSpeeds);
             yield return new WaitForSeconds(m_waveData.MoveSpeeds);
         }
     }
@@ -95,16 +109,17 @@ public class EnemyHandler : MonoBehaviour
         m_enemysMovement.Clear();
         m_enemysBehavior.Clear();
 
-        EnemyBehavior[] enemies = GetComponentsInChildren<EnemyBehavior>();
+        EnemyBehavior[] enemies = GetComponentsInChildren<EnemyBehavior>(true);
 
         foreach (EnemyBehavior obj in enemies)
         {
             DestroyImmediate(obj.gameObject);
         }
 
-        for (int i = 0; i < 40; i++)
+        for (int i = 0; i < MaxEnemyAmount; i++)
         {
-            Instantiate(m_enemyPrefab, transform);
+            GameObject obj = Instantiate(m_enemyPrefab, transform);
+            obj.name = "Enemy " + (i+1);
         }
 
         EnemyMovement[] enemiesMov = GetComponentsInChildren<EnemyMovement>();

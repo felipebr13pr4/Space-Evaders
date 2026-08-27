@@ -750,6 +750,26 @@ PrefabInstance:
       propertyPath: m_AnchoredPosition.y
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 4392205339156484730, guid: 710943ee4a8adb04693f717077cb6c10, type: 3}
+      propertyPath: m_AnchorMax.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4392205339156484730, guid: 710943ee4a8adb04693f717077cb6c10, type: 3}
+      propertyPath: m_AnchorMin.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4392205339156484730, guid: 710943ee4a8adb04693f717077cb6c10, type: 3}
+      propertyPath: m_AnchoredPosition.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4392205339156484730, guid: 710943ee4a8adb04693f717077cb6c10, type: 3}
+      propertyPath: m_AnchoredPosition.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5675407681954668815, guid: 710943ee4a8adb04693f717077cb6c10, type: 3}
+      propertyPath: m_Name
+      value: Wave Count
+      objectReference: {fileID: 0}
     - target: {fileID: 6589433903667541192, guid: 710943ee4a8adb04693f717077cb6c10, type: 3}
       propertyPath: m_Pivot.x
       value: 0
@@ -1423,6 +1443,10 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 4469931899680607981, guid: 3c3d8ea1933c88649a1cb80491a088dc, type: 3}
+      propertyPath: m_speed
+      value: 4
+      objectReference: {fileID: 0}
     - target: {fileID: 6413981764803254992, guid: 3c3d8ea1933c88649a1cb80491a088dc, type: 3}
       propertyPath: m_LocalPosition.x
       value: 0

@@ -4,37 +4,32 @@ using UnityEngine;
 [RequireComponent(typeof(Rigidbody2D))]
 public class EnemyMovement : Entity
 {
+    private static WaitForSeconds m_delayToMove = new(0.05f);
+    private WaitForSeconds m_moveSpeedWait;
     private float m_moveSpeed;
-    private EnemyPattern m_path;
 
-    public void Initialize(float moveSpeed, EnemyPattern path, bool isXFlipped = false, bool isYFlipped = false)
+    public void Initialize(float moveSpeed)
     {
         m_moveSpeed = moveSpeed;
-        m_path = path;
-        m_rb2d.position = new(isXFlipped ? 14.5f : -14.5f, 0);
-        StartCoroutine(Move(isXFlipped, isYFlipped));
+        m_rb2d.position = new((float)((int)Random.Range(ScreenBounds.Left, ScreenBounds.Right))+0.5f,
+            (int)Random.Range(ScreenBounds.Bottom, ScreenBounds.Top));
+        if (isActiveAndEnabled) StartCoroutine(Move());
     }
 
-    private IEnumerator Move(bool isXFlipped = false, bool isYFlipped = false)
+    private IEnumerator Move()
     {
+        yield return m_delayToMove;
+        m_spriteRenderer.enabled = true;
+
+        m_moveSpeedWait = new WaitForSeconds(m_moveSpeed);
+
         while (true)
         {
-            for (int i = 0; i < m_path.Movements.Count; i++)
-            {
-                for (int j = 0; j < m_path.Movements[i].RepeatAmount; j++)
-                {
-                    ClampInBounds();
-                    yield return new WaitForSeconds(m_moveSpeed);
+            ClampInBounds();
 
-                    if (isXFlipped && m_path.Movements[i].Direction.x != 0) {
-                        m_rb2d.position += -m_path.Movements[i].Direction; continue; }
+            yield return m_moveSpeedWait;
 
-                    if (isYFlipped && m_path.Movements[i].Direction.y != 0) {
-                        m_rb2d.position += -m_path.Movements[i].Direction; continue; }
-
-                    m_rb2d.position += m_path.Movements[i].Direction;
-                }
-            }
+            m_rb2d.position += new Vector2(Random.Range(-1, 2), Random.Range(-1, 2));
         }
     }
 
