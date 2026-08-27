@@ -21,5 +21,5 @@ public struct BulletData
         Direction = angleZ;
     }
 
-    public static BulletData Default() => new(1, EntityType.Player,Color.yellow, new(0.5f, 0.5f), 2f, 1f, 0f);
+    public static BulletData Default() => new(1, EntityType.Player,Color.red, new(0.25f, 0.25f), 0.05f, 0.1f, 0f);
 }

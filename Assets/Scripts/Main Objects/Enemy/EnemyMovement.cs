@@ -9,7 +9,6 @@ public class EnemyMovement : Entity
 
     public void Initialize(float moveSpeed, EnemyPattern path, bool isXFlipped = false, bool isYFlipped = false)
     {
-        ErrorLogger.DebugLog("initializing");
         m_moveSpeed = moveSpeed;
         m_path = path;
         m_rb2d.position = new(isXFlipped ? 14.5f : -14.5f, 0);

@@ -28,8 +28,9 @@ Re-appearances from last project
 
 I learned
 - That unity packaging is really good.
-- A little bit more about lists (they're interesting).
+- A little more about lists (they're interesting), Coroutines and Inherited static events.
 - Structs vs classes for small data.
+- "is not" and "is" vs "!=" and "==".
 
 
 Next time i should
@@ -55,7 +56,7 @@ Did I actually do it? (Did i do past "Next times i should")
 
 General Thoughts
 - Im starting to realize that there must be looots of situations where theres a better solution but i can't know that because i am not aware of that better solution, which also means i likely can't put it here on things i should learn or do next time as i just don't know about said thing.
-
+- Claude's kinda good at catching bugs, I was having a really annoying one with the waves that I basically understood how to make it happen but not why it happened. The solution was kinda simple tbh. Just some troubles with coroutines still going.
 
 
 # Project Plan

@@ -39,7 +39,7 @@ public class Bullet : Entity
     {
         ErrorLogger.DebugLog("dealing dmg " + target.gameObject);
         if (target != null)
-            target.TakeDamage(1);
+            target.TakeDamage(m_data.Damage);
         gameObject.SetActive(false);
     }
 
