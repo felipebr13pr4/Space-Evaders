@@ -24,7 +24,7 @@ public class EntityBehavior : Entity
     public static event Action<GameObject, int> OnDamageTaken;
     public static event Action<EntityBehavior> OnDeath;
     private DamageNumber[] m_damageNumbers;
-    private int m_maxDamageNumbers = 20;
+    private const int m_maxDamageNumbers = 20;
     private int m_damageNumberIndex;
     private int DamageNumberIndex
     {
@@ -36,10 +36,12 @@ public class EntityBehavior : Entity
             if (m_damageNumberIndex >= m_maxDamageNumbers) m_damageNumberIndex = 0;
         }
     }
+    protected Color m_color;
 
     protected override void Start()
     {
         base.Start();
+        m_color = Color.white;
         Initialize();
     }
 
@@ -62,13 +64,9 @@ public class EntityBehavior : Entity
 
     private IEnumerator FlashDamage()
     {
-        // Known bug: if player is hit by two shots he gets permanently red as
-        // the color changes to red and the other saves the red. I'll probally make a
-        // color set system with vars instead of pulling the last color.
-        Color lastColor = m_spriteRenderer.color;
         m_spriteRenderer.color = Color.red;
         yield return m_damageFlashDuration;
-        m_spriteRenderer.color = lastColor;
+        m_spriteRenderer.color = m_color;
     }
 
     protected virtual void Die()

@@ -70,6 +70,7 @@ public class EnemyHandler : MonoBehaviour
         m_enemiesAlive = m_waveData.EnemyAmount;
         m_waveData.Healths = (m_waveNumber / 10) + 1;
         m_waveData.FireRates -= 1;
+        //m_waveData.FireRates = 1; // for testing
         m_waveData.MoveSpeeds -= 0.25f;
         m_waveData.Bullets.MoveInterval -= 0.001f;
         ErrorLogger.DebugLog("supposed H: " + m_waveNumber / 10);
@@ -124,6 +125,15 @@ public class EnemyHandler : MonoBehaviour
 
         EnemyMovement[] enemiesMov = GetComponentsInChildren<EnemyMovement>();
         EnemyBehavior[] enemiesBeh = GetComponentsInChildren<EnemyBehavior>();
+
+        int j = 1;
+        for (int i = 4; i < MaxEnemyAmount; i += 4)
+        {
+            GameObject obj = enemiesBeh[i].gameObject;
+            DestroyImmediate(enemiesBeh[i]);
+            obj.name = "Aimbot Enemy " + (j); j++;
+            enemiesBeh[i] = obj.AddComponent<AimbotEnemyBehavior>();
+        }
 
         foreach (EnemyMovement enemy in enemiesMov)
         {

@@ -79,4 +79,10 @@ public class PlayerMovement : Entity
         }
     }
     //
+    
+    protected override float YClamp(float y)
+    {
+        return Mathf.Clamp(y, ScreenBounds.Bottom + sizeAdjustment.y,
+                            (ScreenBounds.Top - sizeAdjustment.y) - 2);
+    }
 }

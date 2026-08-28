@@ -1,10 +1,4 @@
 #if UNITY_EDITOR
-using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
-using UnityEngine.InputSystem;
-using static UnityEngine.RuleTile.TilingRuleOutput;
-
 public class TheGraveyard
 {
     // Hey, i'll use this script to just store things i had to rework. For documentation purposes.

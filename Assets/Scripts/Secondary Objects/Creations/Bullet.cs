@@ -1,4 +1,3 @@
-using System.Collections;
 using UnityEngine;
 
 public class Bullet : Entity
@@ -43,8 +42,7 @@ public class Bullet : Entity
         {   m_moveTimer -= m_moveInterval;
             Vector3 fallDirection = -transform.up;
             transform.position += fallDirection * m_moveDistance;
-            transform.rotation = m_moveRotation;
-            ClampInBounds(); }
+            DeactivateOutBounds(); }
     }
 
     private void DealDamage(EntityBehavior target)
@@ -78,22 +76,22 @@ public class Bullet : Entity
         m_moveInterval = m_data.MoveInterval;
         m_moveDistance = m_data.MoveDistance;
         m_moveRotation = Quaternion.Euler(0f, 0f, m_data.Direction);
+
+        transform.rotation = m_moveRotation;
     }
 
     public void InitializeStats(BulletData data)
     {
-        gameObject.SetActive(false);
         m_data = data;
     }
 
-    protected override void ClampInBounds()
+    private void DeactivateOutBounds()
     {
         Vector2 pos = m_rb2d.position;
-        Vector2 sizeAdjustment = new(m_spriteRenderer.size.x / 2, m_spriteRenderer.size.y / 2);
-        float posxL = ScreenBounds.Left + sizeAdjustment.x;
-        float posxR = ScreenBounds.Right - sizeAdjustment.x;
-        float posyB = ScreenBounds.Bottom + sizeAdjustment.y;
-        float posyT = ScreenBounds.Top - sizeAdjustment.y;
+        float posxL = ScreenBounds.Left - sizeAdjustment.x;
+        float posxR = ScreenBounds.Right + sizeAdjustment.x;
+        float posyB = ScreenBounds.Bottom - sizeAdjustment.y;
+        float posyT = ScreenBounds.Top + sizeAdjustment.y;
 
         if (m_rb2d.position.x < posxL || m_rb2d.position.x > posxR)
         {

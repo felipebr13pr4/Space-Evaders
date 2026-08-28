@@ -27,5 +27,12 @@ public class GlobalHotkeysController : MonoBehaviour
 
         if (Keyboard.current.escapeKey.wasPressedThisFrame)
             GameStateController.Instance.TogglePause();
+
+        if (Keyboard.current.qKey.wasPressedThisFrame)
+            if (Time.timeScale > 0.2f) Time.timeScale -= 0.1f;
+        if (Keyboard.current.eKey.wasPressedThisFrame)
+            Time.timeScale += 0.1f;
+        if (Keyboard.current.digit1Key.wasPressedThisFrame)
+            Time.timeScale = 1;
     }
 }
