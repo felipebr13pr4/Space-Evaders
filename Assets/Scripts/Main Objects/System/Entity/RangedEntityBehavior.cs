@@ -9,19 +9,21 @@ public class RangedEntityBehavior : EntityBehavior
     {   set
         {   m_fireRate = value;
             m_fireRate = Mathf.Clamp(m_fireRate, 0.2f, 20f); } }
-    private const int m_bulletsAmount = 55;
-    protected GameObject[] m_bulletsObjs = new GameObject[m_bulletsAmount];
-    protected Bullet[] m_bullets = new Bullet[m_bulletsAmount];
-    protected BulletData m_bulletData;
+    private const int m_bulletsAmount = 25;
+    [SerializeField] protected GameObject[] m_bulletsObjs = new GameObject[m_bulletsAmount];
+    [SerializeField] protected Bullet[] m_bullets = new Bullet[m_bulletsAmount];
+    [SerializeField] protected BulletData m_bulletData;
     public BulletData BulletData { set => m_bulletData = value; }
 
     public void StartShooting() => StartCoroutine(Shoot());
 
-    public override void InitializeCreations()
+    public override void InitializeCreations(Transform storageLocation)
     {
-        base.InitializeCreations();
+        base.InitializeCreations(storageLocation);
+        m_bulletData = BulletData.Default();
+
         GameObject tempObj2 = new(name + "'s Bullets");
-        tempObj2.transform.SetParent(CreationsHolder.Transform);
+        tempObj2.transform.SetParent(storageLocation);
 
         for (int i = 0; i < m_bulletsObjs.Length; i++)
         {
@@ -34,7 +36,8 @@ public class RangedEntityBehavior : EntityBehavior
             GameObject spriteChild = new("Sprite");
             spriteChild.transform.parent = m_bullets[i].gameObject.transform;
             spriteChild.transform.position = m_bullets[i].gameObject.transform.position;
-            spriteChild.AddComponent<SpriteRenderer>();
+            SpriteRenderer spritechildRen = spriteChild.AddComponent<SpriteRenderer>();
+            spritechildRen.sprite = Resources.Load<Sprite>("Square");
         }
     }
 

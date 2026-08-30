@@ -9,6 +9,7 @@ public class EnemyHandler : MonoBehaviour
     [SerializeField] private GameObject m_enemyPrefab;
     [SerializeField] private List<EnemyMovement> m_enemysMovement = new();
     [SerializeField] private List<EnemyBehavior> m_enemysBehavior = new();
+    [SerializeField] private Transform m_creationHolder;
     private int m_waveNumber;
     private WaveData m_waveData;
     public static event Action OnWaveStart;
@@ -23,7 +24,6 @@ public class EnemyHandler : MonoBehaviour
         foreach (RangedEntityBehavior enemy in m_enemysBehavior)
         {
             enemy.BulletData = m_waveData.Bullets;
-            enemy.InitializeCreations();
         }
         m_waveRoutine = StartCoroutine(StartWave());
     }
@@ -103,8 +103,8 @@ public class EnemyHandler : MonoBehaviour
         }
     }
 
-    [ContextMenu("Get all enemies prefabs")]
-    private void GetAllEnemies()
+    [ContextMenu("Regemerate all enemies prefabs")]
+    private void CreateAllEnemies()
     {
         ErrorLogger.DebugLog("getting all enemies");
         m_enemysMovement.Clear();
@@ -135,6 +135,11 @@ public class EnemyHandler : MonoBehaviour
             enemiesBeh[i] = obj.AddComponent<AimbotEnemyBehavior>();
         }
 
+        foreach (Transform obj in m_creationHolder.gameObject.GetComponentsInChildren<Transform>())
+        {
+            if (obj == m_creationHolder) continue;
+            if (obj != null) DestroyImmediate(obj.gameObject);
+        }
         foreach (EnemyMovement enemy in enemiesMov)
         {
             m_enemysMovement.Add(enemy);
@@ -142,6 +147,7 @@ public class EnemyHandler : MonoBehaviour
         foreach (EnemyBehavior enemy in enemiesBeh)
         {
             m_enemysBehavior.Add(enemy);
+            enemy.InitializeCreations(m_creationHolder);
             enemy.gameObject.SetActive(false);
         }
     }

@@ -23,8 +23,8 @@ public class EntityBehavior : Entity
     private bool m_isDead = false;
     public static event Action<GameObject, int> OnDamageTaken;
     public static event Action<EntityBehavior> OnDeath;
-    private DamageNumber[] m_damageNumbers;
-    private const int m_maxDamageNumbers = 20;
+    [SerializeField] private DamageNumber[] m_damageNumbers;
+    private const int m_maxDamageNumbers = 10;
     private int m_damageNumberIndex;
     private int DamageNumberIndex
     {
@@ -84,14 +84,15 @@ public class EntityBehavior : Entity
         m_isDead = false;
     }
 
-    public virtual void InitializeCreations()
+    public virtual void InitializeCreations(Transform storageLocation)
     {
         m_damageNumbers = new DamageNumber[m_maxDamageNumbers];
         GameObject tempObj = new(name + "'s Damage Numbers");
-        tempObj.transform.SetParent(CreationsHolder.Transform);
+        tempObj.transform.SetParent(storageLocation);
+
         for (int i = 0; i < m_damageNumbers.Length; i++)
         {
-            GameObject number = new GameObject("Damage Number " + (i + 1));
+            GameObject number = new("Damage Number " + (i + 1));
             number.transform.SetParent(tempObj.transform);
             m_damageNumbers[i] = number.AddComponent<DamageNumber>();
         }

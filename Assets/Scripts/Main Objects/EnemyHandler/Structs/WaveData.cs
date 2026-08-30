@@ -17,13 +17,13 @@ public struct WaveData
     public float MoveSpeeds
     {
         readonly get => m_moveSpeeds;
-        set { m_moveSpeeds = value; m_moveSpeeds = Mathf.Clamp(m_moveSpeeds, 0.75f, 20); }
+        set { m_moveSpeeds = value; m_moveSpeeds = Mathf.Clamp(m_moveSpeeds, 1f, 20); }
     }
     private float m_fireRates;
     public float FireRates
     {
         readonly get => m_fireRates;
-        set { m_fireRates = value; m_fireRates = Mathf.Clamp(m_fireRates, 0.5f, 20); }
+        set { m_fireRates = value; m_fireRates = Mathf.Clamp(m_fireRates, 1f, 20); }
     }
     public BulletData Bullets;
 

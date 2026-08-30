@@ -13,7 +13,7 @@ GameObject:
   - component: {fileID: 4479355566001218537}
   - component: {fileID: 6540138671722592544}
   - component: {fileID: 4315155719953782409}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Enemy
   m_TagString: Enemy
   m_Icon: {fileID: 0}
@@ -121,6 +121,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6b55fc616eadea64a88e83b98110e022, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::EnemyMovement
+  m_enemyLayerMask:
+    serializedVersion: 2
+    m_Bits: 64
 --- !u!114 &4315155719953782409
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -134,7 +137,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::EnemyBehavior
   m_maxHealth: 3
-  m_fireRate: 3
 --- !u!1 &3722085309995641479
 GameObject:
   m_ObjectHideFlags: 0
