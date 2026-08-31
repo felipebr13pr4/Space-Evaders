@@ -13,7 +13,7 @@ public class RangedEntityBehavior : EntityBehavior
     [SerializeField] protected GameObject[] m_bulletsObjs = new GameObject[m_bulletsAmount];
     [SerializeField] protected Bullet[] m_bullets = new Bullet[m_bulletsAmount];
     [SerializeField] protected BulletData m_bulletData;
-    public BulletData BulletData { set => m_bulletData = value; }
+    public BulletData BulletData { get => m_bulletData; set => m_bulletData = value; }
 
     public void StartShooting() => StartCoroutine(Shoot());
 

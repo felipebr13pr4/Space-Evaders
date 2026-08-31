@@ -28,4 +28,14 @@ public class PlayerBehavior : RangedEntityBehavior
     {
         m_bulletData = new(1, EntityType.Enemy, Color.lightBlue, new(0.25f, 0.25f),0.05f,0.1f,180);
     }
+
+#if UNITY_EDITOR
+    [ContextMenu("cheat stats")]
+    private void Cheat()
+    {
+        FireRate = 0.01f;
+        MaxHealth = 999;
+        GetComponent<PlayerMovement>().Speed = 10f;
+    }
+#endif
 }

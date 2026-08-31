@@ -33,6 +33,7 @@ I learned
 - "is not" and "is" vs "!=" and "==".
 - Get Component In Childrens doesn't get unactive children unless you pass true inside it, but it does grab a directly referenced children (Technically i learned this in the last project).
 - Coroutines can freeze unity if caught in a infinite loop inside it without a yield return.
+- Using % (remainder operator).
 
 Next time i should
 - Empty for now.

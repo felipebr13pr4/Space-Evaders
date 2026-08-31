@@ -4,12 +4,30 @@ using UnityEngine;
 [RequireComponent(typeof(Rigidbody2D))]
 public class EnemyMovement : Entity
 {
-    private static WaitForSeconds m_delayToMove = new(0.05f);
+    private static readonly WaitForSeconds m_delayToMove = new(0.05f);
     private WaitForSeconds m_moveSpeedWait;
     private float m_moveSpeed;
     private Vector2 m_direction;
     [SerializeField] private LayerMask m_enemyLayerMask;
     private RaycastHit2D[] m_hit;
+    [SerializeField] private RangedEntityBehavior m_behavior;
+    [SerializeField] private SpriteRenderer m_irisSpriteRen;
+    private float m_insideAnotherTimer;
+
+    private void OnCollisionStay2D(Collision2D collision)
+    {
+        if (collision.collider.CompareTag("Enemy"))
+        {
+            m_insideAnotherTimer++;
+            if (m_insideAnotherTimer > 30)
+            {
+                ClampInBounds();
+                m_direction = new Vector2(Random.Range(-1, 2), Random.Range(-1, 2));
+                m_rb2d.position += m_direction;
+                m_insideAnotherTimer = 0;
+            }
+        }
+    }
 
     public void Initialize(float moveSpeed)
     {
@@ -51,27 +69,28 @@ public class EnemyMovement : Entity
     private IEnumerator Move()
     {
         yield return m_delayToMove;
-        m_spriteRenderer.enabled = true;
+        m_spriteRenderer.gameObject.SetActive(true);
+        m_irisSpriteRen.color = m_behavior.BulletData.Color;
 
         m_moveSpeedWait = new WaitForSeconds(m_moveSpeed);
-
-        int safety = 0;
 
         while (true)
         {
             ClampInBounds();
             m_direction = new Vector2(Random.Range(-1, 2), Random.Range(-1, 2));
+
+            // Once again help by Claude but a little modified.
+            float angle = (Mathf.Atan2(m_direction.y, m_direction.x) * Mathf.Rad2Deg); // This i knew.
+            Quaternion rot = Quaternion.AngleAxis(angle, Vector3.forward); // But this was what i didn't and needed, to turn it into a quaternion,
+            m_irisSpriteRen.gameObject.transform.rotation = rot;
+            //
+
             if (m_direction == Vector2.zero || CheckIfTriedToMoveOutBounds() ||
-                CheckIfSomethingInWay() && safety < 15)
-                { yield return null; safety++; continue;  } else if (safety > 15)
-            { safety = 14; m_rb2d.position += m_direction; }
+                CheckIfSomethingInWay())
+                { yield return null; continue;  }
 
             yield return m_moveSpeedWait;
-            if (!CheckIfSomethingInWay())
-            {
-                m_rb2d.position += m_direction;
-                safety = 0;
-            }
+            if (!CheckIfSomethingInWay()) m_rb2d.position += m_direction;
         }
     }
 

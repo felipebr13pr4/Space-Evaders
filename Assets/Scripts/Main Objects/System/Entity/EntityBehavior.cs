@@ -73,7 +73,7 @@ public class EntityBehavior : Entity
     {
         if (m_isDead) return;
         m_spriteRenderer.color = Color.white;
-        m_spriteRenderer.enabled = false;
+        m_spriteRenderer.gameObject.SetActive(false);
         m_isDead = true;
         gameObject.SetActive(false);
         OnDeath?.Invoke(this);
@@ -82,6 +82,7 @@ public class EntityBehavior : Entity
     public virtual void Initialize()
     {
         m_isDead = false;
+
     }
 
     public virtual void InitializeCreations(Transform storageLocation)

@@ -4,22 +4,44 @@ using UnityEngine;
 [Serializable]
 public struct BulletData
 {
-    public int Damage;
+    private int m_damage;
+    public int Damage
+    {
+        readonly get => m_damage;
+        set { m_damage = value; m_damage = Mathf.Clamp(m_damage, 0, 10); }
+    }
     public EntityType Target;
     public Color Color;
-    public Vector2 Size;
-    public float MoveInterval;
-    public float MoveDistance;
+    private Vector2 m_size;
+    public Vector2 Size
+    {
+        readonly get => m_size;
+        set { m_size = value;
+            m_size.x = Mathf.Clamp(m_size.x, 0.1f, 1f);
+            m_size.y = Mathf.Clamp(m_size.y, 0.1f, 1f); } }
+    private float m_moveInterval;
+    public float MoveInterval
+    {
+        readonly get => m_moveInterval;
+        set { m_moveInterval = value; m_moveInterval = Mathf.Clamp(m_moveInterval, 0.04f, 1f); }
+    }
+    private float m_moveDistance;
+    public float MoveDistance
+    {
+        readonly get => m_moveDistance;
+        set { m_moveDistance = value; m_moveDistance = Mathf.Clamp(m_moveDistance, 0.1f, 2f); }
+    }
     public float Direction;
 
     public BulletData(int damage, EntityType target, Color color, Vector2 size, float moveInterval, float moveDistance, float angleZ)
     {
-        Damage = damage;
+        m_damage = Mathf.Clamp(damage, 0, 10);
         Target = target;
         Color = color;
-        Size = size;
-        MoveInterval = moveInterval;
-        MoveDistance = moveDistance;
+        m_size.x = Mathf.Clamp(size.x, 0.1f, 1f);
+        m_size.y = Mathf.Clamp(size.y, 0.1f, 1f);
+        m_moveInterval = Mathf.Clamp(moveInterval, 0.04f, 1f);
+        m_moveDistance = Mathf.Clamp(moveDistance, 0.1f, 2f);
         Direction = angleZ;
     }
 

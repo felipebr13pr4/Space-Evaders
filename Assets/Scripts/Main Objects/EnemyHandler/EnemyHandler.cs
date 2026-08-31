@@ -7,6 +7,7 @@ using UnityEngine.InputSystem;
 public class EnemyHandler : MonoBehaviour
 {
     [SerializeField] private GameObject m_enemyPrefab;
+    [SerializeField] private GameObject m_aimbotEnemyPrefab;
     [SerializeField] private List<EnemyMovement> m_enemysMovement = new();
     [SerializeField] private List<EnemyBehavior> m_enemysBehavior = new();
     [SerializeField] private Transform m_creationHolder;
@@ -16,6 +17,7 @@ public class EnemyHandler : MonoBehaviour
     public static event Action<int> OnWaveStartWithNumber;
     private int m_enemiesAlive;
     private Coroutine m_waveRoutine;
+    private readonly WaitForSeconds m_spawnEnemyTimer = new(0.05f);
     public static readonly int MaxEnemyAmount = 100;
 
     private void Start()
@@ -72,13 +74,14 @@ public class EnemyHandler : MonoBehaviour
         m_waveData.FireRates -= 1;
         //m_waveData.FireRates = 1; // for testing
         m_waveData.MoveSpeeds -= 0.25f;
-        m_waveData.Bullets.MoveInterval -= 0.001f;
+        m_waveData.Bullets.MoveInterval -= 0.0002f;
         ErrorLogger.DebugLog("supposed H: " + m_waveNumber / 10);
         ErrorLogger.DebugLog("current H: " + m_waveData.Healths);
         ErrorLogger.DebugLog("---");
         ErrorLogger.DebugLog("current Amount: " + m_waveData.EnemyAmount);
         ErrorLogger.DebugLog("current Alive: " + m_enemiesAlive);
         ErrorLogger.DebugLog("---");
+        ErrorLogger.DebugLog("current Move Interval: " + m_waveData.Bullets.MoveInterval);
 
         yield return new WaitForSeconds(3);
 
@@ -99,7 +102,7 @@ public class EnemyHandler : MonoBehaviour
             m_enemysBehavior[i].StartShooting();
             yield return null;
             m_enemysMovement[i].Initialize(m_waveData.MoveSpeeds);
-            yield return new WaitForSeconds(m_waveData.MoveSpeeds);
+            yield return m_spawnEnemyTimer;
         }
     }
 
@@ -117,23 +120,22 @@ public class EnemyHandler : MonoBehaviour
             DestroyImmediate(obj.gameObject);
         }
 
+        int[] j = new int[2];
         for (int i = 0; i < MaxEnemyAmount; i++)
         {
-            GameObject obj = Instantiate(m_enemyPrefab, transform);
-            obj.name = "Enemy " + (i+1);
+            if (i % 4 == 0 && i != 0)
+            {
+                CreateEnemy(m_aimbotEnemyPrefab, j[1]);
+                j[1]++;
+                continue;
+            }
+
+            CreateEnemy(m_enemyPrefab, j[0]);
+            j[0]++;
         }
 
         EnemyMovement[] enemiesMov = GetComponentsInChildren<EnemyMovement>();
         EnemyBehavior[] enemiesBeh = GetComponentsInChildren<EnemyBehavior>();
-
-        int j = 1;
-        for (int i = 4; i < MaxEnemyAmount; i += 4)
-        {
-            GameObject obj = enemiesBeh[i].gameObject;
-            DestroyImmediate(enemiesBeh[i]);
-            obj.name = "Aimbot Enemy " + (j); j++;
-            enemiesBeh[i] = obj.AddComponent<AimbotEnemyBehavior>();
-        }
 
         foreach (Transform obj in m_creationHolder.gameObject.GetComponentsInChildren<Transform>())
         {
@@ -152,5 +154,9 @@ public class EnemyHandler : MonoBehaviour
         }
     }
 
-    // Yet to further expand.
+    private void CreateEnemy(GameObject enemy, int i)
+    {
+        GameObject obj = Instantiate(enemy, transform);
+        obj.name = $"{enemy.name} " + (i + 1);
+    }
 }

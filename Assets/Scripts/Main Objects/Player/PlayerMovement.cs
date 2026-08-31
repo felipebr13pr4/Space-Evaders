@@ -5,6 +5,7 @@ using UnityEngine.InputSystem;
 public class PlayerMovement : Entity
 {
     [SerializeField] protected float m_speed = 6;
+    public float Speed { set { m_speed = value; m_speed = Mathf.Clamp(m_speed, 0.2f, 20f); } }
     private Vector2 m_moveDir;
     private Vector2 MoveDir {
         get => m_moveDir;
@@ -51,6 +52,6 @@ public class PlayerMovement : Entity
     protected override float YClamp(float y)
     {
         return Mathf.Clamp(y, ScreenBounds.Bottom + sizeAdjustment.y,
-                            (ScreenBounds.Top - sizeAdjustment.y) - 2);
+                            (ScreenBounds.Top - sizeAdjustment.y) - 1.75f);
     }
 }
