@@ -7,6 +7,7 @@ public class EnemyBehavior : RangedEntityBehavior
     {
         base.Start();
         m_bulletData = new(1, EntityType.Player, Color.red, new(0.25f, 0.25f), 0.05f, 0.1f, 0);
+        m_color = new(1, 0.75f, 0.75f);
     }
 
     private void Update()

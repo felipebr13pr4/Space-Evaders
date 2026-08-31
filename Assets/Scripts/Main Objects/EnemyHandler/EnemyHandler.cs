@@ -17,7 +17,7 @@ public class EnemyHandler : MonoBehaviour
     public static event Action<int> OnWaveStartWithNumber;
     private int m_enemiesAlive;
     private Coroutine m_waveRoutine;
-    private readonly WaitForSeconds m_spawnEnemyTimer = new(0.05f);
+    private readonly WaitForSeconds m_spawnEnemyTimer = new(0.15f);
     public static readonly int MaxEnemyAmount = 100;
 
     private void Start()

@@ -1,9 +1,15 @@
 
+using System;
 using UnityEngine;
 
 public class PlayerBehavior : RangedEntityBehavior
 {
     public static Transform Transform;
+    public static event Action<int, int> OnLifeChange;
+    public override int Health { get => base.Health; 
+        set {
+            base.Health = value;
+            OnLifeChange?.Invoke(Health, MaxHealth); } }
 
     protected override void Start()
     {
@@ -13,6 +19,7 @@ public class PlayerBehavior : RangedEntityBehavior
         InitializeCreations(CreationsHolder.Transform);
         StartShooting();
         base.Start();
+        OnLifeChange?.Invoke(Health, MaxHealth);
     }
 
     private void OnCollisionEnter2D(Collision2D collision)

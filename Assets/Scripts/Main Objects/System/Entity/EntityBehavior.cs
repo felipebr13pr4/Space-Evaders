@@ -9,7 +9,7 @@ public class EntityBehavior : Entity
     public int MaxHealth { get => m_maxHealth; set { m_maxHealth = value; m_health = value; } }
     private int m_lastHealth;
     private int m_health;
-    public int Health
+    public virtual int Health
     {
         get { return m_health; }
         set
@@ -72,7 +72,7 @@ public class EntityBehavior : Entity
     protected virtual void Die()
     {
         if (m_isDead) return;
-        m_spriteRenderer.color = Color.white;
+        m_spriteRenderer.color = m_color;
         m_spriteRenderer.gameObject.SetActive(false);
         m_isDead = true;
         gameObject.SetActive(false);

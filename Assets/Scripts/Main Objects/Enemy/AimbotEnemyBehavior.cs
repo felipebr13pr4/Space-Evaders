@@ -2,6 +2,12 @@ using UnityEngine;
 
 public class AimbotEnemyBehavior : EnemyBehavior
 {
+    protected override void Start()
+    {
+        base.Start();
+        m_color = new(0.9f, 0.75f, 1f);
+    }
+
     protected override void EditBullet(int i)
     {
         // By Claude. Basically I just needed to know the math for this. (Modified)
