@@ -8,7 +8,8 @@ public class RangedEntityBehavior : EntityBehavior
     public float FireRate
     {   set
         {   m_fireRate = value;
-            m_fireRate = Mathf.Clamp(m_fireRate, 0.2f, 20f); } }
+            m_fireRate = Mathf.Clamp(m_fireRate, 0.2f, 20f);
+            m_fireRateWait = new WaitForSeconds(m_fireRate); } }
     private const int m_bulletsAmount = 25;
     [SerializeField] protected GameObject[] m_bulletsObjs = new GameObject[m_bulletsAmount];
     [SerializeField] protected Bullet[] m_bullets = new Bullet[m_bulletsAmount];
@@ -46,7 +47,7 @@ public class RangedEntityBehavior : EntityBehavior
         yield return null;
         yield return null;
 
-        m_fireRateWait = new WaitForSeconds(m_fireRate);
+        
         OnceEditBullet();
 
         while (true)

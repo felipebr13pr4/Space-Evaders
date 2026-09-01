@@ -6,7 +6,7 @@ public class EntityBehavior : Entity
 {
     private static WaitForSeconds m_damageFlashDuration = new(0.1f);
     [SerializeField] protected int m_maxHealth = 3;
-    public int MaxHealth { get => m_maxHealth; set { m_maxHealth = value; m_health = value; } }
+    public int MaxHealth { get => m_maxHealth; set { m_maxHealth = value; Health = value; } }
     private int m_lastHealth;
     private int m_health;
     public virtual int Health
@@ -53,7 +53,7 @@ public class EntityBehavior : Entity
         m_damageNumbers[DamageNumberIndex].Initialize(damage, transform.position);
         DamageNumberIndex += 1;
 
-        StartCoroutine(FlashDamage());
+        if (isActiveAndEnabled) StartCoroutine(FlashDamage());
 
         if (hitter != null)
         {   Health -= damage;

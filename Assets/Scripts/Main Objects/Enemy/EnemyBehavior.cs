@@ -1,6 +1,7 @@
 using UnityEngine;
 using UnityEngine.InputSystem;
 
+[RequireComponent(typeof(EnemyMovement))]
 public class EnemyBehavior : RangedEntityBehavior
 {
     protected override void Start()

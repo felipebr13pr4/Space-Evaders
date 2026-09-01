@@ -6,6 +6,7 @@ using UnityEngine;
 public class WaveTimer : MonoBehaviour
 {
     private TextMeshProUGUI m_text;
+    private Coroutine m_changeTextCoroutine;
 
     private void Start() { m_text = GetComponent<TextMeshProUGUI>();
         EnemyHandler.OnWaveStart += WaveStart;
@@ -13,7 +14,9 @@ public class WaveTimer : MonoBehaviour
 
     private void OnDestroy() => EnemyHandler.OnWaveStart -= WaveStart;
 
-    private void WaveStart() { gameObject.SetActive(true); StartCoroutine(ChangeText()); }
+    private void WaveStart() { gameObject.SetActive(true);
+        if (m_changeTextCoroutine != null) StopCoroutine(m_changeTextCoroutine);
+        m_changeTextCoroutine = StartCoroutine(ChangeText()); }
 
     private IEnumerator ChangeText()
     {

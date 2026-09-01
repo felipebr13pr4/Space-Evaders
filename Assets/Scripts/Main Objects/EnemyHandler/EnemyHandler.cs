@@ -16,7 +16,7 @@ public class EnemyHandler : MonoBehaviour
     public static event Action OnWaveStart;
     public static event Action<int> OnWaveStartWithNumber;
     private int m_enemiesAlive;
-    private Coroutine m_waveRoutine;
+    private Coroutine m_waveCoroutine;
     private readonly WaitForSeconds m_spawnEnemyTimer = new(0.15f);
     public static readonly int MaxEnemyAmount = 100;
 
@@ -27,7 +27,7 @@ public class EnemyHandler : MonoBehaviour
         {
             enemy.BulletData = m_waveData.Bullets;
         }
-        m_waveRoutine = StartCoroutine(StartWave());
+        m_waveCoroutine = StartCoroutine(StartWave());
     }
 
     private void OnEnable()
@@ -44,8 +44,8 @@ public class EnemyHandler : MonoBehaviour
     {
         if (Keyboard.current.digit2Key.wasPressedThisFrame)
         {
-            if (m_waveRoutine != null) StopCoroutine(m_waveRoutine);
-            m_waveRoutine = StartCoroutine(StartWave());
+            if (m_waveCoroutine != null) StopCoroutine(m_waveCoroutine);
+            m_waveCoroutine = StartCoroutine(StartWave());
             // for testing.
         }
 
@@ -56,8 +56,8 @@ public class EnemyHandler : MonoBehaviour
         if (entity is not EnemyBehavior) return;
         m_enemiesAlive -= 1;
         if (m_enemiesAlive == 0) {
-            if (m_waveRoutine != null) StopCoroutine(m_waveRoutine);
-            m_waveRoutine = StartCoroutine(StartWave()); }
+            if (m_waveCoroutine != null) StopCoroutine(m_waveCoroutine);
+            m_waveCoroutine = StartCoroutine(StartWave()); }
     }
 
     private IEnumerator StartWave()

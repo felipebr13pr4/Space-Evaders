@@ -219947,11 +219947,11 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 999149780345778428, guid: 44b59aaca2fc3f24c97f5c96bdd7fc2f, type: 3}
       propertyPath: m_LocalPosition.x
-      value: -6.79365
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 999149780345778428, guid: 44b59aaca2fc3f24c97f5c96bdd7fc2f, type: 3}
       propertyPath: m_LocalPosition.y
-      value: -0.05548
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 999149780345778428, guid: 44b59aaca2fc3f24c97f5c96bdd7fc2f, type: 3}
       propertyPath: m_LocalPosition.z
@@ -523280,6 +523280,17 @@ MeshRenderer:
   m_SortingOrder: 0
   m_MaskInteraction: 0
   m_AdditionalVertexStreams: {fileID: 0}
+--- !u!114 &1517549839 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 1562804966517680545, guid: 710943ee4a8adb04693f717077cb6c10, type: 3}
+  m_PrefabInstance: {fileID: 1055578812}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9f950d2c3511e8344aeffb5ad93d000a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::HealthBar
 --- !u!1 &1517592498
 GameObject:
   m_ObjectHideFlags: 0
@@ -759199,6 +759210,10 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: -6241240041686677596, guid: 3c3d8ea1933c88649a1cb80491a088dc, type: 3}
+      propertyPath: m_healthBar
+      value: 
+      objectReference: {fileID: 1517549839}
     - target: {fileID: 6413981764803254992, guid: 3c3d8ea1933c88649a1cb80491a088dc, type: 3}
       propertyPath: m_LocalPosition.x
       value: 0
@@ -759279,11 +759294,11 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 1648812156334349415, guid: e240cc150c675204397ee628fb303245, type: 3}
       propertyPath: m_LocalPosition.x
-      value: -6.79365
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 1648812156334349415, guid: e240cc150c675204397ee628fb303245, type: 3}
       propertyPath: m_LocalPosition.y
-      value: -0.05548
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 1648812156334349415, guid: e240cc150c675204397ee628fb303245, type: 3}
       propertyPath: m_LocalPosition.z
