@@ -51,7 +51,7 @@ public class PlayerMovement : Entity
     
     protected override float YClamp(float y)
     {
-        return Mathf.Clamp(y, ScreenBounds.Bottom + sizeAdjustment.y,
-                            (ScreenBounds.Top - sizeAdjustment.y) - 1.75f);
+        return Mathf.Clamp(y, ScreenBounds.Bottom + m_sizeAdjustment.y,
+                            (ScreenBounds.Top - m_sizeAdjustment.y) - 1.75f);
     }
 }

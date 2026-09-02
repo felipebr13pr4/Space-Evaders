@@ -42,13 +42,28 @@ public class EnemyHandler : MonoBehaviour
 
     private void Update()
     {
+        #if UNITY_EDITOR
         if (Keyboard.current.digit2Key.wasPressedThisFrame)
         {
             if (m_waveCoroutine != null) StopCoroutine(m_waveCoroutine);
             m_waveCoroutine = StartCoroutine(StartWave());
             // for testing.
         }
-
+        if (Keyboard.current.digit4Key.wasPressedThisFrame)
+        {
+            StartCoroutine(SkipWaves(10));
+        }
+        #endif
+    }
+    
+    private IEnumerator SkipWaves(int amount)
+    {
+        for (int i = 0; i < amount; i++)
+        {
+            if (m_waveCoroutine != null) StopCoroutine(m_waveCoroutine);
+            m_waveCoroutine = StartCoroutine(StartWave());
+            yield return null;
+        }
     }
 
     private void EnemyDead(EntityBehavior entity)
@@ -75,7 +90,6 @@ public class EnemyHandler : MonoBehaviour
         //m_waveData.FireRates = 1; // for testing
         m_waveData.MoveSpeeds -= 0.25f;
         m_waveData.Bullets.MoveInterval -= 0.0002f;
-        ErrorLogger.DebugLog("supposed H: " + m_waveNumber / 10);
         ErrorLogger.DebugLog("current H: " + m_waveData.Healths);
         ErrorLogger.DebugLog("---");
         ErrorLogger.DebugLog("current Amount: " + m_waveData.EnemyAmount);

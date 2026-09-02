@@ -13,6 +13,17 @@ public class EnemyMovement : Entity
     [SerializeField] private RangedEntityBehavior m_behavior;
     [SerializeField] private SpriteRenderer m_irisSpriteRen;
     private float m_insideAnotherTimer;
+    private float m_movementBias = 1;
+    private bool m_shouldHigherMovementBias;
+    private int m_changeSidesPriority;
+    public int ChangeSidesPriority => m_changeSidesPriority;
+    private static readonly WaitForSeconds m_priorityTimer = new(1f);
+    private Coroutine m_priorityCoroutine;
+
+    protected override void Start()
+    {
+        base.Start();
+    }
 
     private void OnCollisionStay2D(Collision2D collision)
     {
@@ -32,6 +43,9 @@ public class EnemyMovement : Entity
     public void Initialize(float moveSpeed)
     {
         m_moveSpeed = moveSpeed;
+        m_changeSidesPriority = Random.Range(0, 16);
+        if (m_priorityCoroutine != null) StopCoroutine(m_priorityCoroutine);
+        m_priorityCoroutine = StartCoroutine(IncreasePriority());
 
         Vector3 pos = PlayerBehavior.Transform.position;
         while (!IsPositionValid(pos))
@@ -44,13 +58,22 @@ public class EnemyMovement : Entity
         if (isActiveAndEnabled) StartCoroutine(Move());
     }
 
+    private IEnumerator IncreasePriority()
+    {
+        while (m_changeSidesPriority < 16)
+        {
+            yield return m_priorityTimer;
+            m_changeSidesPriority++;
+        }
+    }
+
     private bool IsPositionValid(Vector3 pos)
     {
         bool isValid = true;
-        if (pos.x < PlayerBehavior.Transform.position.x + 4.5f &&
-            pos.x > PlayerBehavior.Transform.position.x - 4.5f &&
-            pos.y < PlayerBehavior.Transform.position.y + 3.5f &&
-            pos.y > PlayerBehavior.Transform.position.y - 3.5f)
+        if (pos.x < PlayerBehavior.Transform.position.x + 7.5f &&
+            pos.x > PlayerBehavior.Transform.position.x - 7.5f &&
+            pos.y < PlayerBehavior.Transform.position.y + 4.5f &&
+            pos.y > PlayerBehavior.Transform.position.y - 4.5f)
         {
             isValid = false;
             if (pos.x != PlayerBehavior.Transform.position.x &&
@@ -77,9 +100,10 @@ public class EnemyMovement : Entity
         while (true)
         {
             ClampInBounds();
-            m_direction = new Vector2(Random.Range(-1, 2), Random.Range(-1, 2));
+            int x = MathFunctions.SkewedRandom(-1, 1, m_movementBias, m_shouldHigherMovementBias);
+            m_direction = new Vector2(x, Random.Range(-1, 2));
 
-            // Once again help by Claude but a little modified.
+            // Once again help by Claude. A little modified.
             float angle = (Mathf.Atan2(m_direction.y, m_direction.x) * Mathf.Rad2Deg); // This i knew.
             Quaternion rot = Quaternion.AngleAxis(angle, Vector3.forward); // But this was what i didn't and needed, to turn it into a quaternion,
             m_irisSpriteRen.gameObject.transform.rotation = rot;
@@ -96,8 +120,8 @@ public class EnemyMovement : Entity
 
     protected override float YClamp(float y)
     {
-        return Mathf.Clamp(y, (int)((ScreenBounds.Bottom + sizeAdjustment.y) + 2f),
-                            (int)(ScreenBounds.Top - sizeAdjustment.y));
+        return Mathf.Clamp(y, (int)((ScreenBounds.Bottom + m_sizeAdjustment.y) + 2f),
+                            (int)(ScreenBounds.Top - m_sizeAdjustment.y));
     }
 
     private bool CheckIfSomethingInWay()
@@ -120,35 +144,33 @@ public class EnemyMovement : Entity
     private bool CheckIfTriedToMoveOutBounds()
     {
         bool itTried = false;
-        if ((int)((ScreenBounds.Bottom + sizeAdjustment.y) + 2f) == transform.position.y)
+        if ((int)((ScreenBounds.Bottom + m_sizeAdjustment.y) + 2f) == transform.position.y)
         {
             if (m_direction.y < 0) itTried = true;
         }
-        else if ((int)(ScreenBounds.Top - sizeAdjustment.y) == transform.position.y)
+        else if ((int)(ScreenBounds.Top - m_sizeAdjustment.y) == transform.position.y)
         {
             if (m_direction.y > 0) itTried = true;
         }
-        else if (ScreenBounds.Left + sizeAdjustment.x == transform.position.x)
+        else if (ScreenBounds.Left + m_sizeAdjustment.x == transform.position.x)
         {
             if (m_direction.x < 0) itTried = true;
         }
-        else if (ScreenBounds.Right - sizeAdjustment.x == transform.position.x)
+        else if (ScreenBounds.Right - m_sizeAdjustment.x == transform.position.x)
         {
             if (m_direction.x > 0) itTried = true;
         }
         return itTried;
     }
 
-    private void OnDrawGizmos()
+    public IEnumerator ChangeSides(bool goRight)
     {
-        if (m_hit != null){
-            foreach (var hit in m_hit)
-            {
-                Vector2 origin = transform.position;
-                Gizmos.color = hit.collider != null && hit.collider.gameObject != this.gameObject
-                    ? Color.green : Color.red;
-                Gizmos.DrawLine(origin, origin + m_direction * 0.75f);
-            }
-        }
+        m_changeSidesPriority = 0;
+        m_movementBias = 4;
+        m_shouldHigherMovementBias = goRight;
+        ErrorLogger.DebugLog("ok, active changing sides");
+        yield return new WaitForSeconds(15);
+        ErrorLogger.DebugLog("okay, unactive changing sides");
+        m_movementBias = 1;
     }
 }

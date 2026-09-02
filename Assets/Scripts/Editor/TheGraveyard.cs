@@ -188,6 +188,60 @@ public class TheGraveyard
     }
     //
     */
-    //
-}
+
+    // The way the enemy spacer originally worked was that i tried doing it so
+    // it would automatically know the right amount to move to the other side.
+    // Before i realized it wasn't properly working so i just made it shift
+    // half of the enemies from one side to the other and vice-versa which
+    // solves the issue i had with it.
+    // And it kinda of just made them group in the middle.
+    // New one just works. If i wipe down the entirety of
+    // a half it'll repopulate quickly and spread.
+    // Old one:
+    /*private void CheckSide(Collider2D[] side1, Collider2D[] side2, bool goRight)
+    {
+        ErrorLogger.DebugLog($"side1 lenght: {side1.Length}");
+        ErrorLogger.DebugLog($"side2 lenght: {side2.Length}");
+        ErrorLogger.DebugLog("---------------");
+        foreach (Collider2D enemy in side1)
+        {
+            ErrorLogger.DebugLog($"side1: {enemy.name}");
+        }
+        foreach (Collider2D enemy in side1)
+        {
+            ErrorLogger.DebugLog($"side2: {enemy.name}");
+        }
+        ErrorLogger.DebugLog("---------------");
+        if (side1 != null && side1.Length != 0)
+        {
+            if (side2.Length < side1.Length)
+            {
+                StartCoroutine(PauseTimer());
+
+                int diff = side1.Length - side2.Length;
+                if (diff < 0) diff = side2.Length - side1.Length;
+
+                ErrorLogger.DebugLog($"diff: {diff}");
+                ErrorLogger.DebugLog($"direction: goRight={goRight}");
+                ErrorLogger.DebugLog("changing enemy sides");
+                if (diff > 1) diff = (int)(diff * 1.5f);
+
+                if (diff > side1.Length || diff > side2.Length ||
+                    side1.Length == 0 || side2.Length == 0) return;
+
+                for (int i = 0; i < side1.Length; i++)
+                {
+                    EnemyMovement enemy = side1[i].GetComponent<EnemyMovement>();
+
+                    if (enemy.ChangeSidesPriority > 15)
+                    {
+                        StartCoroutine(enemy.ChangeSides(goRight));
+                        diff--;
+                        if (diff == 0) return;
+                    }
+                }
+            }
+        }*/
+        //
+    }
 #endif

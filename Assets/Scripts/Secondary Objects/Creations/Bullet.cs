@@ -102,10 +102,10 @@ public class Bullet : Entity
     private void DeactivateOutBounds()
     {
         Vector2 pos = m_rb2d.position;
-        float posxL = ScreenBounds.Left - sizeAdjustment.x;
-        float posxR = ScreenBounds.Right + sizeAdjustment.x;
-        float posyB = ScreenBounds.Bottom - sizeAdjustment.y;
-        float posyT = ScreenBounds.Top + sizeAdjustment.y;
+        float posxL = ScreenBounds.Left - m_sizeAdjustment.x;
+        float posxR = ScreenBounds.Right + m_sizeAdjustment.x;
+        float posyB = ScreenBounds.Bottom - m_sizeAdjustment.y;
+        float posyT = ScreenBounds.Top + m_sizeAdjustment.y;
 
         if (m_rb2d.position.x < posxL || m_rb2d.position.x > posxR)
         {
