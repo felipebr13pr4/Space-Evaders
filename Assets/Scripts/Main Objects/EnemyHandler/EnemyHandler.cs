@@ -8,9 +8,12 @@ public class EnemyHandler : MonoBehaviour
 {
     [SerializeField] private GameObject m_enemyPrefab;
     [SerializeField] private GameObject m_aimbotEnemyPrefab;
+    [SerializeField] private GameObject m_triEnemyPrefab;
     [SerializeField] private List<EnemyMovement> m_enemysMovement = new();
     [SerializeField] private List<EnemyBehavior> m_enemysBehavior = new();
+    #if UNITY_EDITOR
     [SerializeField] private Transform m_creationHolder;
+    #endif
     private int m_waveNumber;
     private WaveData m_waveData;
     public static event Action OnWaveStart;
@@ -19,13 +22,15 @@ public class EnemyHandler : MonoBehaviour
     private Coroutine m_waveCoroutine;
     private readonly WaitForSeconds m_spawnEnemyTimer = new(0.15f);
     public static readonly int MaxEnemyAmount = 100;
+    private Dictionary<string, int> m_enemyAmount = new();
+    private bool m_spawned;
 
     private void Start()
     {
         m_waveData = WaveData.Default();
         foreach (RangedEntityBehavior enemy in m_enemysBehavior)
         {
-            enemy.BulletData = m_waveData.Bullets;
+            enemy.BulletsData = m_waveData.Bullets;
         }
         m_waveCoroutine = StartCoroutine(StartWave());
     }
@@ -107,13 +112,11 @@ public class EnemyHandler : MonoBehaviour
         {
             m_enemysBehavior[i].MaxHealth = m_waveData.Healths;
             m_enemysBehavior[i].FireRate = m_waveData.FireRates;
-            m_enemysBehavior[i].BulletData = m_waveData.Bullets;
+            m_enemysBehavior[i].BulletsData.MoveInterval = m_waveData.Bullets.MoveInterval;
             m_enemysBehavior[i].Initialize();
         }
 
         for (int i = 0; i < enemyCount; i++) {
-            m_enemysBehavior[i].gameObject.SetActive(true);
-            m_enemysBehavior[i].StartShooting();
             yield return null;
             m_enemysMovement[i].Initialize(m_waveData.MoveSpeeds);
             yield return m_spawnEnemyTimer;
@@ -134,18 +137,33 @@ public class EnemyHandler : MonoBehaviour
             DestroyImmediate(obj.gameObject);
         }
 
-        int[] j = new int[2];
+        string enemyStrKey = m_enemyPrefab.name;
+        string AimbotEnemyStrKey = m_aimbotEnemyPrefab.name;
+        string TriEnemyStrKey = m_triEnemyPrefab.name;
+
+        m_enemyAmount.Clear();
+        m_enemyAmount.Add(enemyStrKey, 0);
+        m_enemyAmount.Add(AimbotEnemyStrKey, 0);
+        m_enemyAmount.Add(TriEnemyStrKey, 0);
+
+        int[] j = new int[3];
+        int[] whereWillAimbotSpawn = WhereWillSpawn(i: 24, 4, 8, 12, 16, 20, 24, 28, 32, 36, 40, 44, 48, 52, 56, 60, 64, 68, 72, 76, 80, 84, 88, 92, 96);
+        int[] whereWillTriSpawn = WhereWillSpawn(i: 16, 6, 10, 18, 22, 30, 34, 42, 46, 54, 58, 66, 70, 78, 82, 90, 94);
+
+        m_spawned = false;
+
         for (int i = 0; i < MaxEnemyAmount; i++)
         {
-            if (i % 4 == 0 && i != 0)
-            {
-                CreateEnemy(m_aimbotEnemyPrefab, j[1]);
-                j[1]++;
-                continue;
-            }
+            if (!m_spawned)
+                SpawnSpecialEnemy(i, whereWillAimbotSpawn, m_aimbotEnemyPrefab, AimbotEnemyStrKey);
 
-            CreateEnemy(m_enemyPrefab, j[0]);
-            j[0]++;
+            if (!m_spawned)
+                SpawnSpecialEnemy(i, whereWillTriSpawn, m_triEnemyPrefab, TriEnemyStrKey);
+
+            if (!m_spawned)
+                CreateEnemy(m_enemyPrefab, m_enemyAmount[enemyStrKey]);
+
+            m_spawned = false;
         }
 
         EnemyMovement[] enemiesMov = GetComponentsInChildren<EnemyMovement>();
@@ -171,6 +189,41 @@ public class EnemyHandler : MonoBehaviour
     private void CreateEnemy(GameObject enemy, int i)
     {
         GameObject obj = Instantiate(enemy, transform);
+        m_enemyAmount[enemy.name]++;
         obj.name = $"{enemy.name} " + (i + 1);
+    }
+
+    private void SpawnSpecialEnemy(int i, int[] whereWillSpawn, GameObject enemyPrefab, string enemyAmount)
+    {
+        foreach (int j in whereWillSpawn)
+        {
+            if (j == i)
+            {
+                CreateEnemy(enemyPrefab, m_enemyAmount[enemyAmount]);
+                m_spawned = true;
+            }
+        }
+    }
+
+    /// <summary>
+    /// Returns spawn locations. I must be equal to locations lenght and not below 0.
+    /// </summary>
+    private int[] WhereWillSpawn(int i, params int[] locations)
+    {
+        if (i < 0)
+        {   ErrorLogger.LogError("Error when deciding the spawn locations of a enemy. Make sure the I is positive and not below 0.");
+            int[] k = new int[0]; return k; }
+
+        int[] values = new int[i];
+
+        if (i != locations.Length)
+        { ErrorLogger.LogError("Error when deciding the spawn locations of a enemy. Make sure the locations lenght is equal to the I");
+          return values; }
+
+        for (int j = 0; j < values.Length; j++)
+        {
+            values[j] = locations[j];
+        }
+        return values;
     }
 }

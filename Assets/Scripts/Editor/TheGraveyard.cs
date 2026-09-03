@@ -242,6 +242,12 @@ public class TheGraveyard
                 }
             }
         }*/
+
+        // Not quite fitting as the code still exists but before the shoots were separated
+        // they were inside their enemy behaviors, but then I stumbled upon the problem that
+        // I couldn't mix aimbot with multi shots sooo i had to rework the system and
+        // separated them out in new classes. (And the multi-shooting originally was hard
+        // coded to 3 shots and 45 angle)
         //
     }
 #endif

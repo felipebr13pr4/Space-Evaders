@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class EntityBehavior : Entity
 {
-    private static WaitForSeconds m_damageFlashDuration = new(0.1f);
+    private static readonly WaitForSeconds m_damageFlashDuration = new(0.1f);
     [SerializeField] protected int m_maxHealth = 3;
     public int MaxHealth { get => m_maxHealth; set { m_maxHealth = value; Health = value; } }
     private int m_lastHealth;
@@ -38,11 +38,22 @@ public class EntityBehavior : Entity
     }
     protected Color m_color;
 
+    protected virtual void OnEnable()
+    {
+        SetColor();
+    }
+
     protected override void Start()
     {
         base.Start();
-        m_color = Color.white;
+        SetColor();
+        m_spriteRenderer.color = m_color;
         Initialize();
+    }
+
+    protected virtual void SetColor()
+    {
+        m_color = Color.white;
     }
 
     public virtual void TakeDamage(int damage = 0, EntityBehavior hitter = null, bool takeAndDeal = false)
@@ -82,7 +93,6 @@ public class EntityBehavior : Entity
     public virtual void Initialize()
     {
         m_isDead = false;
-
     }
 
     public virtual void InitializeCreations(Transform storageLocation)

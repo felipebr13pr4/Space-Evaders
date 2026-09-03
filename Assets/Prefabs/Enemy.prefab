@@ -13,6 +13,7 @@ GameObject:
   - component: {fileID: 2873091209990265694}
   - component: {fileID: 6540138671722592544}
   - component: {fileID: 4315155719953782409}
+  - component: {fileID: 6769800406020322249}
   m_Layer: 6
   m_Name: Enemy
   m_TagString: Enemy
@@ -196,6 +197,19 @@ MonoBehaviour:
     Target: 0
     Color: {r: 0, g: 0, b: 0, a: 0}
     Direction: 0
+  m_basicShooter: {fileID: 6769800406020322249}
+--- !u!114 &6769800406020322249
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1700237535644854630}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 705f1f399f75a3b48a6fd11a2c338e09, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::Shooting
 --- !u!1 &3722085309995641479
 GameObject:
   m_ObjectHideFlags: 0

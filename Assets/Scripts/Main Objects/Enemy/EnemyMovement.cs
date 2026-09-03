@@ -44,17 +44,21 @@ public class EnemyMovement : Entity
     {
         m_moveSpeed = moveSpeed;
         m_changeSidesPriority = Random.Range(0, 16);
-        if (m_priorityCoroutine != null) StopCoroutine(m_priorityCoroutine);
-        m_priorityCoroutine = StartCoroutine(IncreasePriority());
 
         Vector3 pos = PlayerBehavior.Transform.position;
         while (!IsPositionValid(pos))
         {
+            gameObject.SetActive(false);
             pos = new((float)((int)Random.Range(ScreenBounds.Left, ScreenBounds.Right)) + 0.5f,
 (int)Random.Range(ScreenBounds.Bottom, ScreenBounds.Top));
         }
 
-        m_rb2d.position = pos;
+        gameObject.SetActive(true);
+        
+        if (m_priorityCoroutine != null) StopCoroutine(m_priorityCoroutine);
+        m_priorityCoroutine = StartCoroutine(IncreasePriority());
+
+        transform.position = pos;
         if (isActiveAndEnabled) StartCoroutine(Move());
     }
 
@@ -93,7 +97,7 @@ public class EnemyMovement : Entity
     {
         yield return m_delayToMove;
         m_spriteRenderer.gameObject.SetActive(true);
-        m_irisSpriteRen.color = m_behavior.BulletData.Color;
+        m_irisSpriteRen.color = m_behavior.BulletsData.Color;
 
         m_moveSpeedWait = new WaitForSeconds(m_moveSpeed);
 

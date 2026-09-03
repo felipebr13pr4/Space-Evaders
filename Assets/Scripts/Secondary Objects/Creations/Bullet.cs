@@ -28,6 +28,7 @@ public class Bullet : Entity
         base.Start();
         Initialize();
         InitializeBullet();
+        m_started = true;
     }
 
     private void OnEnable()
@@ -82,14 +83,13 @@ public class Bullet : Entity
 
     private void InitializeBullet()
     {
-        m_started = true;
-
         m_spriteRenderer.color = m_data.Color;
         m_spriteRenderer.size = m_data.Size;
         m_boxCol2d.size = m_data.Size;
         m_moveInterval = m_data.MoveInterval;
         m_moveDistance = m_data.MoveDistance;
         m_moveRotation = Quaternion.Euler(0f, 0f, m_data.Direction);
+        ErrorLogger.DebugLog($"rotation bullet: {m_moveRotation}");
 
         transform.rotation = m_moveRotation;
     }
@@ -97,6 +97,7 @@ public class Bullet : Entity
     public void InitializeStats(BulletData data)
     {
         m_data = data;
+        ErrorLogger.DebugLog($"data direction bullet: {m_data.Direction}");
     }
 
     private void DeactivateOutBounds()

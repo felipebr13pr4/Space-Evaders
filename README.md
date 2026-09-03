@@ -35,6 +35,9 @@ I learned
 - Coroutines can freeze unity if caught in a infinite loop inside it without a yield return.
 - Using % (remainder operator).
 
+Learned but not implemented.
+- Continue outer (C# lacks that so here its just a goto statement). I found it interesting.
+
 Next time i should
 - Empty for now.
 
