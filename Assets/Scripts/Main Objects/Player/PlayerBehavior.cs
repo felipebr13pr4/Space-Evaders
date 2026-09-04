@@ -1,4 +1,6 @@
 
+using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 
 [RequireComponent(typeof(PlayerMovement))]
@@ -40,8 +42,28 @@ public class PlayerBehavior : RangedEntityBehavior
 
     protected override void ShootBullet(int i)
     {
-        if (m_aimbotModifier.isActiveAndEnabled) // m_aimbotModifier.ModifyBullet();
+
+        if (m_aimbotModifier.isActiveAndEnabled &&
+            EnemiesActive.Instance.ActiveEnemies.Count != 0)
+        {
+            float distance = 999;
+            float tmpDistance = 0;
+            GameObject target = null;
+            foreach (GameObject enemy in EnemiesActive.Instance.ActiveEnemies.Values)
+            {
+                tmpDistance = Vector3.Distance(transform.position, enemy.transform.position);
+                if (tmpDistance < distance)
+                {
+                    distance = tmpDistance;
+                    target = enemy;
+                }
+            }
+            if (target != null) m_aimbotModifier.ModifyBullet(target.transform.position);
+        }
+        else BulletsData.FixedDirection = 180;
+
         base.ShootBullet(i);
+        
         if (m_multiShooter.isActiveAndEnabled) StartCoroutine(m_multiShooter.ShootBullet(3, 45));
     }
 

@@ -1,15 +1,18 @@
+using System;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
 [RequireComponent(typeof(EnemyMovement))]
 public class EnemyBehavior : RangedEntityBehavior
 {
+    public static event Action<EnemyBehavior> OnActive;
     public virtual Color EnemyColor => EnemyColors.EnemyColor;
     public virtual Color EnemyBulletColor => EnemyColors.EnemyBulletColor;
 
     protected override void OnEnable()
     {
         base.OnEnable();
+        OnActive?.Invoke(this);
         if (isActiveAndEnabled) StartCoroutine(StartShooting());
     }
 

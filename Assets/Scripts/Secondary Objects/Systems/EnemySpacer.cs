@@ -56,9 +56,6 @@ public class EnemySpacer : MonoBehaviour
 
     private void CheckSide(Collider2D[] side1, Collider2D[] side2, bool goRight)
     {
-        ErrorLogger.DebugLog($"side1 lenght: {side1.Length}");
-        ErrorLogger.DebugLog($"side2 lenght: {side2.Length}");
-        ErrorLogger.DebugLog("---------------");
         /*foreach (Collider2D enemy in side1)
         {
             ErrorLogger.DebugLog($"side1: {enemy.name}");
@@ -67,15 +64,11 @@ public class EnemySpacer : MonoBehaviour
         {
             ErrorLogger.DebugLog($"side2: {enemy.name}");
         }*/
-        ErrorLogger.DebugLog("---------------");
         if (side1 != null && side1.Length != 0)
         {
             if (side2.Length < side1.Length)
             {
                 StartCoroutine(PauseTimer());
-
-                ErrorLogger.DebugLog($"direction: goRight={goRight}");
-                ErrorLogger.DebugLog("changing enemy sides");
 
                 for (int i = 0; i < Mathf.RoundToInt(side1.Length/2); i++)
                 {
