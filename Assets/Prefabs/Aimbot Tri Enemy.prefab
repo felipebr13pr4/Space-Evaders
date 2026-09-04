@@ -1,0 +1,150 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!1001 &7616144989918686735
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    serializedVersion: 3
+    m_TransformParent: {fileID: 0}
+    m_Modifications:
+    - target: {fileID: 75819414172256283, guid: 6a63c0f3ee88ea84d9a6b2e5d46bf49a, type: 3}
+      propertyPath: m_behavior
+      value: 
+      objectReference: {fileID: 3656452199090097867}
+    - target: {fileID: 92361945019341774, guid: 6a63c0f3ee88ea84d9a6b2e5d46bf49a, type: 3}
+      propertyPath: m_entity
+      value: 
+      objectReference: {fileID: 3656452199090097867}
+    - target: {fileID: 4589908569848529604, guid: 6a63c0f3ee88ea84d9a6b2e5d46bf49a, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: -16.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 4589908569848529604, guid: 6a63c0f3ee88ea84d9a6b2e5d46bf49a, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4589908569848529604, guid: 6a63c0f3ee88ea84d9a6b2e5d46bf49a, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4589908569848529604, guid: 6a63c0f3ee88ea84d9a6b2e5d46bf49a, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 4589908569848529604, guid: 6a63c0f3ee88ea84d9a6b2e5d46bf49a, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4589908569848529604, guid: 6a63c0f3ee88ea84d9a6b2e5d46bf49a, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4589908569848529604, guid: 6a63c0f3ee88ea84d9a6b2e5d46bf49a, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4589908569848529604, guid: 6a63c0f3ee88ea84d9a6b2e5d46bf49a, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4589908569848529604, guid: 6a63c0f3ee88ea84d9a6b2e5d46bf49a, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4589908569848529604, guid: 6a63c0f3ee88ea84d9a6b2e5d46bf49a, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4964953724051499975, guid: 6a63c0f3ee88ea84d9a6b2e5d46bf49a, type: 3}
+      propertyPath: m_Color.b
+      value: 0.7
+      objectReference: {fileID: 0}
+    - target: {fileID: 4964953724051499975, guid: 6a63c0f3ee88ea84d9a6b2e5d46bf49a, type: 3}
+      propertyPath: m_Color.g
+      value: 0.45
+      objectReference: {fileID: 0}
+    - target: {fileID: 4964953724051499975, guid: 6a63c0f3ee88ea84d9a6b2e5d46bf49a, type: 3}
+      propertyPath: m_Color.r
+      value: 0.6
+      objectReference: {fileID: 0}
+    - target: {fileID: 5500607240532695133, guid: 6a63c0f3ee88ea84d9a6b2e5d46bf49a, type: 3}
+      propertyPath: m_Name
+      value: Aimbot Tri Enemy
+      objectReference: {fileID: 0}
+    m_RemovedComponents:
+    - {fileID: 2921655600507858486, guid: 6a63c0f3ee88ea84d9a6b2e5d46bf49a, type: 3}
+    m_RemovedGameObjects: []
+    m_AddedGameObjects: []
+    m_AddedComponents:
+    - targetCorrespondingSourceObject: {fileID: 5500607240532695133, guid: 6a63c0f3ee88ea84d9a6b2e5d46bf49a, type: 3}
+      insertIndex: 4
+      addedObject: {fileID: 3656452199090097867}
+    - targetCorrespondingSourceObject: {fileID: 5500607240532695133, guid: 6a63c0f3ee88ea84d9a6b2e5d46bf49a, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 5899436627380580610}
+  m_SourcePrefab: {fileID: 100100000, guid: 6a63c0f3ee88ea84d9a6b2e5d46bf49a, type: 3}
+--- !u!1 &2731414071682135634 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 5500607240532695133, guid: 6a63c0f3ee88ea84d9a6b2e5d46bf49a, type: 3}
+  m_PrefabInstance: {fileID: 7616144989918686735}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &3656452199090097867
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2731414071682135634}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5ba4aa4ae01d0004ea2f854400dd7427, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::AimbotTriEnemyBehavior
+  m_maxHealth: 3
+  m_damageNumbers: []
+  m_bulletsObjs: []
+  m_bullets: []
+  m_bulletData:
+    Target: 0
+    Color: {r: 0, g: 0, b: 0, a: 0}
+    Direction: 0
+    FixedDirection: 0
+  m_basicShooter: {fileID: 8037995415881821437}
+  m_multiShooter: {fileID: 5899436627380580610}
+  m_aimbotModifier: {fileID: 7564315880236856769}
+--- !u!114 &5899436627380580610
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2731414071682135634}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c310258420867df4aaa74a92e50b09f8, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::MultiShooting
+  m_entity: {fileID: 3656452199090097867}
+--- !u!114 &7564315880236856769 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 92361945019341774, guid: 6a63c0f3ee88ea84d9a6b2e5d46bf49a, type: 3}
+  m_PrefabInstance: {fileID: 7616144989918686735}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2731414071682135634}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6677bc0f7907ce6489c1b5e48ec9b280, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::AimbotModifier
+--- !u!114 &8037995415881821437 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 449596602968163058, guid: 6a63c0f3ee88ea84d9a6b2e5d46bf49a, type: 3}
+  m_PrefabInstance: {fileID: 7616144989918686735}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2731414071682135634}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 705f1f399f75a3b48a6fd11a2c338e09, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::Shooting

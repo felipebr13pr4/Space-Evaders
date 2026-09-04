@@ -9,6 +9,7 @@ public class EnemyHandler : MonoBehaviour
     [SerializeField] private GameObject m_enemyPrefab;
     [SerializeField] private GameObject m_aimbotEnemyPrefab;
     [SerializeField] private GameObject m_triEnemyPrefab;
+    [SerializeField] private GameObject m_aimbotTriEnemyPrefab;
     [SerializeField] private List<EnemyMovement> m_enemysMovement = new();
     [SerializeField] private List<EnemyBehavior> m_enemysBehavior = new();
     #if UNITY_EDITOR
@@ -140,15 +141,18 @@ public class EnemyHandler : MonoBehaviour
         string enemyStrKey = m_enemyPrefab.name;
         string AimbotEnemyStrKey = m_aimbotEnemyPrefab.name;
         string TriEnemyStrKey = m_triEnemyPrefab.name;
+        string AimbotTriEnemyStrKey = m_aimbotTriEnemyPrefab.name;
 
         m_enemyAmount.Clear();
         m_enemyAmount.Add(enemyStrKey, 0);
         m_enemyAmount.Add(AimbotEnemyStrKey, 0);
         m_enemyAmount.Add(TriEnemyStrKey, 0);
+        m_enemyAmount.Add(AimbotTriEnemyStrKey, 0);
 
         int[] j = new int[3];
         int[] whereWillAimbotSpawn = WhereWillSpawn(i: 24, 4, 8, 12, 16, 20, 24, 28, 32, 36, 40, 44, 48, 52, 56, 60, 64, 68, 72, 76, 80, 84, 88, 92, 96);
         int[] whereWillTriSpawn = WhereWillSpawn(i: 16, 6, 10, 18, 22, 30, 34, 42, 46, 54, 58, 66, 70, 78, 82, 90, 94);
+        int[] whereWillAimbotTriSpawn = WhereWillSpawn(i: 8, 13, 25, 38, 50, 63, 75, 89, 99);
 
         m_spawned = false;
 
@@ -159,6 +163,9 @@ public class EnemyHandler : MonoBehaviour
 
             if (!m_spawned)
                 SpawnSpecialEnemy(i, whereWillTriSpawn, m_triEnemyPrefab, TriEnemyStrKey);
+
+            if (!m_spawned)
+                SpawnSpecialEnemy(i, whereWillAimbotTriSpawn, m_aimbotTriEnemyPrefab, AimbotTriEnemyStrKey);
 
             if (!m_spawned)
                 CreateEnemy(m_enemyPrefab, m_enemyAmount[enemyStrKey]);

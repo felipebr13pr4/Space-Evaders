@@ -2,6 +2,7 @@ using UnityEngine;
 
 public class MultiEnemyBehavior : EnemyBehavior
 {
+    public override int MaxHealth { get => base.MaxHealth; set => base.MaxHealth = value+2; }
     protected virtual int MultiShotAmount => 3;
     protected virtual int MultiShotAngle => 45;
     protected override int BulletsAmount => 35;
@@ -9,7 +10,6 @@ public class MultiEnemyBehavior : EnemyBehavior
 
     protected override void SetColor()
     {
-        base.SetColor();
         DarkenColor();
     }
 

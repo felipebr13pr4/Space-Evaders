@@ -6,7 +6,7 @@ public class EntityBehavior : Entity
 {
     private static readonly WaitForSeconds m_damageFlashDuration = new(0.1f);
     [SerializeField] protected int m_maxHealth = 3;
-    public int MaxHealth { get => m_maxHealth; set { m_maxHealth = value; Health = value; } }
+    public virtual int MaxHealth { get => m_maxHealth; set { m_maxHealth = value; Health = value; } }
     private int m_lastHealth;
     private int m_health;
     public virtual int Health

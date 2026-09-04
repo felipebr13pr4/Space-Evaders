@@ -4,6 +4,9 @@ using UnityEngine.InputSystem;
 [RequireComponent(typeof(EnemyMovement))]
 public class EnemyBehavior : RangedEntityBehavior
 {
+    public virtual Color EnemyColor => EnemyColors.EnemyColor;
+    public virtual Color EnemyBulletColor => EnemyColors.EnemyBulletColor;
+
     protected override void OnEnable()
     {
         base.OnEnable();
@@ -18,8 +21,8 @@ public class EnemyBehavior : RangedEntityBehavior
 
     protected override void SetColor()
     {
-        m_color = new(1, 0.75f, 0.75f);
-        BulletsData.Color = new(1f, 0.35f, 0.35f);
+        m_color = EnemyColor;
+        BulletsData.Color = EnemyBulletColor;
     }
 
     private void Update()

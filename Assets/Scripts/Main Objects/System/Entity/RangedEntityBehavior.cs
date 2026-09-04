@@ -37,7 +37,7 @@ public class RangedEntityBehavior : EntityBehavior
     public override void InitializeCreations(Transform storageLocation)
     {
         base.InitializeCreations(storageLocation);
-        BulletsData = BulletData.Default();
+        m_bulletData = BulletData.Default();
 
         m_bulletsObjs = new GameObject[BulletsAmount];
         m_bullets = new Bullet[BulletsAmount];

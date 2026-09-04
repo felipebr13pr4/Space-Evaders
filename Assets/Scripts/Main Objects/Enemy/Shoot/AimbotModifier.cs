@@ -2,7 +2,7 @@ using UnityEngine;
 
 public class AimbotModifier : SpecialShooter
 {
-    public void ModifyBullet()
+    public void ModifyBullet(Vector3 target)
     {
         // By Claude. Basically I just needed to know the math for this. (Modified)
         Vector3 dir = PlayerBehavior.Transform.position - transform.position;

@@ -25,7 +25,6 @@ public class MultiShooting : SpecialShooter
         }
 
         m_entity.BulletsData.Direction = m_entity.BulletsData.FixedDirection;
-        ErrorLogger.DebugLog($"Direction 3: {m_entity.BulletsData.Direction}");
     }
 
     public void ModifyBullets(int i, int j, int angle, GameObject[] bulletObjs)

@@ -30,11 +30,11 @@ PrefabInstance:
       objectReference: {fileID: 5717078082044614674}
     - target: {fileID: 7240875215928357887, guid: cdecf62a5671a1747aaa5417d40fdd55, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 0.16347
+      value: -16.5
       objectReference: {fileID: 0}
     - target: {fileID: 7240875215928357887, guid: cdecf62a5671a1747aaa5417d40fdd55, type: 3}
       propertyPath: m_LocalPosition.y
-      value: -1.20336
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 7240875215928357887, guid: cdecf62a5671a1747aaa5417d40fdd55, type: 3}
       propertyPath: m_LocalPosition.z
@@ -155,8 +155,9 @@ MonoBehaviour:
     Target: 0
     Color: {r: 0, g: 0, b: 0, a: 0}
     Direction: 0
+    FixedDirection: 0
   m_basicShooter: {fileID: 4858057330778236186}
-  m_triShooter: {fileID: 595925965324955340}
+  m_multiShooter: {fileID: 595925965324955340}
 --- !u!114 &595925965324955340
 MonoBehaviour:
   m_ObjectHideFlags: 0

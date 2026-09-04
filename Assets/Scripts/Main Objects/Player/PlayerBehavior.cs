@@ -40,7 +40,7 @@ public class PlayerBehavior : RangedEntityBehavior
 
     protected override void ShootBullet(int i)
     {
-        if (m_aimbotModifier.isActiveAndEnabled) m_aimbotModifier.ModifyBullet();
+        if (m_aimbotModifier.isActiveAndEnabled) // m_aimbotModifier.ModifyBullet();
         base.ShootBullet(i);
         if (m_multiShooter.isActiveAndEnabled) StartCoroutine(m_multiShooter.ShootBullet(3, 45));
     }
