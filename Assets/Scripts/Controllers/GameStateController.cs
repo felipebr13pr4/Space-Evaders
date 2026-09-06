@@ -5,11 +5,11 @@ using UnityEngine;
 public class GameStateController : MonoBehaviour
 {
     private bool m_isPlayerDead;
-    private bool m_isLevelClear;
+    private bool m_isInSubMenu;
     private bool m_isGamePaused;
     public bool IsPlayerDead => m_isPlayerDead;
-    public bool IsLevelClear => m_isLevelClear;
     public bool IsGamePaused => m_isGamePaused;
+    public bool IsInSubMenu => m_isInSubMenu;
 
     public static event Action OnGamePaused;
 
@@ -29,17 +29,24 @@ public class GameStateController : MonoBehaviour
 
     private void OnEnable()
     {
-        // Put things when there is something to listen to make the game pause.
+        GlobalHotkeysController.OnOpenMenu += TogglePause;
+        SubMenu.OnSubMenuOpen += SubMenuOpen;
+        // Put things when there is something to listen to prevent it from pausing.
+
     }
 
     private void OnDisable()
     {
-        // Put things when there is something to listen to make the game pause.
+        GlobalHotkeysController.OnOpenMenu -= TogglePause;
+        SubMenu.OnSubMenuOpen -= SubMenuOpen;
+        // Put things when there is something to listen to prevent it from pausing.
     }
+
+    public void SubMenuOpen(bool isOpen) => m_isInSubMenu = isOpen;
 
     public void TogglePause()
     {
-        if (m_isLevelClear | m_isPlayerDead) return;
+        if (m_isPlayerDead | m_isInSubMenu) return;
         GetComponent<AudioHolder>().ActivateSound(0);
         Time.timeScale = Time.timeScale > 0 ? 0 : 1;
         m_isGamePaused = Time.timeScale == 0; 
@@ -48,7 +55,6 @@ public class GameStateController : MonoBehaviour
 
     public void ResetStates()
     {
-        m_isLevelClear = false;
         m_isPlayerDead = false;
         m_isGamePaused = false;
     }

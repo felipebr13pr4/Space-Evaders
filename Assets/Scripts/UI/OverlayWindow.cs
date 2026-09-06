@@ -7,42 +7,50 @@ public class OverlayWindow : MonoBehaviour
 {
     [SerializeField] private TextMeshProUGUI m_windowTitle;
     [SerializeField] private GameObject m_components;
+    [SerializeField] private GameObject m_background;
     [SerializeField] private GameObject[] m_otherWindows;
+
 
     private void OnEnable()
     {
-        GameStateController.OnGamePaused += OpenOverlayWindow;
+        GlobalHotkeysController.OnOpenMenu += OpenOverlayWindowWrap;
         // Put here another thing to make it open.
     }
 
     private void OnDisable()
     {
-        GameStateController.OnGamePaused -= OpenOverlayWindow;
+        GlobalHotkeysController.OnOpenMenu -= OpenOverlayWindowWrap;
         // Put here another thing to make it open.
     }
 
-    private void OpenOverlayWindow()
+    private void OpenOverlayWindowWrap() => StartCoroutine(OpenOverlayWindow());
+
+    private IEnumerator OpenOverlayWindow()
     {
+        for (int i = 0; i < 10; i++)
+            yield return null;
         ErrorLogger.DebugLog("reached openoverlay");
-        bool isPaused = Time.timeScale < 1;
-        m_components.SetActive(isPaused);
-        StartCoroutine(UpdateTitle()); 
-        StartCoroutine(EnsureComponentsActivation());
-        if (!isPaused)
-        {
-            foreach (var window in m_otherWindows) window.SetActive(false);
-            gameObject.SetActive(true);
-        }
+        bool isPaused = Time.timeScale == 0;
+        StartCoroutine(UpdateTitle());
+        StartCoroutine(ComponentsActivation(isPaused));
+        foreach (var window in m_otherWindows) window.GetComponent<FadingMenu>().Disable();
     }
 
-    private IEnumerator EnsureComponentsActivation()
+    private IEnumerator ComponentsActivation(bool isPaused)
     {
         for (int i = 0; i < 10; i++)
         {
-            bool isPaused = Time.timeScale < 1;
-            m_components.SetActive(isPaused);
+            EnableOrDisable(isPaused, m_components);
+            EnableOrDisable(isPaused, m_background);
             yield return null;
         }
+    }
+
+    private void EnableOrDisable(bool isPaused, GameObject obj)
+    {
+        if (obj.activeInHierarchy) obj.GetComponent<FadingMenu>().Enable();
+        if (isPaused) obj.SetActive(true);
+        else obj.GetComponent<FadingMenu>().Disable();
     }
 
     private IEnumerator UpdateTitle()
@@ -65,6 +73,6 @@ public class OverlayWindow : MonoBehaviour
         {
             return "Game Name";
         }
-        return "";
+        return "Game Paused.";
     }
 }

@@ -1,4 +1,6 @@
 #if UNITY_EDITOR
+using UnityEngine;
+
 public class TheGraveyard
 {
     // Hey, i'll use this script to just store things i had to rework. For documentation purposes.
@@ -243,11 +245,32 @@ public class TheGraveyard
             }
         }*/
 
-        // Not quite fitting as the code still exists but before the shoots were separated
-        // they were inside their enemy behaviors, but then I stumbled upon the problem that
-        // I couldn't mix aimbot with multi shots sooo i had to rework the system and
-        // separated them out in new classes. (And the multi-shooting originally was hard
-        // coded to 3 shots and 45 angle)
-        //
+    // Not quite fitting as the code still exists but before the shoots were separated
+    // they were inside their enemy behaviors, but then I stumbled upon the problem that
+    // I couldn't mix aimbot with multi shots sooo i had to rework the system and
+    // separated them out in new classes. (And the multi-shooting originally was hard
+    // coded to 3 shots and 45 angle)
+
+    // The fading system before i fully thought of just fusing and generalizing.
+    /*private IEnumerator EnableFade()
+    {
+        while (Alpha < 1)
+        {
+            Alpha += 0.05f;
+            m_canvasGroup.alpha = Alpha;
+            yield return m_fadeTimer;
+        }
     }
+    private IEnumerator DisableFade()
+    {
+        while (Alpha > 0)
+        {
+            Alpha -= 0.05f;
+            m_canvasGroup.alpha = Alpha;
+            print(Alpha);
+            yield return m_fadeTimer;
+        }
+    }*/
+    //
+}
 #endif

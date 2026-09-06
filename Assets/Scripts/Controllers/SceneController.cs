@@ -1,8 +1,12 @@
 using UnityEngine;
+using UnityEngine.InputSystem;
 using UnityEngine.SceneManagement;
 
 public class SceneController : MonoBehaviour
 {
+    private string m_currentScene;
+
+
     public static SceneController Instance { get; private set; }
     private void Awake()
     {
@@ -27,6 +31,13 @@ public class SceneController : MonoBehaviour
         SceneManager.sceneLoaded -= ResetThings;
     }
 
+    private void Update()
+    {
+        if (m_currentScene == "MainMenu") return;
+        if (Keyboard.current.rKey.wasPressedThisFrame)
+            ReloadScene();
+    }
+
     public void LoadScene(SceneType type)
     {
         string sceneToLoad = type switch
@@ -41,8 +52,8 @@ public class SceneController : MonoBehaviour
 
     public void ReloadScene()
     {
-        string currentScene = SceneManager.GetActiveScene().name;
-        SceneManager.LoadScene(currentScene);
+        m_currentScene = SceneManager.GetActiveScene().name;
+        SceneManager.LoadScene(m_currentScene);
     }
 
     private void ResetThings(Scene scene, LoadSceneMode mode)

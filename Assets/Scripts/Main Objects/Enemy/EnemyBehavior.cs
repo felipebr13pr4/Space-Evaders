@@ -27,9 +27,10 @@ public class EnemyBehavior : RangedEntityBehavior
         m_color = EnemyColor;
         BulletsData.Color = EnemyBulletColor;
     }
-
+#if UNITY_EDITOR
     private void Update()
     {
         if (Keyboard.current.tKey.wasPressedThisFrame) Die(); // for testing.
     }
+#endif
 }

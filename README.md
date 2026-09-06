@@ -28,12 +28,20 @@ Re-appearances from last project
 
 I learned
 - That unity packaging is really good.
-- A little more about lists (they're interesting), Coroutines, Inherited static events, using the profiler, optimizing.
+- A little more about lists (they're interesting), Coroutines, Inherited static events, using the profiler, optimizing, debugging, dictionaries, events, design philosphy.
 - Structs vs classes for small data.
 - "is not" and "is" vs "!=" and "==".
 - Get Component In Childrens doesn't get unactive children unless you pass true inside it, but it does grab a directly referenced children (Technically i learned this in the last project).
 - Coroutines can freeze unity if caught in a infinite loop inside it without a yield return.
 - Using % (remainder operator).
+- You can make a "Bridge"/"Wrap" to make a non-IEnumerator event call a IEnumerator method.
+- Solutions for something that needs two parents (the multi-aimbot enemy needing aimbot and multi).
+
+Minor learnt things
+- Getting smallest value from a list.
+- How to get the distance from x thing to y thing.
+- GameObject can't be caught by get component (it even does a warning) so just use Transform.
+- Checking if dict is empty.
 
 Learned but not implemented.
 - Continue outer (C# lacks that so here its just a goto statement). I found it interesting.

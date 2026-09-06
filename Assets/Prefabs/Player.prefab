@@ -110,7 +110,7 @@ BoxCollider2D:
     drawMode: 0
     adaptiveTiling: 0
   m_AutoTiling: 0
-  m_Size: {x: 1.5, y: 0.2}
+  m_Size: {x: 1.25, y: 0.2}
   m_EdgeRadius: 0
 --- !u!114 &4469931899680607981
 MonoBehaviour:
@@ -195,6 +195,7 @@ MonoBehaviour:
     Target: 0
     Color: {r: 0, g: 0, b: 0, a: 0}
     Direction: 0
+    FixedDirection: 0
   m_basicShooter: {fileID: 6520884302600013547}
   m_healthBar: {fileID: 0}
   m_aimbotModifier: {fileID: -6234856354854549691}
