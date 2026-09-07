@@ -83,7 +83,7 @@ public class Bullet : Entity
 
     private void InitializeBullet()
     {
-        m_spriteRenderer.color = m_data.Color;
+        m_spriteRenderer.color = m_data.BulletColor;
         m_spriteRenderer.size = m_data.Size;
         m_boxCol2d.size = m_data.Size;
         m_moveInterval = m_data.MoveInterval;

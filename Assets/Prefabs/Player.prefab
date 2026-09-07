@@ -14,8 +14,6 @@ GameObject:
   - component: {fileID: 4469931899680607981}
   - component: {fileID: -6241240041686677596}
   - component: {fileID: 6520884302600013547}
-  - component: {fileID: -6525365486981493787}
-  - component: {fileID: -6234856354854549691}
   m_Layer: 0
   m_Name: Player
   m_TagString: Player
@@ -36,6 +34,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
+  - {fileID: 6787833758099953825}
   - {fileID: 5524238691343792012}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -193,13 +192,13 @@ MonoBehaviour:
   - {fileID: 0}
   m_bulletData:
     Target: 0
-    Color: {r: 0, g: 0, b: 0, a: 0}
+    BulletColor: {r: 0, g: 0, b: 0, a: 0}
     Direction: 0
     FixedDirection: 0
   m_basicShooter: {fileID: 6520884302600013547}
   m_healthBar: {fileID: 0}
-  m_aimbotModifier: {fileID: -6234856354854549691}
-  m_multiShooter: {fileID: -6525365486981493787}
+  m_aimbotModifier: {fileID: 3415912295791975157}
+  m_multiShooter: {fileID: 8317193685783629398}
   m_creationsHolder: {fileID: 0}
 --- !u!114 &6520884302600013547
 MonoBehaviour:
@@ -213,32 +212,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 705f1f399f75a3b48a6fd11a2c338e09, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Shooting
---- !u!114 &-6525365486981493787
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 7782274364177928484}
-  m_Enabled: 0
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: c310258420867df4aaa74a92e50b09f8, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::MultiShooting
-  m_entity: {fileID: -6241240041686677596}
---- !u!114 &-6234856354854549691
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 7782274364177928484}
-  m_Enabled: 0
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 6677bc0f7907ce6489c1b5e48ec9b280, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::AimbotModifier
-  m_entity: {fileID: -6241240041686677596}
 --- !u!1 &8551500014973904880
 GameObject:
   m_ObjectHideFlags: 0
@@ -331,3 +304,64 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_SpriteSortPoint: 0
   m_BlendShapeWeights: []
+--- !u!1 &8596352427304667072
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 6787833758099953825}
+  - component: {fileID: 8317193685783629398}
+  - component: {fileID: 3415912295791975157}
+  m_Layer: 6
+  m_Name: Modifiers
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &6787833758099953825
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8596352427304667072}
+  serializedVersion: 2
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 6413981764803254992}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &8317193685783629398
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8596352427304667072}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c310258420867df4aaa74a92e50b09f8, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::MultiShooting
+  m_entity: {fileID: -6241240041686677596}
+  MultiShotAmount: 3
+  MultiShotAngle: 45
+--- !u!114 &3415912295791975157
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8596352427304667072}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6677bc0f7907ce6489c1b5e48ec9b280, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::AimbotModifier
+  m_entity: {fileID: -6241240041686677596}

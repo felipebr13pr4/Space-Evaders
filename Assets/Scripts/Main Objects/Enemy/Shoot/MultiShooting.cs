@@ -3,8 +3,13 @@ using UnityEngine;
 
 public class MultiShooting : SpecialShooter
 {
-    public IEnumerator ShootBullet(int amount, int angle)
+    [SerializeField] protected int MultiShotAmount = 3;
+    [SerializeField] protected int MultiShotAngle = 45;
+
+    public IEnumerator ShootBullet()
     {
+        int amount = MultiShotAmount;
+        int angle = MultiShotAngle;
         GameObject[] bulletObjs = new GameObject[amount];
 
         yield return null;

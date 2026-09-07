@@ -36,24 +36,13 @@ public class EntityBehavior : Entity
             if (m_damageNumberIndex >= m_maxDamageNumbers) m_damageNumberIndex = 0;
         }
     }
-    protected Color m_color;
-
-    protected virtual void OnEnable()
-    {
-        SetColor();
-    }
+    private Color m_spriteColor;
 
     protected override void Start()
     {
         base.Start();
-        SetColor();
-        m_spriteRenderer.color = m_color;
+        m_spriteColor = m_spriteRenderer.color;
         Initialize();
-    }
-
-    protected virtual void SetColor()
-    {
-        m_color = Color.white;
     }
 
     public virtual void TakeDamage(int damage = 0, EntityBehavior hitter = null, bool takeAndDeal = false)
@@ -77,13 +66,13 @@ public class EntityBehavior : Entity
     {
         m_spriteRenderer.color = Color.red;
         yield return m_damageFlashDuration;
-        m_spriteRenderer.color = m_color;
+        m_spriteRenderer.color = m_spriteColor;
     }
 
     protected virtual void Die()
     {
         if (m_isDead) return;
-        m_spriteRenderer.color = m_color;
+        m_spriteRenderer.color = m_spriteColor;
         m_spriteRenderer.gameObject.SetActive(false);
         m_isDead = true;
         gameObject.SetActive(false);

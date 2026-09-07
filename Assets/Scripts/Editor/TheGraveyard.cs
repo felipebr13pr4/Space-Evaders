@@ -1,5 +1,6 @@
 #if UNITY_EDITOR
 using UnityEngine;
+using UnityEngine.UIElements;
 
 public class TheGraveyard
 {
@@ -252,6 +253,7 @@ public class TheGraveyard
     // coded to 3 shots and 45 angle)
 
     // The fading system before i fully thought of just fusing and generalizing.
+    // Inside Fading menu.
     /*private IEnumerator EnableFade()
     {
         while (Alpha < 1)
@@ -271,6 +273,65 @@ public class TheGraveyard
             yield return m_fadeTimer;
         }
     }*/
+    // But then even after generalizing i talked a bit with Claude andd he showed me
+    // that i just made something already existing (MoveTowards) so that also got scrapped lol.
+    /*private IEnumerator Fade(float alpha, float alpha2, float incrementation, bool isInversed)
+    {
+        // enable: Alpha < 1
+        // disable: Alpha > 0
+        while (alpha < alpha2)
+        {
+            Alpha += incrementation;
+            if (!isInversed) alpha = Alpha;
+            else alpha2 = Alpha;
+            m_canvasGroup.alpha = Alpha;
+            yield return m_fadeTimer;
+        }
+    }*/
+    // The old disable call
+    /*m_fadeCoroutine = StartCoroutine(Fade(0, Alpha, -0.05f, true));*/
+    // The old enable call
+    /*m_fadeCoroutine = StartCoroutine(Fade(Alpha, 1, 0.05f, false));*/
+
+    // Claude also helped me see that the overlay window script was kinda rough
+    // as it had tacky solutions from the past that were not needed anymore and
+    // a accidental infinite while true i hadn't caught. I suspect it was from how it was
+    // set up before or i just didn't spot it.
+    /*private IEnumerator OpenOverlayWindow()
+    {
+        for (int i = 0; i < 10; i++)
+            yield return null;
+        ErrorLogger.DebugLog("reached openoverlay");
+        bool isPaused = Time.timeScale == 0;
+        StartCoroutine(UpdateTitle());
+        StartCoroutine(ComponentsActivation(isPaused));
+        foreach (var window in m_otherWindows) window.GetComponent<FadingMenu>().Disable();
+    }
+
+    private IEnumerator ComponentsActivation(bool isPaused)
+    {
+        for (int i = 0; i < 10; i++)
+        {
+            EnableOrDisable(isPaused, m_components);
+            EnableOrDisable(isPaused, m_background);
+            yield return null;
+        }
+    }
+    private IEnumerator UpdateTitle()
+    {
+        while (true)
+        {
+            while (!m_windowTitle.gameObject.activeInHierarchy) yield return null;
+            m_windowTitle.text = HandleTitle();
+            yield return new WaitForSecondsRealtime(0.1f);
+        }
+    }*/
+
+    // Before there was a inheriting class for enemy types as i had not realized i could just
+    // copy the way i had in player behavior to achieve multiple modifiers.
+    // But since its a bit of various pieces of code everywhere im not going to
+    // put them here (You can check past versions of commits though i think).
+    // It is a nearly-entire rework.
     //
 }
 #endif

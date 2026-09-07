@@ -32,7 +32,7 @@ public class GlobalHotkeysController : MonoBehaviour
 
     private void Update()
     {
-        if (m_sceneName == "MainMenu") return;
+        if (m_sceneName == SceneNames.MainMenu) return;
 
         if (Keyboard.current.escapeKey.wasPressedThisFrame)
             OnOpenMenu?.Invoke();

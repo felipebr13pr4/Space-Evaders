@@ -1,6 +1,6 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
---- !u!1001 &6615330608325407035
+--- !u!1001 &4327345849822216105
 PrefabInstance:
   m_ObjectHideFlags: 0
   serializedVersion: 2
@@ -18,23 +18,47 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2245448178974759676, guid: cdecf62a5671a1747aaa5417d40fdd55, type: 3}
       propertyPath: m_Color.g
-      value: 0.75
+      value: 0.7490196
       objectReference: {fileID: 0}
     - target: {fileID: 2245448178974759676, guid: cdecf62a5671a1747aaa5417d40fdd55, type: 3}
       propertyPath: m_Color.r
-      value: 0.9
+      value: 0.9019608
       objectReference: {fileID: 0}
-    - target: {fileID: 6540138671722592544, guid: cdecf62a5671a1747aaa5417d40fdd55, type: 3}
-      propertyPath: m_behavior
-      value: 
-      objectReference: {fileID: 2921655600507858486}
+    - target: {fileID: 4315155719953782409, guid: cdecf62a5671a1747aaa5417d40fdd55, type: 3}
+      propertyPath: m_bulletData.Color.b
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 4315155719953782409, guid: cdecf62a5671a1747aaa5417d40fdd55, type: 3}
+      propertyPath: m_bulletData.Color.g
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4315155719953782409, guid: cdecf62a5671a1747aaa5417d40fdd55, type: 3}
+      propertyPath: m_bulletData.Color.r
+      value: 0.8
+      objectReference: {fileID: 0}
+    - target: {fileID: 4315155719953782409, guid: cdecf62a5671a1747aaa5417d40fdd55, type: 3}
+      propertyPath: m_baseFireRateMultiplier
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 4315155719953782409, guid: cdecf62a5671a1747aaa5417d40fdd55, type: 3}
+      propertyPath: m_bulletData.BulletColor.b
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 4315155719953782409, guid: cdecf62a5671a1747aaa5417d40fdd55, type: 3}
+      propertyPath: m_bulletData.BulletColor.g
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4315155719953782409, guid: cdecf62a5671a1747aaa5417d40fdd55, type: 3}
+      propertyPath: m_bulletData.BulletColor.r
+      value: 0.8
+      objectReference: {fileID: 0}
     - target: {fileID: 7240875215928357887, guid: cdecf62a5671a1747aaa5417d40fdd55, type: 3}
       propertyPath: m_LocalPosition.x
-      value: -16.5
+      value: -1.29123
       objectReference: {fileID: 0}
     - target: {fileID: 7240875215928357887, guid: cdecf62a5671a1747aaa5417d40fdd55, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 0
+      value: -1.00383
       objectReference: {fileID: 0}
     - target: {fileID: 7240875215928357887, guid: cdecf62a5671a1747aaa5417d40fdd55, type: 3}
       propertyPath: m_LocalPosition.z
@@ -68,116 +92,12 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    m_RemovedComponents:
-    - {fileID: 4315155719953782409, guid: cdecf62a5671a1747aaa5417d40fdd55, type: 3}
+    - target: {fileID: 7961608145815699025, guid: cdecf62a5671a1747aaa5417d40fdd55, type: 3}
+      propertyPath: m_Enabled
+      value: 1
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
-    m_AddedComponents:
-    - targetCorrespondingSourceObject: {fileID: 1700237535644854630, guid: cdecf62a5671a1747aaa5417d40fdd55, type: 3}
-      insertIndex: 4
-      addedObject: {fileID: 2921655600507858486}
-    - targetCorrespondingSourceObject: {fileID: 1700237535644854630, guid: cdecf62a5671a1747aaa5417d40fdd55, type: 3}
-      insertIndex: -1
-      addedObject: {fileID: 92361945019341774}
+    m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: cdecf62a5671a1747aaa5417d40fdd55, type: 3}
---- !u!114 &449596602968163058 stripped
-MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 6769800406020322249, guid: cdecf62a5671a1747aaa5417d40fdd55, type: 3}
-  m_PrefabInstance: {fileID: 6615330608325407035}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 5500607240532695133}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 705f1f399f75a3b48a6fd11a2c338e09, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::Shooting
---- !u!1 &5500607240532695133 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 1700237535644854630, guid: cdecf62a5671a1747aaa5417d40fdd55, type: 3}
-  m_PrefabInstance: {fileID: 6615330608325407035}
-  m_PrefabAsset: {fileID: 0}
---- !u!114 &2921655600507858486
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 5500607240532695133}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 07c9ca1ce09589945948d19284488c32, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::AimbotEnemyBehavior
-  m_maxHealth: 3
-  m_damageNumbers: []
-  m_bulletsObjs:
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  m_bullets:
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  m_bulletData:
-    Target: 0
-    Color: {r: 0, g: 0, b: 0, a: 0}
-    Direction: 0
-  m_basicShooter: {fileID: 449596602968163058}
-  m_aimbotModifier: {fileID: 92361945019341774}
---- !u!114 &92361945019341774
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 5500607240532695133}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 6677bc0f7907ce6489c1b5e48ec9b280, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::AimbotModifier
-  m_entity: {fileID: 2921655600507858486}

@@ -97,7 +97,7 @@ public class EnemyMovement : Entity
     {
         yield return m_delayToMove;
         m_spriteRenderer.gameObject.SetActive(true);
-        m_irisSpriteRen.color = m_behavior.BulletsData.Color;
+        m_irisSpriteRen.color = m_behavior.BulletsData.BulletColor;
 
         m_moveSpeedWait = new WaitForSeconds(m_moveSpeed);
 
@@ -148,6 +148,7 @@ public class EnemyMovement : Entity
     private bool CheckIfTriedToMoveOutBounds()
     {
         bool itTried = false;
+        print((int)(ScreenBounds.Top - m_sizeAdjustment.y));
         if ((int)((ScreenBounds.Bottom + m_sizeAdjustment.y) + 2f) == transform.position.y)
         {
             if (m_direction.y < 0) itTried = true;

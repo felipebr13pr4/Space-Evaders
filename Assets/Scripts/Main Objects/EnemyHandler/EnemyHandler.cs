@@ -31,7 +31,7 @@ public class EnemyHandler : MonoBehaviour
         m_waveData = WaveData.Default();
         foreach (RangedEntityBehavior enemy in m_enemysBehavior)
         {
-            enemy.BulletsData = m_waveData.Bullets;
+            enemy.BulletsData.SetMainStats(m_waveData.Bullets);
         }
         m_waveCoroutine = StartCoroutine(StartWave());
     }
@@ -123,6 +123,7 @@ public class EnemyHandler : MonoBehaviour
             yield return m_spawnEnemyTimer;
         }
     }
+#if UNITY_EDITOR
 
     [ContextMenu("Regemerate all enemies prefabs")]
     private void CreateAllEnemies()
@@ -233,4 +234,5 @@ public class EnemyHandler : MonoBehaviour
         }
         return values;
     }
+#endif
 }

@@ -17,6 +17,7 @@ public class PlayerBehavior : RangedEntityBehavior
     [SerializeField] protected AimbotModifier m_aimbotModifier;
     [SerializeField] protected MultiShooting m_multiShooter;
     protected override int ShootDirection => 180;
+    protected float m_bulletTransparency = 1;
 
     protected override void Start()
     {
@@ -26,9 +27,8 @@ public class PlayerBehavior : RangedEntityBehavior
         StartCoroutine(StartShooting());
         base.Start();
         m_healthBar.UpdateValues(Health, MaxHealth);
-        Color tempColor = Color.lightBlue;
-        tempColor.a = 0.5f;
-        BulletsData = new(1, EntityType.Enemy, tempColor, new(0.25f, 0.25f), 0.05f, 0.1f, 180);
+        BulletsData =
+            new(1, target: EntityType.Enemy, m_bulletColor, new(0.25f, 0.25f), 0.05f, 0.1f, ShootDirection);
     }
 
     private void OnCollisionEnter2D(Collision2D collision)
@@ -64,7 +64,7 @@ public class PlayerBehavior : RangedEntityBehavior
 
         base.ShootBullet(i);
         
-        if (m_multiShooter.isActiveAndEnabled) StartCoroutine(m_multiShooter.ShootBullet(3, 45));
+        if (m_multiShooter.isActiveAndEnabled) StartCoroutine(m_multiShooter.ShootBullet());
     }
 
 #if UNITY_EDITOR

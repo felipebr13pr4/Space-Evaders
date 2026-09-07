@@ -35,6 +35,7 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 1491065279979778381}
+  - {fileID: 1113826239733151338}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!50 &4479355566001218537
@@ -195,9 +196,14 @@ MonoBehaviour:
   - {fileID: 0}
   m_bulletData:
     Target: 0
-    Color: {r: 0, g: 0, b: 0, a: 0}
+    BulletColor: {r: 1, g: 0.34901962, b: 0.34901962, a: 1}
     Direction: 0
+    FixedDirection: 0
   m_basicShooter: {fileID: 6769800406020322249}
+  m_baseHealthAdder: 0
+  m_baseFireRateMultiplier: 1
+  m_aimbotModifier: {fileID: 7961608145815699025}
+  m_multiShooter: {fileID: 8248888080641215618}
 --- !u!114 &6769800406020322249
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -210,6 +216,67 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 705f1f399f75a3b48a6fd11a2c338e09, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Shooting
+--- !u!1 &1908138697785165766
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1113826239733151338}
+  - component: {fileID: 7961608145815699025}
+  - component: {fileID: 8248888080641215618}
+  m_Layer: 6
+  m_Name: Modifiers
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1113826239733151338
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1908138697785165766}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 7240875215928357887}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &7961608145815699025
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1908138697785165766}
+  m_Enabled: 0
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6677bc0f7907ce6489c1b5e48ec9b280, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::AimbotModifier
+  m_entity: {fileID: 4315155719953782409}
+--- !u!114 &8248888080641215618
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1908138697785165766}
+  m_Enabled: 0
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c310258420867df4aaa74a92e50b09f8, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::MultiShooting
+  m_entity: {fileID: 4315155719953782409}
+  MultiShotAmount: 3
+  MultiShotAngle: 45
 --- !u!1 &3722085309995641479
 GameObject:
   m_ObjectHideFlags: 0

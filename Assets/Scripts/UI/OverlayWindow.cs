@@ -27,23 +27,14 @@ public class OverlayWindow : MonoBehaviour
 
     private IEnumerator OpenOverlayWindow()
     {
-        for (int i = 0; i < 10; i++)
-            yield return null;
+        yield return null;
         ErrorLogger.DebugLog("reached openoverlay");
         bool isPaused = Time.timeScale == 0;
-        StartCoroutine(UpdateTitle());
-        StartCoroutine(ComponentsActivation(isPaused));
+        yield return null;
+        EnableOrDisable(isPaused, m_components);
+        EnableOrDisable(isPaused, m_background);
+        m_windowTitle.text = HandleTitle();
         foreach (var window in m_otherWindows) window.GetComponent<FadingMenu>().Disable();
-    }
-
-    private IEnumerator ComponentsActivation(bool isPaused)
-    {
-        for (int i = 0; i < 10; i++)
-        {
-            EnableOrDisable(isPaused, m_components);
-            EnableOrDisable(isPaused, m_background);
-            yield return null;
-        }
     }
 
     private void EnableOrDisable(bool isPaused, GameObject obj)
@@ -53,23 +44,13 @@ public class OverlayWindow : MonoBehaviour
         else obj.GetComponent<FadingMenu>().Disable();
     }
 
-    private IEnumerator UpdateTitle()
-    {
-        while (true)
-        {
-            while (!m_windowTitle.gameObject.activeInHierarchy) yield return null;
-            m_windowTitle.text = HandleTitle();
-            yield return new WaitForSecondsRealtime(0.1f);
-        }
-    }
-
     private string HandleTitle()
     {
         // Put here ifs and else ifs when there are other things that can make this open.
         if (Time.timeScale == 0)
         {
             return "Game Paused.";
-        }else if (SceneManager.GetActiveScene().name == "MainMenu")
+        }else if (SceneManager.GetActiveScene().name == SceneNames.MainMenu)
         {
             return "Game Name";
         }

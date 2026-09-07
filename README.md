@@ -36,6 +36,7 @@ I learned
 - Using % (remainder operator).
 - You can make a "Bridge"/"Wrap" to make a non-IEnumerator event call a IEnumerator method.
 - Solutions for something that needs two parents (the multi-aimbot enemy needing aimbot and multi).
+- I need to make sure old tacky solutions are still necessary.
 
 Minor learnt things
 - Getting smallest value from a list.

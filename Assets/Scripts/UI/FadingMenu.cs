@@ -26,29 +26,24 @@ public class FadingMenu : MonoBehaviour
         Enable();
     }
 
+    public void Enable()
+    {
+        if (m_fadeCoroutine != null) StopCoroutine(m_fadeCoroutine);
+        m_fadeCoroutine = StartCoroutine(Fade(1));
+    }
+
     public void Disable()
     {
         if (!isActiveAndEnabled) return;
         if (m_fadeCoroutine != null) StopCoroutine(m_fadeCoroutine);
-        m_fadeCoroutine = StartCoroutine(Fade(0, Alpha, -0.05f, true));
+        m_fadeCoroutine = StartCoroutine(Fade(0));
     }
 
-    public void Enable()
+    private IEnumerator Fade(float target)
     {
-        if (m_fadeCoroutine != null) StopCoroutine(m_fadeCoroutine);
-        m_fadeCoroutine = StartCoroutine(Fade(Alpha, 1, 0.05f, false));
-    }
-
-    private IEnumerator Fade(float alpha, float alpha2, float incrementation, bool isInversed)
-    {
-        // enable: Alpha < 1
-        // disable: Alpha > 0
-        while (alpha < alpha2)
+        while (Alpha != target)
         {
-            Alpha += incrementation;
-            if (!isInversed) alpha = Alpha;
-            else alpha2 = Alpha;
-            ErrorLogger.DebugLog(Alpha);
+            Alpha = Mathf.MoveTowards(Alpha, target, 0.05f);
             m_canvasGroup.alpha = Alpha;
             yield return m_fadeTimer;
         }

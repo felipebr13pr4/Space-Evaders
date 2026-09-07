@@ -16,7 +16,6 @@ public class RangedEntityBehavior : EntityBehavior
     [SerializeField] protected GameObject[] m_bulletsObjs;
     public GameObject[] BulletsObj => m_bulletsObjs;
     [SerializeField] protected Bullet[] m_bullets;
-    public Bullet[] Bullets => m_bullets;
     [SerializeField] protected BulletData m_bulletData;
     public BulletData BulletsData
     {   get { m_bullets[BulletIndex].InitializeStats(m_bulletData); return m_bulletData; }
@@ -27,17 +26,18 @@ public class RangedEntityBehavior : EntityBehavior
         set { m_bulletIndex = value; if (BulletIndex >= BulletsAmount) BulletIndex = 0; } }
     [SerializeField] protected Shooting m_basicShooter;
     protected virtual int ShootDirection => 0;
+    protected Color m_bulletColor;
 
     protected override void Start()
     {
         base.Start();
+        m_bulletColor = BulletsData.BulletColor;
         BulletsData.FixedDirection = ShootDirection;
     }
 
     public override void InitializeCreations(Transform storageLocation)
     {
         base.InitializeCreations(storageLocation);
-        m_bulletData = BulletData.Default();
 
         m_bulletsObjs = new GameObject[BulletsAmount];
         m_bullets = new Bullet[BulletsAmount];

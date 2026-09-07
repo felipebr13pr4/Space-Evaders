@@ -33,7 +33,7 @@ public class SceneController : MonoBehaviour
 
     private void Update()
     {
-        if (m_currentScene == "MainMenu") return;
+        if (m_currentScene == SceneNames.MainMenu) return;
         if (Keyboard.current.rKey.wasPressedThisFrame)
             ReloadScene();
     }
@@ -42,9 +42,9 @@ public class SceneController : MonoBehaviour
     {
         string sceneToLoad = type switch
         {
-            SceneType.Game => "MainGame",
-            SceneType.Menu => "MainMenu",
-            _ => "MainMenu",
+            SceneType.Game => SceneNames.MainGame,
+            SceneType.Menu => SceneNames.MainMenu,
+            _ => SceneNames.MainMenu,
         };
 
         SceneManager.LoadScene(sceneToLoad);

@@ -25,18 +25,6 @@ public class AudioController : MonoBehaviour
         DontDestroyOnLoad(gameObject);
     }
 
-    private void OnEnable()
-    {
-        AudioHolder.OnAudio += PlayAudio;
-        AudioHolder.OnStoppableAudio += PlayStoppableAudio;
-    }
-
-    private void OnDisable()
-    {
-        AudioHolder.OnAudio -= PlayAudio;
-        AudioHolder.OnStoppableAudio -= PlayStoppableAudio;
-    }
-    
     private void Start()
     {
         m_audioVolume = PlayerPrefs.GetFloat(PrefKeys.Volume, 1f);

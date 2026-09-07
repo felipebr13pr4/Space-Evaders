@@ -16,16 +16,14 @@ public class EnemiesActive : MonoBehaviour
     private void OnEnable()
     {
         EntityBehavior.OnDeath += EnemyUnactive;
-        EnemyBehavior.OnActive += EnemyActive;
     }
 
     private void OnDisable()
     {
         EntityBehavior.OnDeath -= EnemyUnactive;
-        EnemyBehavior.OnActive -= EnemyActive;
     }
 
-    private void EnemyActive(EnemyBehavior enemy)
+    public void EnemyActive(EnemyBehavior enemy)
     {
         m_activeEnemies.Add(enemy.name, enemy.gameObject);
         m_unactiveEnemies.Remove(enemy.name);
