@@ -3,40 +3,43 @@ using UnityEngine;
 
 public class MultiShooting : SpecialShooter
 {
-    [SerializeField] protected int MultiShotAmount = 3;
-    [SerializeField] protected int MultiShotAngle = 45;
+    [SerializeField] private int m_multiShotAmount = 2;
+    public int MultiShotAmount => m_multiShotAmount;
+    [SerializeField] private int m_multiShotAngle = 45;
+    public int MultiShotAngle => m_multiShotAngle;
 
     public IEnumerator ShootBullet()
     {
-        int amount = MultiShotAmount;
-        int angle = MultiShotAngle;
+        int amount = m_multiShotAmount;
+        int angle = m_multiShotAngle;
         GameObject[] bulletObjs = new GameObject[amount];
 
         yield return null;
         yield return null;
 
-        int j = 0;
-        for (int i = 0; i < amount; i++)
+        for (int i = 0; i < amount;)
         {
-            ModifyBullets(i, j, angle, bulletObjs);
+            ModifyBullets(i, angle, bulletObjs);
             yield return null;
             yield return null;
-            i++; j++;
+            i++;
 
-            ModifyBullets(i, j, -angle, bulletObjs);
+            if (i == amount) break;
+
+            ModifyBullets(i, -angle, bulletObjs);
             yield return null;
             yield return null;
-            i++; j++;
+            i++;
         }
 
         m_entity.BulletsData.Direction = m_entity.BulletsData.FixedDirection;
     }
 
-    public void ModifyBullets(int i, int j, int angle, GameObject[] bulletObjs)
+    public void ModifyBullets(int i, int angle, GameObject[] bulletObjs)
     {
-        bulletObjs[j] = m_entity.BulletsObj[m_entity.BulletIndex];
+        bulletObjs[i] = m_entity.BulletsObj[m_entity.BulletIndex];
         m_entity.BulletsData.Direction += angle * (i + 1);
-        ShootBullet(bulletObjs[j]);
+        ShootBullet(bulletObjs[i]);
         m_entity.BulletIndex++;
     }
 }

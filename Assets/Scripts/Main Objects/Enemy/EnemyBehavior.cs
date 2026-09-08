@@ -10,7 +10,7 @@ public class EnemyBehavior : RangedEntityBehavior
     public override float FireRate { set => base.FireRate = value * m_baseFireRateMultiplier; }
     [SerializeField] protected AimbotModifier m_aimbotModifier;
     [SerializeField] protected MultiShooting m_multiShooter;
-    protected override int BulletsAmount => 40;
+    protected override int BulletsAmount => 20+(m_multiShooter.MultiShotAmount*5);
 
     protected void OnEnable()
     {
@@ -36,7 +36,7 @@ public class EnemyBehavior : RangedEntityBehavior
             StartCoroutine(m_multiShooter.ShootBullet());
     }
 
-#if UNITY_EDITOR
+#if UNITY_EDITOR || DEVELOPMENT_BUILD
     private void Update()
     {
         if (Keyboard.current.tKey.wasPressedThisFrame) Die(); // for testing.

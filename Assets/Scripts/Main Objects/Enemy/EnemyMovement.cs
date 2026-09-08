@@ -148,7 +148,6 @@ public class EnemyMovement : Entity
     private bool CheckIfTriedToMoveOutBounds()
     {
         bool itTried = false;
-        print((int)(ScreenBounds.Top - m_sizeAdjustment.y));
         if ((int)((ScreenBounds.Bottom + m_sizeAdjustment.y) + 2f) == transform.position.y)
         {
             if (m_direction.y < 0) itTried = true;

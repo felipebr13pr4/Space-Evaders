@@ -2,20 +2,6 @@ using UnityEngine;
 
 public class Bullet : Entity
 {
-    // Known bug, i don't know where to put this so i'll put it here.
-    // Im still trying to fix it. But for some reason bullets are going realllyyy fast for no reason.
-    // The weirdest part is that when you pause and that bullet exists, it just... Keeps going.
-    // The transform y just keeps decreasing even while everything is paused.
-    // This miiiiiiiight be because of the testing wave skip. As I think I did not notice it
-    // happening in normal gameplay when not doing the test wave skip keybind.
-    // After testing by going to a higher wave (13) without skipping them (but cheating for it
-    // to be faster) i thiiink it is indeed the wave skipping causing weird things.
-    // Nvm. It happens even while not skipping and just killing enemies...
-    // Might be because its going too fast? I do realize that on wave 50 its probally that
-    // As theres no cap on mov interval so it drops to 0. The value it decreases results in that
-    // 0.001*50=0.05 which is the set value. The actual decrease i wanted was probally 0.0002.
-    // I don't quite know if the thing I do will fix it so i'll keep this here for now.
-
     private BulletData m_data;
     private bool m_started = false;
     private float m_moveTimer;
@@ -79,6 +65,9 @@ public class Bullet : Entity
 
         m_rb2d.bodyType = RigidbodyType2D.Kinematic;
         m_rb2d.freezeRotation = true;
+
+        gameObject.layer = m_data.Target == EntityType.Player ? LayerMask.NameToLayer("EnemyBullet") :
+            LayerMask.NameToLayer("PlayerBullet");
     }
 
     private void InitializeBullet()

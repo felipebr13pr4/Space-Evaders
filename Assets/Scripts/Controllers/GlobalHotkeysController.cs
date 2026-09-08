@@ -37,7 +37,7 @@ public class GlobalHotkeysController : MonoBehaviour
         if (Keyboard.current.escapeKey.wasPressedThisFrame)
             OnOpenMenu?.Invoke();
 
-#if UNITY_EDITOR
+#if UNITY_EDITOR || DEVELOPMENT_BUILD
         if (Keyboard.current.qKey.wasPressedThisFrame)
             if (Time.timeScale > 0.2f) Time.timeScale -= 0.1f;
         if (Keyboard.current.eKey.wasPressedThisFrame)

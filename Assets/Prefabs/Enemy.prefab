@@ -275,8 +275,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::MultiShooting
   m_entity: {fileID: 4315155719953782409}
-  MultiShotAmount: 3
-  MultiShotAngle: 45
+  m_multiShotAmount: 0
+  m_multiShotAngle: 45
 --- !u!1 &3722085309995641479
 GameObject:
   m_ObjectHideFlags: 0

@@ -24,6 +24,7 @@ public class GameScreenController : MonoBehaviour
         int width = PlayerPrefs.GetInt(PrefKeys.ScreenWidth, 1920);
         int height = PlayerPrefs.GetInt(PrefKeys.ScreenHeight, 1080);
         StartCoroutine(ChangeScreenResolution(width, height));
+        Application.targetFrameRate = 30;
     }
 
     public void FullScreen(bool state)

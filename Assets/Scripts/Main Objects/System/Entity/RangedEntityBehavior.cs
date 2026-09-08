@@ -10,8 +10,8 @@ public class RangedEntityBehavior : EntityBehavior
         {   m_fireRate = value;
             m_fireRate = Mathf.Clamp(m_fireRate, FireRateMin, m_fireRateMax);
             m_fireRateWait = new WaitForSeconds(m_fireRate); } }
-    protected virtual float FireRateMin { get => 0.5f; }
-    private readonly float m_fireRateMax = 20f;
+    protected virtual float FireRateMin => 0.5f;
+    private readonly float m_fireRateMax = WaveData.Default().MaxFireRate;
     protected virtual int BulletsAmount => 25;
     [SerializeField] protected GameObject[] m_bulletsObjs;
     public GameObject[] BulletsObj => m_bulletsObjs;

@@ -1,0 +1,79 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!1001 &3414706818476702673
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    serializedVersion: 3
+    m_TransformParent: {fileID: 0}
+    m_Modifications:
+    - target: {fileID: 2800748463763852115, guid: 89c5f7b35639e0343b73f9529b41e989, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: -1.67691
+      objectReference: {fileID: 0}
+    - target: {fileID: 2800748463763852115, guid: 89c5f7b35639e0343b73f9529b41e989, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: -1.37038
+      objectReference: {fileID: 0}
+    - target: {fileID: 2800748463763852115, guid: 89c5f7b35639e0343b73f9529b41e989, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2800748463763852115, guid: 89c5f7b35639e0343b73f9529b41e989, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 2800748463763852115, guid: 89c5f7b35639e0343b73f9529b41e989, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2800748463763852115, guid: 89c5f7b35639e0343b73f9529b41e989, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2800748463763852115, guid: 89c5f7b35639e0343b73f9529b41e989, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2800748463763852115, guid: 89c5f7b35639e0343b73f9529b41e989, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2800748463763852115, guid: 89c5f7b35639e0343b73f9529b41e989, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2800748463763852115, guid: 89c5f7b35639e0343b73f9529b41e989, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3520530986600870958, guid: 89c5f7b35639e0343b73f9529b41e989, type: 3}
+      propertyPath: MultiShotAmount
+      value: 5
+      objectReference: {fileID: 0}
+    - target: {fileID: 3520530986600870958, guid: 89c5f7b35639e0343b73f9529b41e989, type: 3}
+      propertyPath: m_multiShotAngle
+      value: 11
+      objectReference: {fileID: 0}
+    - target: {fileID: 3520530986600870958, guid: 89c5f7b35639e0343b73f9529b41e989, type: 3}
+      propertyPath: m_multiShotAmount
+      value: 4
+      objectReference: {fileID: 0}
+    - target: {fileID: 6141490703180419530, guid: 89c5f7b35639e0343b73f9529b41e989, type: 3}
+      propertyPath: m_Name
+      value: Aimbot Five-Shots Enemy
+      objectReference: {fileID: 0}
+    - target: {fileID: 8736986597609467429, guid: 89c5f7b35639e0343b73f9529b41e989, type: 3}
+      propertyPath: m_baseHealthAdder
+      value: 5
+      objectReference: {fileID: 0}
+    - target: {fileID: 8736986597609467429, guid: 89c5f7b35639e0343b73f9529b41e989, type: 3}
+      propertyPath: m_baseFireRateMultiplier
+      value: 4
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+    m_RemovedGameObjects: []
+    m_AddedGameObjects: []
+    m_AddedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: 89c5f7b35639e0343b73f9529b41e989, type: 3}

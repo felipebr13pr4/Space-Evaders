@@ -12,7 +12,7 @@ public class PlayerBehavior : RangedEntityBehavior
         set {
             base.Health = value;
             m_healthBar.UpdateValues(Health, MaxHealth); } }
-    protected override float FireRateMin { get => 0.1f; }
+    protected override float FireRateMin => 0.2f*(1+((m_multiShooter.MultiShotAmount/10)/2));
     protected override int BulletsAmount => 500;
     [SerializeField] protected AimbotModifier m_aimbotModifier;
     [SerializeField] protected MultiShooting m_multiShooter;
@@ -42,7 +42,6 @@ public class PlayerBehavior : RangedEntityBehavior
 
     protected override void ShootBullet(int i)
     {
-
         if (m_aimbotModifier.isActiveAndEnabled &&
             EnemiesActive.Instance.ActiveEnemies.Count != 0)
         {
@@ -67,7 +66,7 @@ public class PlayerBehavior : RangedEntityBehavior
         if (m_multiShooter.isActiveAndEnabled) StartCoroutine(m_multiShooter.ShootBullet());
     }
 
-#if UNITY_EDITOR
+#if UNITY_EDITOR || DEVELOPMENT_BUILD
     [SerializeField] private Transform m_creationsHolder;
 
     [ContextMenu("Generate Creations")]
