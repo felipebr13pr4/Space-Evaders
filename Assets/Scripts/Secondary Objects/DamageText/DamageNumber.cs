@@ -27,6 +27,7 @@ public class DamageNumber : MonoBehaviour
     {
         gameObject.SetActive(true);
         transform.position = position;
+        m_text.color = Color.white;
         m_text.text = amount.ToString();
         StartCoroutine(Float());
     }
@@ -36,6 +37,7 @@ public class DamageNumber : MonoBehaviour
         for (int i = 0; i < 100; i++) { 
             yield return new WaitForSeconds(0.01f);
             m_rect.position += new Vector3(0, 0.01f, 0);
+            m_text.color -= new Color(0, 0, 0, 0.01f);
         }
         gameObject.SetActive(false);
     }

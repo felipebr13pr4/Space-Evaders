@@ -23,7 +23,7 @@ Fouth time using git and github.
 
 
 Re-appearances from last project
-- Empty for now.
+- Scope creep.
 
 
 I learned

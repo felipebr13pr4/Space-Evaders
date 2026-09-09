@@ -332,6 +332,49 @@ public class TheGraveyard
     // But since its a bit of various pieces of code everywhere im not going to
     // put them here (You can check past versions of commits though i think).
     // It is a nearly-entire rework.
+
+    // Bullet Data wasss really bad, i don't know how i did not think about it
+    // but claude helped me notice it.
+    /*public BulletData(int damage, Vector2 size, float moveInterval, float moveDistance)
+    {
+        m_damage = Mathf.Clamp(damage, 0, 10);
+        m_size.x = Mathf.Clamp(size.x, 0.1f, 1f);
+        m_size.y = Mathf.Clamp(size.y, 0.1f, 1f);
+        m_moveInterval = Mathf.Clamp(moveInterval, 0.04f, 1f);
+        m_moveDistance = Mathf.Clamp(moveDistance, 0.1f, 2f);
+    }
+
+    public BulletData(int damage, EntityType target, Color color, Vector2 size, float moveInterval, float moveDistance, float angleZ)
+    {
+        m_damage = Mathf.Clamp(damage, 0, 10);
+        Target = target;
+        BulletColor = color;
+        m_size.x = Mathf.Clamp(size.x, 0.1f, 1f);
+        m_size.y = Mathf.Clamp(size.y, 0.1f, 1f);
+        m_moveInterval = Mathf.Clamp(moveInterval, 0.04f, 1f);
+        m_moveDistance = Mathf.Clamp(moveDistance, 0.1f, 2f);
+        Direction = angleZ;
+        FixedDirection = angleZ;
+    }
+
+    public static BulletData DefaultAll() => new(1, EntityType.Player, Color.red, new(0.25f, 0.25f), 0.05f, 0.1f, 0f);
+    public static BulletData Default() => new(1, new(0.25f, 0.25f), 0.05f, 0.1f);
+    public void SetMainStats(int damage, Vector2 size, float moveInterval, float moveDistance)
+    {
+        m_damage = Mathf.Clamp(damage, 0, 10);
+        m_size.x = Mathf.Clamp(size.x, 0.1f, 1f);
+        m_size.y = Mathf.Clamp(size.y, 0.1f, 1f);
+        m_moveInterval = Mathf.Clamp(moveInterval, 0.04f, 1f);
+        m_moveDistance = Mathf.Clamp(moveDistance, 0.1f, 2f);
+    }
+    public void SetMainStats(BulletData data)
+    {
+        m_damage = Mathf.Clamp(data.Damage, 0, 10);
+        m_size.x = Mathf.Clamp(data.Size.x, 0.1f, 1f);
+        m_size.y = Mathf.Clamp(data.Size.y, 0.1f, 1f);
+        m_moveInterval = Mathf.Clamp(data.MoveInterval, 0.04f, 1f);
+        m_moveDistance = Mathf.Clamp(data.MoveDistance, 0.1f, 2f);
+    }*/
     //
 }
 #endif

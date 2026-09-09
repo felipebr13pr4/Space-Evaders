@@ -10,11 +10,11 @@ public class SubMenu : MonoBehaviour
     public static event Action<bool> OnSubMenuOpen;
 
     private void OnEnable()
-    {   OnSubMenuOpen?.Invoke(isActiveAndEnabled);
+    {   OnSubMenuOpen?.Invoke(!isActiveAndEnabled);
         if (m_returnButton != null) m_returnButton.SetActive(isActiveAndEnabled); }
 
     private void OnDisable()
-    {   OnSubMenuOpen?.Invoke(isActiveAndEnabled); }
+    {   OnSubMenuOpen?.Invoke(!isActiveAndEnabled); }
 
     private void Start()
     {   if (m_firstTime)

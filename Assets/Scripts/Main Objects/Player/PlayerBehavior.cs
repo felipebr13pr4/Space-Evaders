@@ -1,6 +1,4 @@
 
-using System.Collections.Generic;
-using System.Linq;
 using UnityEngine;
 
 [RequireComponent(typeof(PlayerMovement))]
@@ -8,6 +6,9 @@ public class PlayerBehavior : RangedEntityBehavior
 {
     public static Transform Transform;
     [SerializeField] private HealthBar m_healthBar;
+    public override int MaxHealth { get => base.MaxHealth;
+        set { m_maxHealth = value;
+        m_healthBar.UpdateValues(Health, MaxHealth);} }
     public override int Health { get => base.Health; 
         set {
             base.Health = value;
@@ -23,6 +24,7 @@ public class PlayerBehavior : RangedEntityBehavior
     {
         Transform = transform;
         MaxHealth = 9;
+        Health = 9;
         FireRate = 3; // for testing.
         StartCoroutine(StartShooting());
         base.Start();

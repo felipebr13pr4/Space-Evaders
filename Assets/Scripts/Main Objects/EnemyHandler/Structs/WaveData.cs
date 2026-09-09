@@ -38,7 +38,7 @@ public class WaveData
     private float m_minFireRate = 2f;
     public float MinFireRate
     { get => m_minFireRate;
-    set { m_minFireRate = value; m_minFireRate = Mathf.Clamp(m_minFireRate, 0.001f, m_maxFireRate); } }
+    set { m_minFireRate = value; m_minFireRate = Mathf.Clamp(m_minFireRate, 0.25f, m_maxFireRate); } }
     
     private float m_fireRates;
     public float FireRates

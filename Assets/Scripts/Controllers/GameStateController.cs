@@ -4,12 +4,10 @@ using UnityEngine;
 [RequireComponent(typeof(AudioHolder))]
 public class GameStateController : MonoBehaviour
 {
-    private bool m_isPlayerDead;
-    private bool m_isInSubMenu;
+    private bool m_canUnpause;
     private bool m_isGamePaused;
-    public bool IsPlayerDead => m_isPlayerDead;
     public bool IsGamePaused => m_isGamePaused;
-    public bool IsInSubMenu => m_isInSubMenu;
+    public bool IsInSubMenu => m_canUnpause;
 
     public static event Action OnGamePaused;
 
@@ -30,7 +28,9 @@ public class GameStateController : MonoBehaviour
     private void OnEnable()
     {
         GlobalHotkeysController.OnOpenMenu += TogglePause;
-        SubMenu.OnSubMenuOpen += SubMenuOpen;
+        SubMenu.OnSubMenuOpen += DetermineIfCanUnpause;
+        CardHandler.OnCardWaveNumber += PauseThenCannotUnpause;
+        Card.OnCardChosen += CanUnpauseThenPause;
         // Put things when there is something to listen to prevent it from pausing.
 
     }
@@ -38,15 +38,29 @@ public class GameStateController : MonoBehaviour
     private void OnDisable()
     {
         GlobalHotkeysController.OnOpenMenu -= TogglePause;
-        SubMenu.OnSubMenuOpen -= SubMenuOpen;
+        SubMenu.OnSubMenuOpen -= DetermineIfCanUnpause;
+        CardHandler.OnCardWaveNumber -= PauseThenCannotUnpause;
+        Card.OnCardChosen -= CanUnpauseThenPause;
         // Put things when there is something to listen to prevent it from pausing.
     }
 
-    public void SubMenuOpen(bool isOpen) => m_isInSubMenu = isOpen;
+    public void CanUnpauseThenPause()
+    {
+        m_canUnpause = true;
+        TogglePause();
+    }
+
+    public void PauseThenCannotUnpause()
+    {
+        TogglePause();
+        m_canUnpause = false;
+    }
+
+    public void DetermineIfCanUnpause(bool can) => m_canUnpause = can;
 
     public void TogglePause()
     {
-        if (m_isPlayerDead | m_isInSubMenu) return;
+        if (!m_canUnpause) return;
         GetComponent<AudioHolder>().ActivateSound(0);
         Time.timeScale = Time.timeScale > 0 ? 0 : 1;
         m_isGamePaused = Time.timeScale == 0; 
@@ -55,7 +69,7 @@ public class GameStateController : MonoBehaviour
 
     public void ResetStates()
     {
-        m_isPlayerDead = false;
+        m_canUnpause = true;
         m_isGamePaused = false;
     }
 }
