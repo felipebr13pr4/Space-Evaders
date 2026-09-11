@@ -118,7 +118,8 @@ public class EnemyMovement : Entity
                 { yield return null; continue;  }
 
             yield return m_moveSpeedWait;
-            if (!CheckIfSomethingInWay()) m_rb2d.position += m_direction;
+            if (!CheckIfSomethingInWay() && !CheckIfTriedToMoveOutBounds())
+                m_rb2d.position += m_direction;
         }
     }
 
@@ -145,22 +146,35 @@ public class EnemyMovement : Entity
         return thereIs;
     }
 
+#if UNITY_EDITOR
+    [ContextMenu("Check if bounds are set correct.")]
+    private void BoundsCheck()
+    {
+        ErrorLogger.DebugLog("Bottom: " + (int)((ScreenBounds.Bottom + (m_sizeAdjustment.y*2)) + 2f));
+        ErrorLogger.DebugLog("Top: " + (int)(ScreenBounds.Top - (m_sizeAdjustment.y*2)));
+        ErrorLogger.DebugLog("Left: " + (ScreenBounds.Left + (m_sizeAdjustment.x)));
+        ErrorLogger.DebugLog("Right: " + (ScreenBounds.Right - (m_sizeAdjustment.x)));
+        ErrorLogger.DebugLog("Size Adju Y: " + m_sizeAdjustment.y);
+        ErrorLogger.DebugLog("Size Adju X: " + m_sizeAdjustment.x);
+    }
+#endif
+
     private bool CheckIfTriedToMoveOutBounds()
     {
         bool itTried = false;
-        if ((int)((ScreenBounds.Bottom + m_sizeAdjustment.y) + 2f) == transform.position.y)
+        if ((int)((ScreenBounds.Bottom + (m_sizeAdjustment.y*2)) + 2f) == transform.position.y)
         {
             if (m_direction.y < 0) itTried = true;
         }
-        else if ((int)(ScreenBounds.Top - m_sizeAdjustment.y) == transform.position.y)
+        else if ((int)(ScreenBounds.Top - (m_sizeAdjustment.y*2)) == transform.position.y)
         {
             if (m_direction.y > 0) itTried = true;
         }
-        else if (ScreenBounds.Left + m_sizeAdjustment.x == transform.position.x)
+        else if (ScreenBounds.Left + (m_sizeAdjustment.x) == transform.position.x)
         {
             if (m_direction.x < 0) itTried = true;
         }
-        else if (ScreenBounds.Right - m_sizeAdjustment.x == transform.position.x)
+        else if (ScreenBounds.Right - (m_sizeAdjustment.x) == transform.position.x)
         {
             if (m_direction.x > 0) itTried = true;
         }

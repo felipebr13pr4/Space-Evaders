@@ -24,7 +24,6 @@ public class UnlockByWave : MonoBehaviour
         int waveCheck = m_waveCheck;
         for(int i = 0; i < m_objs.Length; i++)
         {
-            print($"temp waveCheck: {waveCheck}. I am: {gameObject.name}");
             if (m_activatedObjs != null && m_activatedObjs.Contains(m_objs[i]))
             { waveCheck += m_waveCheckAddition; continue; }
             if (m_objs[i].activeSelf) continue;

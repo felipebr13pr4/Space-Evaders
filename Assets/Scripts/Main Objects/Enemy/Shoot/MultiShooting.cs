@@ -7,32 +7,40 @@ public class MultiShooting : SpecialShooter
     public int MultiShotAmount => m_multiShotAmount;
     [SerializeField] private int m_multiShotAngle = 45;
     public int MultiShotAngle => m_multiShotAngle;
+    private bool m_isShooting;
+    public bool IsShooting => m_isShooting;
+
+    public void SetStats(int amount, int angle)
+    {
+        m_multiShotAmount = amount;
+        m_multiShotAngle = angle;
+    }
 
     public IEnumerator ShootBullet()
     {
+        m_isShooting = true;
+        
         int amount = m_multiShotAmount;
         int angle = m_multiShotAngle;
         GameObject[] bulletObjs = new GameObject[amount];
 
         yield return null;
-        yield return null;
 
         for (int i = 0; i < amount;)
         {
             ModifyBullets(i, angle, bulletObjs);
-            yield return null;
-            yield return null;
             i++;
+            yield return null;
 
             if (i == amount) break;
 
             ModifyBullets(i, -angle, bulletObjs);
-            yield return null;
-            yield return null;
             i++;
+            yield return null;
         }
 
         m_entity.BulletsData.Direction = m_entity.BulletsData.FixedDirection;
+        m_isShooting = false;
     }
 
     public void ModifyBullets(int i, int angle, GameObject[] bulletObjs)

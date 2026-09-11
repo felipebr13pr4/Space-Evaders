@@ -200,10 +200,10 @@ MonoBehaviour:
     Direction: 0
     FixedDirection: 0
   m_basicShooter: {fileID: 6769800406020322249}
+  m_aimbotModifier: {fileID: 7961608145815699025}
+  m_multiShootModifier: {fileID: 8248888080641215618}
   m_baseHealthAdder: 0
   m_baseFireRateMultiplier: 1
-  m_aimbotModifier: {fileID: 7961608145815699025}
-  m_multiShooter: {fileID: 8248888080641215618}
 --- !u!114 &6769800406020322249
 MonoBehaviour:
   m_ObjectHideFlags: 0

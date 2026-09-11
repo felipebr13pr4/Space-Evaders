@@ -24,11 +24,18 @@ public class EffectData
     public bool IsPositive => m_amountFloat > 0 || m_amountInt > 0;
 
     public FramedAs FramedAs => HandleFramedAs();
+    /// <summary>
+    /// Returns what the effect is framed as. If is positive true then its a buff.
+    /// Invert is positive if you want positive numbers to be considered a debuff.
+    /// </summary>
     private FramedAs IsBuff(bool isPositive) => isPositive ? FramedAs.Buff : FramedAs.Debuff;
 
     [SerializeField] private bool m_enabled;
     public bool Enabled { get => m_enabled; set => m_enabled = value; }
 
+    /// <summary>
+    /// Decides what the effect is framed as and if should invert.
+    /// </summary>
     private FramedAs HandleFramedAs()
     {
         if (IsPlayerStat)

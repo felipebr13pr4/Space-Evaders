@@ -8,9 +8,7 @@ public class EnemyBehavior : RangedEntityBehavior
     [SerializeField] private float m_baseFireRateMultiplier = 1;
     public override int MaxHealth { get => base.MaxHealth; set => base.MaxHealth = value + m_baseHealthAdder; }
     public override float FireRate { set => base.FireRate = value * m_baseFireRateMultiplier; }
-    [SerializeField] protected AimbotModifier m_aimbotModifier;
-    [SerializeField] protected MultiShooting m_multiShooter;
-    protected override int BulletsAmount => 20+(m_multiShooter.MultiShotAmount*5);
+    protected override int BulletsAmount => 20+(m_multiShootModifier.MultiShotAmount*5);
 
     protected void OnEnable()
     {
@@ -31,9 +29,6 @@ public class EnemyBehavior : RangedEntityBehavior
             m_aimbotModifier.ModifyBullet(PlayerBehavior.Transform.position);
 
         base.ShootBullet(i);
-
-        if (m_multiShooter.isActiveAndEnabled)
-            StartCoroutine(m_multiShooter.ShootBullet());
     }
 
 #if UNITY_EDITOR || DEVELOPMENT_BUILD

@@ -1156,9 +1156,9 @@ MonoBehaviour:
     Direction: 0
     FixedDirection: 0
   m_basicShooter: {fileID: 6520884302600013547}
-  m_healthBar: {fileID: 0}
   m_aimbotModifier: {fileID: 3415912295791975157}
-  m_multiShooter: {fileID: 8317193685783629398}
+  m_multiShootModifier: {fileID: 8317193685783629398}
+  m_healthBar: {fileID: 0}
   m_creationsHolder: {fileID: 0}
 --- !u!114 &6520884302600013547
 MonoBehaviour:

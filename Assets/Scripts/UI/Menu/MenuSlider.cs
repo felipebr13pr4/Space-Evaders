@@ -27,7 +27,7 @@ public class MenuSlider : MonoBehaviour
         m_sliderComponent.value = m_sliderType switch
         {
             SliderType.Volume => AudioController.Instance.AudioVolume,
-            _ => 0,
+            _ => 1,
         };
     }
 }

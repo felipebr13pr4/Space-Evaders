@@ -27,6 +27,11 @@ public class RangedEntityBehavior : EntityBehavior
     [SerializeField] protected Shooting m_basicShooter;
     protected virtual int ShootDirection => 0;
     protected Color m_bulletColor;
+    protected Color BulletColor
+    { set { m_bulletColor = value;
+            BulletsData.BulletColor = m_bulletColor; } }
+    [SerializeField] protected AimbotModifier m_aimbotModifier;
+    [SerializeField] protected MultiShooting m_multiShootModifier;
 
     protected override void Start()
     {
@@ -72,6 +77,7 @@ public class RangedEntityBehavior : EntityBehavior
             {
                 yield return m_fireRateWait;
                 if (!gameObject.activeInHierarchy) yield break;
+                while (m_multiShootModifier.IsShooting) yield return null;
                 m_bullets[BulletIndex].InitializeStats(BulletsData);
                 ShootBullet(BulletIndex);
             }
@@ -83,5 +89,7 @@ public class RangedEntityBehavior : EntityBehavior
         BulletsData.Direction = BulletsData.FixedDirection;
         m_basicShooter.ShootBullet(m_bulletsObjs[i]);
         BulletIndex++;
+
+        if (m_multiShootModifier.isActiveAndEnabled) StartCoroutine(m_multiShootModifier.ShootBullet());
     }
 }

@@ -8,17 +8,22 @@ public class PlayerBehavior : RangedEntityBehavior
     [SerializeField] private HealthBar m_healthBar;
     public override int MaxHealth { get => base.MaxHealth;
         set { m_maxHealth = value;
-        m_healthBar.UpdateValues(Health, MaxHealth);} }
-    public override int Health { get => base.Health; 
+            m_healthBar.UpdateValues(Health, MaxHealth); } }
+    public override int Health { get => base.Health;
         set {
             base.Health = value;
             m_healthBar.UpdateValues(Health, MaxHealth); } }
-    protected override float FireRateMin => 0.2f*(1+((m_multiShooter.MultiShotAmount/10)/2));
+    protected override float FireRateMin => 0.2f * (1 + (((float)m_multiShootModifier.MultiShotAmount / 10) / 2));
     protected override int BulletsAmount => 500;
-    [SerializeField] protected AimbotModifier m_aimbotModifier;
-    [SerializeField] protected MultiShooting m_multiShooter;
     protected override int ShootDirection => 180;
-    protected float m_bulletTransparency = 1;
+    private float m_bulletTransparency = 1;
+    public float BulletTransparency
+    { set { m_bulletTransparency = value;
+            Color tmpColor = m_bulletColor; tmpColor.a = m_bulletTransparency;
+            BulletColor = tmpColor; } }
+
+    public static PlayerBehavior Instance { get; private set; }
+    private void Awake() => Instance = this;
 
     protected override void Start()
     {
@@ -65,7 +70,6 @@ public class PlayerBehavior : RangedEntityBehavior
 
         base.ShootBullet(i);
         
-        if (m_multiShooter.isActiveAndEnabled) StartCoroutine(m_multiShooter.ShootBullet());
     }
 
 #if UNITY_EDITOR || DEVELOPMENT_BUILD
@@ -82,8 +86,10 @@ public class PlayerBehavior : RangedEntityBehavior
     {
         BulletsData.MoveInterval = 0.04f;
         FireRate = 0.01f;
-        MaxHealth = 999;
-        GetComponent<PlayerMovement>().Speed = 10f;
+        MaxHealth = 9999;
+        Health = 9999;
+        m_multiShootModifier.SetStats(5, 22);
+        GetComponent<PlayerMovement>().Speed = 5f;
     }
 #endif
 }

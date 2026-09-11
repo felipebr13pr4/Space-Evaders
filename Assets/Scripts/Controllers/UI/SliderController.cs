@@ -33,6 +33,12 @@ public class SliderController : MonoBehaviour
             case SliderType.Volume:
                 AudioController.Instance.SetAudio(value);
                 return;
+
+            case SliderType.PlayerBulletTransparency:
+                PlayerBehavior.Instance.BulletTransparency = value;
+                return;
+
+            default: ErrorLogger.LogError("No slider type found."); return;
         }
     }
 }
