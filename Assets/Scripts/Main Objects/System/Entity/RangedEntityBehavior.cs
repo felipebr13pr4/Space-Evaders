@@ -6,7 +6,8 @@ public class RangedEntityBehavior : EntityBehavior
     private WaitForSeconds m_fireRateWait;
     private float m_fireRate = 3;
     public virtual float FireRate
-    {   set
+    {   get => m_fireRate;
+        set
         {   m_fireRate = value;
             m_fireRate = Mathf.Clamp(m_fireRate, FireRateMin, m_fireRateMax);
             m_fireRateWait = new WaitForSeconds(m_fireRate); } }
@@ -31,7 +32,9 @@ public class RangedEntityBehavior : EntityBehavior
     { set { m_bulletColor = value;
             BulletsData.BulletColor = m_bulletColor; } }
     [SerializeField] protected AimbotModifier m_aimbotModifier;
+    public AimbotModifier AimbotModifier => m_aimbotModifier;
     [SerializeField] protected MultiShooting m_multiShootModifier;
+    public MultiShooting MultiShootModifier => m_multiShootModifier;
 
     protected override void Start()
     {

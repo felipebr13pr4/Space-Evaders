@@ -99,8 +99,8 @@ MonoBehaviour:
   m_fontSizeMin: 8
   m_fontSizeMax: 80
   m_fontStyle: 0
-  m_HorizontalAlignment: 1
-  m_VerticalAlignment: 256
+  m_HorizontalAlignment: 2
+  m_VerticalAlignment: 512
   m_textAlignment: 65535
   m_characterSpacing: 0
   m_characterHorizontalScale: 1
@@ -236,8 +236,8 @@ MonoBehaviour:
   m_fontSizeMin: 8
   m_fontSizeMax: 80
   m_fontStyle: 0
-  m_HorizontalAlignment: 1
-  m_VerticalAlignment: 256
+  m_HorizontalAlignment: 2
+  m_VerticalAlignment: 512
   m_textAlignment: 65535
   m_characterSpacing: 0
   m_characterHorizontalScale: 1
@@ -373,8 +373,8 @@ MonoBehaviour:
   m_fontSizeMin: 8
   m_fontSizeMax: 80
   m_fontStyle: 0
-  m_HorizontalAlignment: 1
-  m_VerticalAlignment: 256
+  m_HorizontalAlignment: 2
+  m_VerticalAlignment: 512
   m_textAlignment: 65535
   m_characterSpacing: 0
   m_characterHorizontalScale: 1
@@ -510,8 +510,8 @@ MonoBehaviour:
   m_fontSizeMin: 8
   m_fontSizeMax: 80
   m_fontStyle: 0
-  m_HorizontalAlignment: 1
-  m_VerticalAlignment: 256
+  m_HorizontalAlignment: 2
+  m_VerticalAlignment: 512
   m_textAlignment: 65535
   m_characterSpacing: 0
   m_characterHorizontalScale: 1
@@ -647,8 +647,8 @@ MonoBehaviour:
   m_fontSizeMin: 8
   m_fontSizeMax: 80
   m_fontStyle: 0
-  m_HorizontalAlignment: 1
-  m_VerticalAlignment: 256
+  m_HorizontalAlignment: 2
+  m_VerticalAlignment: 512
   m_textAlignment: 65535
   m_characterSpacing: 0
   m_characterHorizontalScale: 1
@@ -784,8 +784,8 @@ MonoBehaviour:
   m_fontSizeMin: 8
   m_fontSizeMax: 80
   m_fontStyle: 0
-  m_HorizontalAlignment: 1
-  m_VerticalAlignment: 256
+  m_HorizontalAlignment: 2
+  m_VerticalAlignment: 512
   m_textAlignment: 65535
   m_characterSpacing: 0
   m_characterHorizontalScale: 1
@@ -921,8 +921,8 @@ MonoBehaviour:
   m_fontSizeMin: 8
   m_fontSizeMax: 80
   m_fontStyle: 0
-  m_HorizontalAlignment: 1
-  m_VerticalAlignment: 256
+  m_HorizontalAlignment: 2
+  m_VerticalAlignment: 512
   m_textAlignment: 65535
   m_characterSpacing: 0
   m_characterHorizontalScale: 1
@@ -1133,50 +1133,50 @@ MonoBehaviour:
   m_buttonComponent: {fileID: 3362812767387527617}
   m_cardData:
     m_effects:
-    - m_playerStatEffect: 0
-      m_enemyStatEffect: 0
+    - m_playerStatEffect: 5
+      m_enemyStatEffect: 4
       m_amountFloat: 0
-      m_amountInt: 3
+      m_amountInt: 0
       m_enabled: 1
-    - m_playerStatEffect: 0
-      m_enemyStatEffect: 0
+    - m_playerStatEffect: 5
+      m_enemyStatEffect: 4
       m_amountFloat: 0
-      m_amountInt: 3
+      m_amountInt: 0
       m_enabled: 1
-    - m_playerStatEffect: 0
-      m_enemyStatEffect: 0
+    - m_playerStatEffect: 5
+      m_enemyStatEffect: 4
       m_amountFloat: 0
-      m_amountInt: 3
+      m_amountInt: 0
       m_enabled: 1
-    - m_playerStatEffect: 0
-      m_enemyStatEffect: 0
+    - m_playerStatEffect: 5
+      m_enemyStatEffect: 4
       m_amountFloat: 0
-      m_amountInt: 3
+      m_amountInt: 0
       m_enabled: 1
-    - m_playerStatEffect: 0
-      m_enemyStatEffect: 0
+    - m_playerStatEffect: 5
+      m_enemyStatEffect: 4
       m_amountFloat: 0
-      m_amountInt: 3
+      m_amountInt: 0
       m_enabled: 0
-    - m_playerStatEffect: 0
-      m_enemyStatEffect: 0
+    - m_playerStatEffect: 5
+      m_enemyStatEffect: 4
       m_amountFloat: 0
-      m_amountInt: 3
+      m_amountInt: 0
       m_enabled: 0
-    - m_playerStatEffect: 0
-      m_enemyStatEffect: 0
+    - m_playerStatEffect: 5
+      m_enemyStatEffect: 4
       m_amountFloat: 0
-      m_amountInt: 3
+      m_amountInt: 0
       m_enabled: 0
-    - m_playerStatEffect: 0
-      m_enemyStatEffect: 0
+    - m_playerStatEffect: 5
+      m_enemyStatEffect: 4
       m_amountFloat: 0
-      m_amountInt: 3
+      m_amountInt: 0
       m_enabled: 0
-    - m_playerStatEffect: 0
-      m_enemyStatEffect: 0
+    - m_playerStatEffect: 5
+      m_enemyStatEffect: 4
       m_amountFloat: 0
-      m_amountInt: 3
+      m_amountInt: 0
       m_enabled: 0
   m_effectTexts:
   - {fileID: 138346075226494166}
@@ -1225,6 +1225,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a25184ffab04cf049b10bc63d8c969ff, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::DisableAfterFrame
+  m_shouldDoIt: 0
 --- !u!1 &5435946994804100985
 GameObject:
   m_ObjectHideFlags: 0
@@ -1324,8 +1325,8 @@ MonoBehaviour:
   m_fontSizeMin: 8
   m_fontSizeMax: 80
   m_fontStyle: 0
-  m_HorizontalAlignment: 1
-  m_VerticalAlignment: 256
+  m_HorizontalAlignment: 2
+  m_VerticalAlignment: 512
   m_textAlignment: 65535
   m_characterSpacing: 0
   m_characterHorizontalScale: 1
@@ -1461,8 +1462,8 @@ MonoBehaviour:
   m_fontSizeMin: 8
   m_fontSizeMax: 80
   m_fontStyle: 0
-  m_HorizontalAlignment: 1
-  m_VerticalAlignment: 256
+  m_HorizontalAlignment: 2
+  m_VerticalAlignment: 512
   m_textAlignment: 65535
   m_characterSpacing: 0
   m_characterHorizontalScale: 1

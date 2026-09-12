@@ -37,6 +37,7 @@ I learned
 - You can make a "Bridge"/"Wrap" to make a non-IEnumerator event call a IEnumerator method.
 - Solutions for something that needs two parents (the multi-aimbot enemy needing aimbot and multi).
 - I need to make sure old tacky solutions are still necessary.
+- 'Do' before while to use the code inside the while before the while checks.
 
 Minor learnt things
 - Getting smallest value from a list.
@@ -48,7 +49,11 @@ Learned but not implemented.
 - Continue outer (C# lacks that so here its just a goto statement). I found it interesting.
 
 Next time i should
-- Empty for now.
+- Hesitate a bit less to ask for help.
+- Think.
+- Step up git etiquette.
+- Maybe build a method that just delays a frame (I notice alot of times i just need a method to start but be delayed by a single frame).
+- Learn how to use debug mode for the red line break things and likely other useful tools.
 
 
 Did I actually do it? (Did i do past "Next times i should")
@@ -74,6 +79,7 @@ General Thoughts
 - Once again Claude helped me, at optimizing when there are lots of enemies it was a bit laggy and he showed me to cache new waitforseconds, a small thing i forgot and a solution to just not using coroutine in the bullets movement. In general i learned to cache it. Anddd the Resource.Load was being used every time which was bad (that was what i forgot).
 - I've created a file called TheGraveyard, i decided to keep old things there for documentations purpose, otherwise i would have just deleted the things as its saved in between these commits anyways. But this file can be used to show differences from developing and the final build.
 - Two small bugs i know but won't fix. One is that enemies can go into a same square as the way its set up in a summary is "check, empty? move" but two enemies can look at a empty spot at the same frame and they end up in the same square. I do have a system to make them quickly get out of it though but it happens (and also the average player in a casual playthrough shooouldn't see it i think). I also know the fix is just to make a ghost enemy some frames before it moves so it basically says "im moving there" and others don't move there but thats too much work for something not quite a problem. The other bug is a funny/neat one, when a enemy is completely squared and you pause it's eyes go haywire since the yield return is null. Really easy fix i think, just making it a waitforseconds instead of yield return null in the movement but i liked it so im keeping it.
+- One thing i notice is that sometimes im likely overnaming vars. I think i should trust a bit more on context instead. E.g. a CardData inside Card could be just named Data instead of CardData i think. But since i think i've not been doing that i'll not change it to keep the project consistent (alternative is going through the entirety of it searching for those cases).
 
 # Project Plan
 

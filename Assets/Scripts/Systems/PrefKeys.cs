@@ -13,4 +13,5 @@ public static class PrefKeys
     public const string ScreenWidth = "Screen Width";
     public const string ScreenHeight = "Screen Height";
     public const string FullScreen = "Full Screen";
+    public const string PlayerBulletTransparency = "Player Bullet Transparency";
 }

@@ -1,4 +1,5 @@
 using System;
+using System.Collections;
 using UnityEngine;
 
 [RequireComponent(typeof(AudioHolder))]
@@ -10,6 +11,7 @@ public class GameStateController : MonoBehaviour
     public bool IsInSubMenu => m_canUnpause;
 
     public static event Action OnGamePaused;
+    public static event Action<bool> OnGamePausedWithIfLocked;
 
     public static GameStateController Instance { get; private set; }
     private void Awake()
@@ -29,7 +31,7 @@ public class GameStateController : MonoBehaviour
     {
         GlobalHotkeysController.OnOpenMenu += TogglePause;
         SubMenu.OnSubMenuOpen += DetermineIfCanUnpause;
-        CardHandler.OnCardWaveNumber += PauseThenCannotUnpause;
+        CardHandler.OnCardWaveNumber += CannotUnpauseThenPause;
         Card.OnCardChosen += CanUnpauseThenPause;
         // Put things when there is something to listen to prevent it from pausing.
 
@@ -39,7 +41,7 @@ public class GameStateController : MonoBehaviour
     {
         GlobalHotkeysController.OnOpenMenu -= TogglePause;
         SubMenu.OnSubMenuOpen -= DetermineIfCanUnpause;
-        CardHandler.OnCardWaveNumber -= PauseThenCannotUnpause;
+        CardHandler.OnCardWaveNumber -= CannotUnpauseThenPause;
         Card.OnCardChosen -= CanUnpauseThenPause;
         // Put things when there is something to listen to prevent it from pausing.
     }
@@ -50,10 +52,10 @@ public class GameStateController : MonoBehaviour
         TogglePause();
     }
 
-    public void PauseThenCannotUnpause()
+    public void CannotUnpauseThenPause()
     {
-        TogglePause();
         m_canUnpause = false;
+        TogglePause(true);
     }
 
     public void DetermineIfCanUnpause(bool can) => m_canUnpause = can;
@@ -65,6 +67,17 @@ public class GameStateController : MonoBehaviour
         Time.timeScale = Time.timeScale > 0 ? 0 : 1;
         m_isGamePaused = Time.timeScale == 0; 
         OnGamePaused?.Invoke();
+        OnGamePausedWithIfLocked?.Invoke(m_canUnpause);
+    }
+
+    public void TogglePause(bool bypassUnpause = false)
+    {
+        if (!bypassUnpause) return;
+        GetComponent<AudioHolder>().ActivateSound(0);
+        Time.timeScale = Time.timeScale > 0 ? 0 : 1;
+        m_isGamePaused = Time.timeScale == 0;
+        OnGamePaused?.Invoke();
+        OnGamePausedWithIfLocked?.Invoke(m_canUnpause);
     }
 
     public void ResetStates()

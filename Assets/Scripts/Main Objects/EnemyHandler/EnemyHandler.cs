@@ -12,6 +12,7 @@ public class EnemyHandler : MonoBehaviour
     public List<EnemyBehavior> EnemiesBehaviors => m_enemiesBehavior;
     private int m_waveNumber;
     private WaveData m_waveData;
+    public WaveData WaveData => m_waveData;
     public static event Action OnWaveStart;
     public static event Action<int> OnWaveStartWithNumber;
     private int m_enemiesAlive;
@@ -86,8 +87,8 @@ public class EnemyHandler : MonoBehaviour
 
         m_waveData.EnemyAmount += 2;
         m_enemiesAlive = m_waveData.EnemyAmount;
-        m_waveData.Healths = (m_waveNumber / 10) + 1;
-        m_waveData.FireRates -= 0.25f;
+        if (m_waveNumber % 3 == 0) m_waveData.Healths += 1;
+        m_waveData.FireRates -= 0.5f;
         //m_waveData.FireRates = 1; // for testing
         m_waveData.MoveSpeeds -= 0.25f;
         m_waveData.Bullets.MoveInterval -= 0.0002f;
@@ -109,6 +110,8 @@ public class EnemyHandler : MonoBehaviour
             m_enemiesBehavior[i].MaxHealth = m_waveData.Healths;
             m_enemiesBehavior[i].FireRate = m_waveData.FireRates;
             m_enemiesBehavior[i].BulletsData.MoveInterval = m_waveData.Bullets.MoveInterval;
+            m_enemiesBehavior[i].BulletsData.Size = m_waveData.Bullets.Size;
+            m_enemiesBehavior[i].BulletsData.Damage = m_waveData.Bullets.Damage;
             m_enemiesBehavior[i].Initialize();
         }
 

@@ -375,6 +375,58 @@ public class TheGraveyard
         m_moveInterval = Mathf.Clamp(data.MoveInterval, 0.04f, 1f);
         m_moveDistance = Mathf.Clamp(data.MoveDistance, 0.1f, 2f);
     }*/
+
+    // On CardData.
+    /*public void Randomize()
+    {
+        int buffsAmt = 0;
+        int debuffsAmt = 0;
+        int safety = 0;
+        for (int i = 0; i < m_effects.Length; i++)
+        {
+            safety++;
+            if (safety > 300) { ErrorLogger.LogError("Randomizer safety engaged"); return; }
+            if (!m_effects[i].Enabled) continue;
+            m_effects[i].Randomize();
+            if (m_effects[i].FramedAs == FramedAs.Buff) buffsAmt++; else debuffsAmt++;
+            if (buffsAmt > m_maxBuffsAmount || debuffsAmt > m_maxDebuffsAmount) i--;
+        }
+    }*/
+    // 2nd version, did not change the infinite loop problem.
+    /*public void Randomize()
+    {
+        int buffsAmt = 0;
+        int debuffsAmt = 0;
+        int safety = 0;
+        for (int i = 0; i < m_effects.Length; i++)
+        {
+
+            if (!m_effects[i].Enabled) continue;
+
+            while (m_effects[i].FramedAs != FramedAs.Buff && buffsAmt < m_maxBuffsAmount)
+            {
+                m_effects[i].Randomize();
+                safety++;
+                if (safety > 300) { ErrorLogger.LogError("Randomizer safety engaged"); return; }
+                if (m_effects[i].FramedAs == FramedAs.Buff) { buffsAmt++; i++; }
+            }
+
+            while (m_effects[i].FramedAs != FramedAs.Debuff && debuffsAmt < m_maxDebuffsAmount)
+            {
+                m_effects[i].Randomize();
+                safety++;
+                if (safety > 300) { ErrorLogger.LogError("Randomizer safety engaged"); return; }
+                if (m_effects[i].FramedAs == FramedAs.Debuff) { debuffsAmt++; i++; }
+            }
+        }
+    }*/
+
+    // Vis system in Card before i realized "uhh, thisss can definetly be made generic"
+    /*string visibility = m_cardData.Effects[i].IsFloat ?
+    m_cardData.Effects[i].AmountFloat > 0.01f ? "0.##" :
+    m_cardData.Effects[i].AmountFloat > 0.001f ? "0.###" :
+    m_cardData.Effects[i].AmountFloat > 0.0001f ? "0.####" :
+    m_cardData.Effects[i].AmountFloat > 0.00001f ? "0.#####" : "0.######" : "";*/
     //
 }
 #endif

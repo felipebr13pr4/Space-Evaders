@@ -4,7 +4,7 @@ using UnityEngine.InputSystem;
 public class PlayerMovement : Entity
 {
     [SerializeField] protected float m_speed = 6;
-    public float Speed { set { m_speed = value; m_speed = Mathf.Clamp(m_speed, 0.2f, 20f); } }
+    public float Speed { get => m_speed; set { m_speed = value; m_speed = Mathf.Clamp(m_speed, 0.2f, 20f); } }
     private Vector2 m_moveDir;
     private Vector2 MoveDir {
         get => m_moveDir;

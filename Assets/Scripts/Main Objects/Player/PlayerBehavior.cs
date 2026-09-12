@@ -88,7 +88,8 @@ public class PlayerBehavior : RangedEntityBehavior
         FireRate = 0.01f;
         MaxHealth = 9999;
         Health = 9999;
-        m_multiShootModifier.SetStats(5, 22);
+        m_multiShootModifier.MultiShotAmount = 4;
+        m_multiShootModifier.MultiShotAngle = 45;
         GetComponent<PlayerMovement>().Speed = 5f;
     }
 #endif
