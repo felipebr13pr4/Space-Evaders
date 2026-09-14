@@ -118,7 +118,8 @@ public class CardData
                 m_effects[healPos[1]] = effects[maxHealthPos[0]];
                 m_effects[maxHealthPos[1]] = effects[healPos[0]];
                 ErrorLogger.DebugLog("Swapped health and heal positions. (2 heals before 2 max healths version)");
-                ErrorLogger.LogError("Swapped health and heal positions. (2 heals before 2 max healths version)");
+                // Warning log for spotting easier to make sure its working.
+                ErrorLogger.LogWarning("Swapped health and heal positions. (2 heals before 2 max healths version)");
                 return;
             }
 
@@ -131,9 +132,9 @@ public class CardData
                 ErrorLogger.DebugLog($"highest health pos: {highestMaxHealthPos}");
                 m_effects[lowestHealPos] = effects[highestMaxHealthPos];
                 m_effects[highestMaxHealthPos] = effects[lowestHealPos];
-                // error logs for spotting easier.
                 ErrorLogger.DebugLog("Swapped health and heal positions.");
-                ErrorLogger.LogError("Swapped health and heal positions.");
+                // Warning log for spotting easier to make sure its working.
+                ErrorLogger.LogWarning("Swapped health and heal positions.");
 
             }
         }

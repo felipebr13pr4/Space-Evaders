@@ -97,6 +97,10 @@ public class CardEffectHandler : MonoBehaviour
                         m_enemyHandler.WaveData.Bullets.Size += new Vector2(effect.AmountFloat, effect.AmountFloat);
                         continue;
 
+                    case EnemyStat.Amount:
+                        m_enemyHandler.WaveData.EnemyAmount += effect.AmountInt;
+                        continue;
+
                     default:
                         ErrorLogger.LogError("No stat assigned for this card");
                         continue;

@@ -1,5 +1,6 @@
 // Had claude do these (though just placeholder values, all 1).
-// Its really great at repetitive tasks.
+// Its really great at repetitive tasks. (maxHealth, enemyBuSize and enemyAmount by me tho
+// since the first was for example and the other two later additions)
 public static class EffectsRanges
 {
     // Got to remember, there are some places to also change when including a entry.
@@ -10,6 +11,8 @@ public static class EffectsRanges
     // you add a entry and see one of those then check if you added everything.
     // I don't quite know if it all could be generalized to a single place. Perhaps.
     // But honestly i don't know how it would work as those are not completely glued.
+    // And for easier remembering you can just look at the references inside enums for
+    // where they are.
 
     public const int PlayerMaxMaxHealth = 150;
     public const int PlayerMinMaxHealth = -3;
@@ -17,8 +20,8 @@ public static class EffectsRanges
     public const float PlayerMaxSpeed = 9;
     public const float PlayerMinSpeed = -1;
 
-    public const float PlayerMaxFireRate = 1;
-    public const float PlayerMinFireRate = -5;
+    public const float PlayerMaxFireRate = 0.1f;
+    public const float PlayerMinFireRate = -1;
 
     public const int PlayerMaxBulletDamage = 2;
     public const int PlayerMinBulletDamage = -1;
@@ -35,12 +38,12 @@ public static class EffectsRanges
     public const float PlayerMaxShotsAngle = 5;
     public const float PlayerMinShotsAngle = -40;
 
-    public const int PlayerMaxHeal = 200;
+    public const int PlayerMaxHeal = 300;
     public const int PlayerMinHeal = -5;
 
     // ---
 
-    public const int EnemyMaxMaxHealth = 5;
+    public const int EnemyMaxMaxHealth = 2;
     public const int EnemyMinMaxHealth = -5;
 
     public const float EnemyMaxSpeed = 1.2f;
@@ -54,5 +57,9 @@ public static class EffectsRanges
 
     public const float EnemyMaxBulletSize = 0.01f;
     public const float EnemyMinBulletSize = -0.01f;
+
+    public const int EnemyMaxAmount = 2;
+    public const int EnemyMinAmount = -10;
+
 
 }

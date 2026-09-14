@@ -45,25 +45,9 @@ public class OverlayWindow : MonoBehaviour
 
     private void EnableOrDisable(bool isPaused, GameObject obj)
     {
-        if (isPaused) obj.SetActive(true);
+        if (isPaused) { obj.SetActive(true);
+            if (obj.activeSelf) { obj.SetActive(false); obj.SetActive(true); } }
         else obj.GetComponent<FadingMenu>().Disable();
-        if (obj.activeInHierarchy)
-            StartCoroutine(EnsureCorrectState(isPaused, obj));
-    }
-
-    // Necessary as spamming pauses when cards appear causes problems.
-    private IEnumerator EnsureCorrectState(bool isPaused, GameObject obj)
-    {
-        yield return null;
-
-        while (true)
-        {
-            yield return new WaitForSecondsRealtime(1);
-            if (!isPaused && obj.activeInHierarchy)
-                obj.GetComponent<FadingMenu>().Disable();
-            else
-                yield break;
-        }
     }
 
     private string HandleTitle()

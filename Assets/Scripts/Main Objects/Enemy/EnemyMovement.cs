@@ -50,7 +50,7 @@ public class EnemyMovement : Entity
         {
             gameObject.SetActive(false);
             pos = new((float)((int)Random.Range(ScreenBounds.Left, ScreenBounds.Right)) + 0.5f,
-(int)Random.Range(ScreenBounds.Bottom, ScreenBounds.Top));
+(int)Random.Range(ScreenBounds.Bottom+2f, ScreenBounds.Top));
         }
 
         gameObject.SetActive(true);

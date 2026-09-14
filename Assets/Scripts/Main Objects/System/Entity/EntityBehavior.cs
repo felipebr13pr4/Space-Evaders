@@ -1,5 +1,6 @@
 using System;
 using System.Collections;
+using TMPro;
 using UnityEngine;
 
 public class EntityBehavior : Entity
@@ -36,7 +37,9 @@ public class EntityBehavior : Entity
             if (m_damageNumberIndex >= m_maxDamageNumbers) m_damageNumberIndex = 0;
         }
     }
+    protected virtual Color DamageNumberColor => Color.white;
     private Color m_spriteColor;
+    [SerializeField] protected AudioHolder m_audioHolder;
 
     protected override void Start()
     {
@@ -87,14 +90,15 @@ public class EntityBehavior : Entity
     public virtual void InitializeCreations(Transform storageLocation)
     {
         m_damageNumbers = new DamageNumber[m_maxDamageNumbers];
-        GameObject tempObj = new(name + "'s Damage Numbers");
-        tempObj.transform.SetParent(storageLocation);
+        GameObject childStorageLoc = new(name + "'s Damage Numbers");
+        childStorageLoc.transform.SetParent(storageLocation);
 
         for (int i = 0; i < m_damageNumbers.Length; i++)
         {
             GameObject number = new("Damage Number " + (i + 1));
-            number.transform.SetParent(tempObj.transform);
+            number.transform.SetParent(childStorageLoc.transform);
             m_damageNumbers[i] = number.AddComponent<DamageNumber>();
+            m_damageNumbers[i].Color = DamageNumberColor;
         }
     }
 }

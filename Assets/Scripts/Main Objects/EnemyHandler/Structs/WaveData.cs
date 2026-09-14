@@ -7,7 +7,7 @@ public class WaveData
     public int EnemyAmount 
     {
         get => m_enemyAmount;
-        set { m_enemyAmount = value; m_enemyAmount = Mathf.Clamp(m_enemyAmount, 0, MaxEnemyAmount); }
+        set { m_enemyAmount = value; m_enemyAmount = Mathf.Clamp(m_enemyAmount, 1, MaxEnemyAmount); }
     }
     
     private const int m_maxHealthAmount = 999;

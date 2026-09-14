@@ -37,6 +37,7 @@ public class ShowSliderValueInText : MonoBehaviour
         {
             SliderType.Volume => "P0",
             SliderType.PlayerBulletTransparency => "P0",
+            SliderType.MusicVolume => "P0",
             _ => "F0"
         };
         m_TextMeshPro.text = value.ToString(strLenght);

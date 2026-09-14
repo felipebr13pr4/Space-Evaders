@@ -14,6 +14,7 @@ GameObject:
   - component: {fileID: 6540138671722592544}
   - component: {fileID: 4315155719953782409}
   - component: {fileID: 6769800406020322249}
+  - component: {fileID: 3151371339899092516}
   m_Layer: 6
   m_Name: Enemy
   m_TagString: Enemy
@@ -142,6 +143,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::EnemyBehavior
   m_maxHealth: 3
   m_damageNumbers: []
+  m_audioHolder: {fileID: 3151371339899092516}
   m_bulletsObjs:
   - {fileID: 0}
   - {fileID: 0}
@@ -216,6 +218,24 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 705f1f399f75a3b48a6fd11a2c338e09, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Shooting
+--- !u!114 &3151371339899092516
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1700237535644854630}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ffafdbebfde18eb45b2f23b4ca03775e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::AudioHolder
+  m_audioData:
+  - m_clip: {fileID: 8300000, guid: 45166bbeac6eb574a9b6fdcdda8527d5, type: 3}
+    m_pitch: 1
+    m_isPitchRandom: 1
+    m_min: 0.75
+    m_max: 1.25
 --- !u!1 &1908138697785165766
 GameObject:
   m_ObjectHideFlags: 0

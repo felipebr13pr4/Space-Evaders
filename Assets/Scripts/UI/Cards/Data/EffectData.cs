@@ -104,6 +104,9 @@ public class EffectData
                 case EnemyStat.BulletSize:
                     return IsBuff(!IsPositive);
 
+                case EnemyStat.Amount:
+                    return IsBuff(!IsPositive);
+
                 default:
                     ErrorLogger.LogError("No enemy stats yet 'Enemy Stat is true' detected");
                     return FramedAs.None;
@@ -195,6 +198,10 @@ public class EffectData
 
                 case EnemyStat.BulletSize:
                     AmountFloat = Random.Range(EnemyMinBulletSize, EnemyMaxBulletSize);
+                    return;
+
+                case EnemyStat.Amount:
+                    AmountInt = Random.Range(EnemyMinAmount, EnemyMaxAmount + 1);
                     return;
 
                 default:

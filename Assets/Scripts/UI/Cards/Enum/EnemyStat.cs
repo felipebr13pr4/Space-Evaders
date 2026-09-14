@@ -6,4 +6,5 @@ public enum EnemyStat
     FireRate = 2,
     BulletDamage = 3,
     BulletSize = 5,
+    Amount = 6,
 }

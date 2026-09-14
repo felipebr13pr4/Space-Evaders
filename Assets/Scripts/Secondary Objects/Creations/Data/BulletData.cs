@@ -8,7 +8,7 @@ public class BulletData
     public int Damage
     {
         get => m_damage;
-        set { m_damage = value; m_damage = Mathf.Clamp(m_damage, 0, 10); }
+        set { m_damage = value; m_damage = Mathf.Clamp(m_damage, 1, 500); }
     }
     public EntityType Target;
     public Color BulletColor;

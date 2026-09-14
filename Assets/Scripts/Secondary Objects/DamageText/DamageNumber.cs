@@ -8,7 +8,11 @@ using UnityEngine;
 public class DamageNumber : MonoBehaviour
 {
     private TextMeshPro m_text;
+    public TextMeshPro Text => m_text;
     private RectTransform m_rect;
+    [SerializeField] private Color m_color;
+    public Color Color { set { m_color = value;
+            GetComponent<TextMeshPro>().color = m_color; } }
 
     private void Start()
     {
@@ -27,7 +31,7 @@ public class DamageNumber : MonoBehaviour
     {
         gameObject.SetActive(true);
         transform.position = position;
-        m_text.color = Color.white;
+        m_text.color = m_color;
         m_text.text = amount.ToString();
         StartCoroutine(Float());
     }

@@ -9,6 +9,7 @@ public class EnemyBehavior : RangedEntityBehavior
     public override int MaxHealth { get => base.MaxHealth; set => base.MaxHealth = value + m_baseHealthAdder; }
     public override float FireRate { set => base.FireRate = value * m_baseFireRateMultiplier; }
     protected override int BulletsAmount => 20+(m_multiShootModifier.MultiShotAmount*5);
+    protected override Color DamageNumberColor => new(1, 0.2f, 0.2f, 1);
 
     protected void OnEnable()
     {
@@ -29,6 +30,18 @@ public class EnemyBehavior : RangedEntityBehavior
             m_aimbotModifier.ModifyBullet(PlayerBehavior.Transform.position);
 
         base.ShootBullet(i);
+    }
+
+    public override void Initialize()
+    {
+        base.Initialize();
+        m_bullets[BulletIndex].InitializeStats(m_bulletData);
+    }
+
+    protected override void Die()
+    {
+        base.Die();
+        m_audioHolder.ActivateStoppableSound(0);
     }
 
 #if UNITY_EDITOR || DEVELOPMENT_BUILD

@@ -40,6 +40,7 @@ public class SceneController : MonoBehaviour
 
     public void LoadScene(SceneType type)
     {
+        SavingController.Instance.SaveAll();
         string sceneToLoad = type switch
         {
             SceneType.Game => SceneNames.MainGame,
@@ -52,6 +53,7 @@ public class SceneController : MonoBehaviour
 
     public void ReloadScene()
     {
+        SavingController.Instance.SaveAll();
         m_currentScene = SceneManager.GetActiveScene().name;
         SceneManager.LoadScene(m_currentScene);
     }

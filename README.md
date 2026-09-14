@@ -54,6 +54,7 @@ Next time i should
 - Step up git etiquette.
 - Maybe build a method that just delays a frame (I notice alot of times i just need a method to start but be delayed by a single frame).
 - Learn how to use debug mode for the red line break things and likely other useful tools.
+- Add sounds way way earlier (I realize I keep forgetting and I end up doing it when close to finishing the project).
 
 
 Did I actually do it? (Did i do past "Next times i should")
@@ -107,3 +108,13 @@ Ideas for fun?
 - Maybe unique patterns aliens can descend instead of the normal block grid?
 - Maybe unique player bullets?
 - Maybe other small fun mechanics?
+
+# Credits
+
+Main Menu Music: https://youtu.be/In9xTpfjorU?si=IJYazD4zRjoKC5Yg
+8bit Dungeon Boss by Kevin MacLeod
+
+Main Game music: https://youtu.be/OuRvOCf9mJ4?si=evNREZhg_fYb4e6w
+MAZE by Density & Time
+
+Font: https://www.dafont.com/pixel-operator.font

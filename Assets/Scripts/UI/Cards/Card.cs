@@ -23,8 +23,6 @@ public class Card : MonoBehaviour
         m_buttonComponent.onClick.AddListener(ButtonClicked);
 
         StartCoroutine(HandleRefresh());
-
-        StartCoroutine(HandleTexts());
     }
 
     private void OnDisable() => m_buttonComponent.onClick.RemoveListener(ButtonClicked);
@@ -35,7 +33,7 @@ public class Card : MonoBehaviour
     private void UpdateWave(int wave) => m_currentWave = wave; 
     private void UpdateUnlock() => m_cardData.HasUnlockedAimbot = true;
 
-    private IEnumerator HandleRefresh()
+    public IEnumerator HandleRefresh()
     {
         yield return null;
         if (!isActiveAndEnabled) yield break;
@@ -47,6 +45,10 @@ public class Card : MonoBehaviour
         m_cardData.MaxDebuffsAmount = 5 + waveChange;
 
         m_cardData.Randomize();
+
+        yield return null;
+
+        StartCoroutine(HandleTexts());
     }
 
     private IEnumerator HandleTexts()

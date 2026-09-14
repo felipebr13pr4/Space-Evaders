@@ -86,8 +86,8 @@ public class EnemyHandler : MonoBehaviour
         OnWaveStartWithNumber?.Invoke(m_waveNumber);
 
         m_waveData.EnemyAmount += 2;
-        m_enemiesAlive = m_waveData.EnemyAmount;
-        if (m_waveNumber % 3 == 0) m_waveData.Healths += 1;
+        if (m_waveNumber != 3 && m_waveNumber != 6)
+            if (m_waveNumber % 3 == 0) m_waveData.Healths += 1;
         m_waveData.FireRates -= 0.5f;
         //m_waveData.FireRates = 1; // for testing
         m_waveData.MoveSpeeds -= 0.25f;
@@ -95,11 +95,16 @@ public class EnemyHandler : MonoBehaviour
         ErrorLogger.DebugLog("current H: " + m_waveData.Healths);
         ErrorLogger.DebugLog("---");
         ErrorLogger.DebugLog("current Amount: " + m_waveData.EnemyAmount);
-        ErrorLogger.DebugLog("current Alive: " + m_enemiesAlive);
         ErrorLogger.DebugLog("---");
-        ErrorLogger.DebugLog("current Move Interval: " + m_waveData.Bullets.MoveInterval);
+        ErrorLogger.DebugLog("current Speed: " + m_waveData.Bullets.MoveInterval);
+        ErrorLogger.DebugLog("current Size: " + m_waveData.Bullets.Size);
+        ErrorLogger.DebugLog("current Damage: " + m_waveData.Bullets.Damage);
 
         yield return new WaitForSeconds(3);
+
+        m_enemiesAlive = m_waveData.EnemyAmount;
+        ErrorLogger.DebugLog("current Alive: " + m_enemiesAlive);
+        ErrorLogger.DebugLog("---");
 
         ErrorLogger.DebugLog("starting wave");
 
@@ -111,6 +116,7 @@ public class EnemyHandler : MonoBehaviour
             m_enemiesBehavior[i].FireRate = m_waveData.FireRates;
             m_enemiesBehavior[i].BulletsData.MoveInterval = m_waveData.Bullets.MoveInterval;
             m_enemiesBehavior[i].BulletsData.Size = m_waveData.Bullets.Size;
+            ErrorLogger.DebugLog("BulletsData.Size: " + m_enemiesBehavior[i].BulletsData.Size);
             m_enemiesBehavior[i].BulletsData.Damage = m_waveData.Bullets.Damage;
             m_enemiesBehavior[i].Initialize();
         }

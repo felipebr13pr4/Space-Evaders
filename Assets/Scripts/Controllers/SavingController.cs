@@ -33,7 +33,7 @@ public class SavingController : MonoBehaviour
     {
         while (true)
         {
-            yield return new WaitForSecondsRealtime(15);
+            yield return new WaitForSecondsRealtime(5);
             if (m_isAutoSaveOn) Save();
         }
     }
@@ -53,8 +53,10 @@ public class SavingController : MonoBehaviour
     private void SavePlayerPrefs()
     {
         PlayerPrefs.SetFloat(PrefKeys.Volume, AudioController.Instance.AudioVolume);
+        PlayerPrefs.SetFloat(PrefKeys.MusicVolume, MusicController.Instance.AudioVolume);
         PlayerPrefs.SetInt(PrefKeys.ScreenWidth, Screen.width);
         PlayerPrefs.SetInt(PrefKeys.ScreenHeight, Screen.height);
         PlayerPrefs.SetInt(PrefKeys.FullScreen, Screen.fullScreenMode == FullScreenMode.FullScreenWindow ? 1 : 0);
+        PlayerPrefs.SetFloat(PrefKeys.PlayerBulletTransparency, PlayerBehavior.Instance.BulletTransparency);
     }
 }
