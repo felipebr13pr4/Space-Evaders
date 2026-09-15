@@ -6,6 +6,7 @@ public class MusicController : AudioBasics
 {
     [SerializeField] private AudioClip[] m_musics;
     public static MusicController Instance { get; private set; }
+    private string m_pastScene;
 
     private void Awake()
     {
@@ -35,8 +36,12 @@ public class MusicController : AudioBasics
 
     private void DecideMusic()
     {
-        if (SceneManager.GetActiveScene().name == SceneNames.MainMenu) PlayMusic(m_musics[0]);
-        else if (SceneManager.GetActiveScene().name == SceneNames.MainGame) PlayMusic(m_musics[1]);
+        if (m_pastScene == "" ||  m_pastScene != SceneManager.GetActiveScene().name)
+        {
+            if (SceneManager.GetActiveScene().name == SceneNames.MainMenu) PlayMusic(m_musics[0]);
+            else if (SceneManager.GetActiveScene().name == SceneNames.MainGame) PlayMusic(m_musics[1]);
+        }
+        m_pastScene = SceneManager.GetActiveScene().name;
 
     }
 

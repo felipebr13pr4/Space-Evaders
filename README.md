@@ -15,7 +15,11 @@ Link itch: (I'll add this when i have it which is after the project is entirely 
 
 # How to play
 
-Didn't do anything yet.
+WASD for movement.
+Esc to pause / leave submenus.
+Kill the squares.
+Choose a card.
+Survive the longest.
 
 # Development Notes
 
@@ -24,7 +28,6 @@ Fouth time using git and github.
 
 Re-appearances from last project
 - Scope creep.
-
 
 I learned
 - That unity packaging is really good.
@@ -81,6 +84,7 @@ General Thoughts
 - I've created a file called TheGraveyard, i decided to keep old things there for documentations purpose, otherwise i would have just deleted the things as its saved in between these commits anyways. But this file can be used to show differences from developing and the final build.
 - Two small bugs i know but won't fix. One is that enemies can go into a same square as the way its set up in a summary is "check, empty? move" but two enemies can look at a empty spot at the same frame and they end up in the same square. I do have a system to make them quickly get out of it though but it happens (and also the average player in a casual playthrough shooouldn't see it i think). I also know the fix is just to make a ghost enemy some frames before it moves so it basically says "im moving there" and others don't move there but thats too much work for something not quite a problem. The other bug is a funny/neat one, when a enemy is completely squared and you pause it's eyes go haywire since the yield return is null. Really easy fix i think, just making it a waitforseconds instead of yield return null in the movement but i liked it so im keeping it.
 - One thing i notice is that sometimes im likely overnaming vars. I think i should trust a bit more on context instead. E.g. a CardData inside Card could be just named Data instead of CardData i think. But since i think i've not been doing that i'll not change it to keep the project consistent (alternative is going through the entirety of it searching for those cases).
+- Third small bug found, annoying but doesn't do any harm. After death, clicking esc before you open a submenu makes the menu disappear (slightly frame-perfect?). I thiiink i got a vague idea on why but honestly its not a issue as if you press esc again it opens back again.
 
 # Project Plan
 

@@ -16,6 +16,7 @@ GameObject:
   - component: {fileID: 1850832798212866860}
   - component: {fileID: 3153809734678420493}
   - component: {fileID: 6833159144378910035}
+  - component: {fileID: 1609594661102848003}
   m_Layer: 5
   m_Name: Card
   m_TagString: Untagged
@@ -267,6 +268,18 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::DisableAfterFrame
   m_shouldDoIt: 0
+--- !u!114 &1609594661102848003
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3657128479631250735}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 57810871b268cdd4f94ff4e5595c8f7d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::DisableButtonOnOverlay
 --- !u!1001 &2621483146201042641
 PrefabInstance:
   m_ObjectHideFlags: 0

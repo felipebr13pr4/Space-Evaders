@@ -1,6 +1,5 @@
 using NUnit.Framework;
 using System;
-using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -47,9 +46,11 @@ public class CardData
                     ErrorLogger.LogError($"Randomizer safety engaged on slot {i}, couldn't land a {target}");
                     break;
                 }
-            } while (m_effects[i].FramedAs != target || m_effects[i].AreBothAmountsZero
-            || m_hasUnlockedAimbot && m_effects[i].IsPlayerStat &&
-               m_effects[i].PlayerStatEffect == PlayerStat.Aimbot);
+            } while (m_effects[i].FramedAs != target ||
+                     m_effects[i].AreBothAmountsZero ||
+                     m_hasUnlockedAimbot && m_effects[i].IsPlayerStat &&
+                     m_effects[i].PlayerStatEffect == PlayerStat.Aimbot ||
+                     CheckIfTwoUnlocks(PlayerStat.Aimbot));
 
             if (m_effects[i].FramedAs == FramedAs.Buff) buffsAmt++;
             else if (m_effects[i].FramedAs == FramedAs.Debuff) debuffsAmt++;
@@ -57,6 +58,16 @@ public class CardData
         CheckIfHealthAndHeal();
     }
     //
+
+    private bool CheckIfTwoUnlocks(PlayerStat stat)
+    {
+        int unlocks = 0;
+        foreach (EffectData effect in m_effects)
+        {
+            unlocks += effect.PlayerStatEffect == stat ? 1 : 0;
+        }
+        return unlocks > 1;
+    }
 
     // Thanks paint for being really helpful for visualizing the values.
     // I'll save it to be honest lol. And why not, i'll keep it in the project folder.

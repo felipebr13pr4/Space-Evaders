@@ -1,5 +1,9 @@
 #if UNITY_EDITOR
+using System;
+using TMPro;
 using UnityEngine;
+using UnityEngine.SceneManagement;
+using UnityEngine.UI;
 using UnityEngine.UIElements;
 
 public class TheGraveyard
@@ -428,5 +432,141 @@ public class TheGraveyard
     m_cardData.Effects[i].AmountFloat > 0.0001f ? "0.####" :
     m_cardData.Effects[i].AmountFloat > 0.00001f ? "0.#####" : "0.######" : "";*/
     //
+
+    // Overlay system was breaking when dying because it was really bad.
+    // So i reworked it. Past one:
+
+    /*public class SubMenu : MonoBehaviour
+    {
+        [SerializeField] private GameObject m_returnButton;
+        private bool m_firstTime = true;
+        public static event Action<bool> OnSubMenuOpen;
+
+        private void OnEnable()
+        {
+            OnSubMenuOpen?.Invoke(!isActiveAndEnabled);
+            if (m_returnButton != null) m_returnButton.SetActive(isActiveAndEnabled);
+        }
+
+        private void OnDisable()
+        { OnSubMenuOpen?.Invoke(!isActiveAndEnabled); }
+
+        private void Start()
+        {
+            if (m_firstTime)
+            {
+                Canvas.ForceUpdateCanvases();
+                LayoutRebuilder.ForceRebuildLayoutImmediate(GetComponent<RectTransform>());
+                m_firstTime = false;
+            }
+        }
+
+    }*/
+    // And then game state was subscribed where now submenuhandler subscribes.
+    // (SubMenuHandler.IsSubMenuOpen -= UpdateIfSubMenu;)
+
+    // Overlay window looked like this when trying to make it be able to 
+    // appear in the card menu. Then i rolled it back alot because it was just not
+    // working.
+    /*public class OverlayWindow : MonoBehaviour
+    {
+        [SerializeField] private TextMeshProUGUI m_windowTitle;
+        [SerializeField] private GameObject m_components;
+        [SerializeField] private GameObject m_background;
+        [SerializeField] private GameObject[] m_otherWindows;
+        [SerializeField] private CardHandler m_cardHandler;
+        private bool m_isPlayerDead;
+        private bool m_isInCard;
+
+
+        private void OnEnable()
+        {
+            GlobalHotkeysController.OnOpenMenu += OpenOverlayWindowWrap;
+            PlayerBehavior.OnPlayerDeath += PlayerDied;
+            PlayerBehavior.OnPlayerDeath += OpenOverlayWindowWrap;
+            // Put here another thing to make it open. (player death)
+        }
+
+        private void OnDisable()
+        {
+            GlobalHotkeysController.OnOpenMenu -= OpenOverlayWindowWrap;
+            PlayerBehavior.OnPlayerDeath -= PlayerDied;
+            PlayerBehavior.OnPlayerDeath -= OpenOverlayWindowWrap;
+            // Put here another thing to make it open.  (player death)
+        }
+
+        private void PlayerDied() => m_isPlayerDead = true;
+
+        private void OpenOverlayWindowWrap() => StartCoroutine(OpenOverlayWindow());
+
+        private IEnumerator OpenOverlayWindow()
+        {
+            yield return null;
+            if (m_cardHandler.activeInHierarchy)
+            {
+                m_cardHandler.CardsInteractable(false);
+                m_isInCard = true;
+            }
+            ErrorLogger.DebugLog("reached openoverlay");
+            bool isPaused = Time.timeScale == 0;
+            ErrorLogger.DebugLog($"m_cardHandler.activeInHierarchy: {m_cardHandler.activeInHierarchy}");
+            ErrorLogger.DebugLog($"m_components.activeInHierarchy: {m_components.activeInHierarchy}");
+            if (m_isInCard && !m_otherWindows[2].activeInHierarchy)
+            { isPaused = !m_components.activeInHierarchy; }
+            yield return null;
+            EnableOrDisable(isPaused, m_components);
+            EnableOrDisable(isPaused, m_background);
+            m_windowTitle.text = HandleTitle();
+            foreach (var window in m_otherWindows) window.GetComponent<FadingMenu>().Disable();
+        }
+
+        private void EnableOrDisable(bool isPaused, GameObject obj)
+        {
+            if (isPaused)
+            {
+                obj.SetActive(true);
+                if (obj.activeSelf) { obj.SetActive(false); obj.SetActive(true); }
+            }
+            else
+            {
+                obj.GetComponent<FadingMenu>().Disable();
+                if (m_isInCard)
+                {
+                    m_cardHandler.CardsInteractable(true);
+                }
+                m_isInCard = false;
+            }
+        }
+
+        private string HandleTitle()
+        {
+            // Put here ifs and else ifs when there are other things that can make this open.
+            if (Time.timeScale == 0)
+            {
+                return "Game Paused.";
+            }
+            else if (m_isPlayerDead)
+            {
+                return "Game Name";
+            }
+            else if (SceneManager.GetActiveScene().name == SceneNames.MainMenu)
+            {
+                return "Game Name";
+            }
+            return "Game Paused.";
+        }
+    }
+    */
+    // The method (now removed) in card handler used in the above class.
+    /*
+    [SerializeField] private Button[] m_cardsButtons;
+    public void CardsInteractable(bool state)
+    {
+        foreach (Button card in m_cardsButtons)
+        {
+            if (!state) { card.GetComponent<FadingMenu>().Disable(); continue; }
+            card.interactable = state;
+        }
+    }*/
 }
 #endif

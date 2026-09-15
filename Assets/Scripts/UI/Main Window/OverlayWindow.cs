@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using TMPro;
 using UnityEngine;
@@ -9,45 +10,54 @@ public class OverlayWindow : MonoBehaviour
     [SerializeField] private GameObject m_components;
     [SerializeField] private GameObject m_background;
     [SerializeField] private GameObject[] m_otherWindows;
-    private bool m_isOnUnpausableScreen;
+    private bool m_isPlayerDead;
+    private bool m_isOnCardMenu = false;
+    public static event Action<bool> OnOpen;
 
 
     private void OnEnable()
     {
+        CardHandler.OnCardsActivated += CardMenu;
         GlobalHotkeysController.OnOpenMenu += OpenOverlayWindowWrap;
-        GameStateController.OnGamePausedWithIfLocked += UpdateUnpauseState;
+        PlayerBehavior.OnPlayerDeath += PlayerDied;
+        PlayerBehavior.OnPlayerDeath += OpenOverlayWindowWrap;
         // Put here another thing to make it open. (player death)
     }
 
     private void OnDisable()
     {
+        CardHandler.OnCardsActivated -= CardMenu;
         GlobalHotkeysController.OnOpenMenu -= OpenOverlayWindowWrap;
-        GameStateController.OnGamePausedWithIfLocked -= UpdateUnpauseState;
+        PlayerBehavior.OnPlayerDeath -= PlayerDied;
+        PlayerBehavior.OnPlayerDeath -= OpenOverlayWindowWrap;
         // Put here another thing to make it open.  (player death)
     }
 
-    private void UpdateUnpauseState(bool canUnpause) => m_isOnUnpausableScreen = !canUnpause; 
+    private void CardMenu() => m_isOnCardMenu = !m_isOnCardMenu; 
+    private void PlayerDied() => m_isPlayerDead = true;
 
     private void OpenOverlayWindowWrap() => StartCoroutine(OpenOverlayWindow());
 
     private IEnumerator OpenOverlayWindow()
     {
-        if (m_isOnUnpausableScreen) yield break;
         yield return null;
         ErrorLogger.DebugLog("reached openoverlay");
-        bool isPaused = Time.timeScale == 0;
+        bool shouldActivate = Time.timeScale == 0;
+        if (m_isOnCardMenu && !m_otherWindows[2].activeInHierarchy)
+        { shouldActivate = !m_components.activeInHierarchy; }
         yield return null;
-        EnableOrDisable(isPaused, m_components);
-        EnableOrDisable(isPaused, m_background);
+        EnableOrDisable(shouldActivate, m_components);
+        EnableOrDisable(shouldActivate, m_background);
         m_windowTitle.text = HandleTitle();
         foreach (var window in m_otherWindows) window.GetComponent<FadingMenu>().Disable();
     }
 
-    private void EnableOrDisable(bool isPaused, GameObject obj)
+    private void EnableOrDisable(bool shouldActivate, GameObject obj)
     {
-        if (isPaused) { obj.SetActive(true);
+        if (shouldActivate) { obj.SetActive(true);
             if (obj.activeSelf) { obj.SetActive(false); obj.SetActive(true); } }
-        else obj.GetComponent<FadingMenu>().Disable();
+        else { if(!m_isPlayerDead) obj.GetComponent<FadingMenu>().Disable(); }
+        OnOpen?.Invoke(shouldActivate);
     }
 
     private string HandleTitle()
@@ -56,12 +66,15 @@ public class OverlayWindow : MonoBehaviour
         if (Time.timeScale == 0)
         {
             return "Game Paused.";
-        }else if (SceneManager.GetActiveScene().name == SceneNames.MainMenu)
+        }
+        else if (m_isPlayerDead)
+        {
+            return "Game Name";
+        }
+        else if (SceneManager.GetActiveScene().name == SceneNames.MainMenu)
         {
             return "Game Name";
         }
         return "Game Paused.";
     }
-
-    
 }

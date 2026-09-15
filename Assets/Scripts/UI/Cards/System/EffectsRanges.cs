@@ -32,7 +32,7 @@ public static class EffectsRanges
     public const float PlayerMaxBulletMoveInterval = 0.001f;
     public const float PlayerMinBulletMoveInterval = -0.001f;
 
-    public const int PlayerMaxShotsAmount = 5;
+    public const int PlayerMaxShotsAmount = 10;
     public const int PlayerMinShotsAmount = 1;
 
     public const float PlayerMaxShotsAngle = 5;
@@ -58,8 +58,8 @@ public static class EffectsRanges
     public const float EnemyMaxBulletSize = 0.01f;
     public const float EnemyMinBulletSize = -0.01f;
 
-    public const int EnemyMaxAmount = 2;
-    public const int EnemyMinAmount = -10;
+    public const int EnemyMaxAmount = 1;
+    public const int EnemyMinAmount = -3;
 
 
 }

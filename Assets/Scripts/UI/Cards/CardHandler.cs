@@ -1,11 +1,12 @@
 using System;
 using System.Collections;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class CardHandler : MonoBehaviour
 {
     [SerializeField] private GameObject m_cardUI;
-    public static event Action OnCardWaveNumber;
+    public static event Action OnCardsActivated;
 
     private void OnEnable()
     {
@@ -23,7 +24,7 @@ public class CardHandler : MonoBehaviour
     {
         bool isIt = false;
         if (wave % 3 == 0) isIt = true;
-        if (isIt) { OnCardWaveNumber?.Invoke();
+        if (isIt) { OnCardsActivated?.Invoke();
                     m_cardUI.SetActive(true);
                     StartCoroutine(MakeSureItsPaused()); }
     }
@@ -32,7 +33,7 @@ public class CardHandler : MonoBehaviour
     private IEnumerator MakeSureItsPaused()
     {
         yield return new WaitForSecondsRealtime(0.1f);
-        if (Time.timeScale > 0) OnCardWaveNumber?.Invoke();
+        if (Time.timeScale > 0) OnCardsActivated?.Invoke();
     }
 
     private void OnUnpause()

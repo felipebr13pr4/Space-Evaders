@@ -1,4 +1,5 @@
 
+using System;
 using UnityEngine;
 
 [RequireComponent(typeof(PlayerMovement))]
@@ -22,6 +23,7 @@ public class PlayerBehavior : RangedEntityBehavior
         set { m_bulletTransparency = value;
             Color tmpColor = m_bulletColor; tmpColor.a = m_bulletTransparency;
             BulletColor = tmpColor; } }
+    public static event Action OnPlayerDeath;
 
     public static PlayerBehavior Instance { get; private set; }
     private void Awake() => Instance = this;
@@ -49,6 +51,12 @@ public class PlayerBehavior : RangedEntityBehavior
             TakeDamage(hitter: collision.gameObject.GetComponent<EntityBehavior>(),
                        takeAndDeal: true);
         }
+    }
+
+    protected override void Die()
+    {
+        base.Die();
+        OnPlayerDeath?.Invoke();
     }
 
     protected override void ShootBullet(int i)

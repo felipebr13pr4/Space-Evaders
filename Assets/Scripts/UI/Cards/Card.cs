@@ -3,6 +3,7 @@ using System.Collections;
 using TMPro;
 using UnityEditor;
 using UnityEngine;
+using UnityEngine.InputSystem;
 using UnityEngine.UI;
 
 public class Card : MonoBehaviour
@@ -25,13 +26,17 @@ public class Card : MonoBehaviour
         StartCoroutine(HandleRefresh());
     }
 
-    private void OnDisable() => m_buttonComponent.onClick.RemoveListener(ButtonClicked);
+    private void OnDisable()
+    {
+        m_buttonComponent.onClick.RemoveListener(ButtonClicked);
+    }
 
     private void OnDestroy() { EnemyHandler.OnWaveStartWithNumber -= UpdateWave;
     CardEffectHandler.OnPlayerAimbotUnlock -= UpdateUnlock; }
 
     private void UpdateWave(int wave) => m_currentWave = wave; 
     private void UpdateUnlock() => m_cardData.HasUnlockedAimbot = true;
+    
 
     public IEnumerator HandleRefresh()
     {
