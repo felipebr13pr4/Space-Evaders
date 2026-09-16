@@ -342,7 +342,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: First Score!
+  m_text: PLACEHOLDER
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 580c9e5e5737a204c9d6db07a4cc84be, type: 2}
   m_sharedMaterial: {fileID: -9019181515192202474, guid: 580c9e5e5737a204c9d6db07a4cc84be, type: 2}

@@ -28,7 +28,7 @@ public class MenuSlider : MonoBehaviour
         {
             SliderType.Volume => AudioController.Instance.AudioVolume,
             SliderType.MusicVolume => MusicController.Instance.AudioVolume,
-            SliderType.PlayerBulletTransparency => PlayerBehavior.Instance.BulletTransparency,
+            SliderType.PlayerBulletTransparency => PlayerPrefs.GetFloat(PrefKeys.PlayerBulletTransparency, 1f),
             _ => 1,
         };
     }

@@ -22,7 +22,6 @@ public class EntityBehavior : Entity
         }
     }
     private bool m_isDead = false;
-    public static event Action<GameObject, int> OnDamageTaken;
     public static event Action<EntityBehavior> OnDeath;
     [SerializeField] private DamageNumber[] m_damageNumbers;
     private const int m_maxDamageNumbers = 10;
@@ -51,7 +50,6 @@ public class EntityBehavior : Entity
     public virtual void TakeDamage(int damage = 0, EntityBehavior hitter = null, bool takeAndDeal = false)
     {
         if (hitter != null) damage = hitter.Health;
-        OnDamageTaken?.Invoke(gameObject, damage);
 
         m_damageNumbers[DamageNumberIndex].Initialize(damage, transform.position);
         DamageNumberIndex += 1;

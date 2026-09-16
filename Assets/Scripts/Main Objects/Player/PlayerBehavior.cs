@@ -24,9 +24,12 @@ public class PlayerBehavior : RangedEntityBehavior
             Color tmpColor = m_bulletColor; tmpColor.a = m_bulletTransparency;
             BulletColor = tmpColor; } }
     public static event Action OnPlayerDeath;
+    public static event Action<AchievementType> OnPlayerDeathAchievement;
 
     public static PlayerBehavior Instance { get; private set; }
     private void Awake() => Instance = this;
+    public static event Action<int> OnDamageTaken;
+    public static event Action<int, AchievementType> OnDamageTakenAchievement;
 
     protected override void Start()
     {
@@ -53,10 +56,18 @@ public class PlayerBehavior : RangedEntityBehavior
         }
     }
 
+    public override void TakeDamage(int damage = 0, EntityBehavior hitter = null, bool takeAndDeal = false)
+    {
+        OnDamageTaken?.Invoke(damage);
+        OnDamageTakenAchievement?.Invoke(damage, AchievementType.DamageTaken);
+        base.TakeDamage(damage, hitter, takeAndDeal);
+    }
+
     protected override void Die()
     {
         base.Die();
         OnPlayerDeath?.Invoke();
+        OnPlayerDeathAchievement?.Invoke(AchievementType.TimesKilled);
     }
 
     protected override void ShootBullet(int i)

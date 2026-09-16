@@ -12,17 +12,14 @@ public class HealthBar : MonoBehaviour
     private readonly WaitForSeconds m_flashDurationSmaller = new(0.01f);
     private Coroutine m_flashCoroutine;
 
-    private void OnEnable() => EntityBehavior.OnDamageTaken += PlayerTookDamage;
+    private void OnEnable() => PlayerBehavior.OnDamageTaken += PlayerTookDamage;
 
-    private void OnDisable() => EntityBehavior.OnDamageTaken -= PlayerTookDamage;
+    private void OnDisable() => PlayerBehavior.OnDamageTaken -= PlayerTookDamage;
 
-    private void PlayerTookDamage(GameObject obj, int dmg)
+    private void PlayerTookDamage(int dmg)
     {
-        if (obj.CompareTag("Player"))
-        {
-            if (m_flashCoroutine != null) StopCoroutine(m_flashCoroutine);
-            m_flashCoroutine = StartCoroutine(FlashColor());
-        }
+        if (m_flashCoroutine != null) StopCoroutine(m_flashCoroutine);
+        m_flashCoroutine = StartCoroutine(FlashColor());
     }
 
     public void UpdateValues(int health, int maxHealth)

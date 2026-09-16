@@ -36,7 +36,22 @@ public class AchievementBox : MonoBehaviour
     {
         int amount = type switch
         {
-            // Put amounts here when there actually is data saved
+            AchievementType.EnemiesKilled => PlayerPrefs.GetInt(PrefKeys.EnemyKilled, 0),
+            AchievementType.TimesKilled => PlayerPrefs.GetInt(PrefKeys.TimesKilled, 0),
+            AchievementType.DamageTaken => PlayerPrefs.GetInt(PrefKeys.DamageTaken, 0),
+            AchievementType.DamageDealt => PlayerPrefs.GetInt(PrefKeys.DamageDealt, 0),
+            AchievementType.BasicKilled => PlayerPrefs.GetInt(PrefKeys.BasicsKilled, 0),
+            AchievementType.AimbotKilled => PlayerPrefs.GetInt(PrefKeys.AimbotsKilled, 0),
+            AchievementType.TriKilled => PlayerPrefs.GetInt(PrefKeys.TrisKilled, 0),
+            AchievementType.AimbotTriKilled => PlayerPrefs.GetInt(PrefKeys.AimbotTrisKilled, 0),
+            AchievementType.FiveKilled => PlayerPrefs.GetInt(PrefKeys.FivesKilled, 0),
+            AchievementType.AimbotFiveKilled => PlayerPrefs.GetInt(PrefKeys.AimbotFivesKilled, 0),
+            AchievementType.SevenKilled => PlayerPrefs.GetInt(PrefKeys.SevensKilled, 0),
+            AchievementType.AimbotSevenKilled => PlayerPrefs.GetInt(PrefKeys.AimbotSevensKilled, 0),
+            AchievementType.TenKilled => PlayerPrefs.GetInt(PrefKeys.TensKilled, 0),
+            AchievementType.AimbotTenKilled => PlayerPrefs.GetInt(PrefKeys.AimbotTensKilled, 0),
+            AchievementType.BossKilled => PlayerPrefs.GetInt(PrefKeys.BossesKilled, 0),
+            AchievementType.AimbotBossKilled => PlayerPrefs.GetInt(PrefKeys.AimbotBossesKilled, 0),
             _ => 0,
         };
         return amount;

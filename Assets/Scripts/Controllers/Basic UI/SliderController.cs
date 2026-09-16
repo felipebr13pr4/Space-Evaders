@@ -35,7 +35,7 @@ public class SliderController : MonoBehaviour
                 return;
 
             case SliderType.PlayerBulletTransparency:
-                PlayerBehavior.Instance.BulletTransparency = value;
+                PlayerPrefs.SetFloat(PrefKeys.PlayerBulletTransparency, value);
                 return;
 
             case SliderType.MusicVolume:
