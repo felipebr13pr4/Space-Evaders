@@ -1,4 +1,4 @@
-// Had claude do these (though just placeholder values, all 1).
+// Had claude do these with placeholder values to 1 (like, just doing the name).
 // Its really great at repetitive tasks. (maxHealth, enemyBuSize and enemyAmount by me tho
 // since the first was for example and the other two later additions)
 public static class EffectsRanges

@@ -10,21 +10,33 @@ public class SubMenu : MonoBehaviour
     public static event Action<bool, GameObject> IsSubMenuActive;
     private FadingMenu m_fade;
     private bool m_firstTime = true;
+    private bool m_isLocked = true;
 
-    private void OnEnable() => IsSubMenuActive?.Invoke(true, gameObject);
-    private void OnDisable() => IsSubMenuActive?.Invoke(false, gameObject);
+    private void OnEnable()
+    {
+        IsSubMenuActive?.Invoke(true, gameObject);
+        StartCoroutine(LockState(false));
+    }
+    private void OnDisable()
+    {
+        IsSubMenuActive?.Invoke(false, gameObject);
+        m_isLocked = true;
+    }
 
-    private void Start() {m_fade = GetComponent<FadingMenu>(); if (m_firstTime)
+    private void Start()
+    {
+        m_fade = GetComponent<FadingMenu>(); if (m_firstTime)
         {
             Canvas.ForceUpdateCanvases();
             LayoutRebuilder.ForceRebuildLayoutImmediate(GetComponent<RectTransform>());
             m_firstTime = false;
         }
     }
-    
-    private void Update()
+
+    private IEnumerator LockState(bool isLocked)
     {
-        if (Keyboard.current.escapeKey.wasPressedThisFrame)
-        { IsSubMenuActive?.Invoke(false, gameObject); m_fade.Disable();}
-    }
+        yield return null;
+        yield return null;
+        m_isLocked = isLocked;
+    } 
 }

@@ -6,8 +6,8 @@ public class SubMenuHandler : MonoBehaviour
 {
     [SerializeField] private GameObject m_returnButton;
     [SerializeField] private GameObject m_mainMenu;
-    private List<GameObject> m_activeMenus = new(5);
-    public static event Action<bool> IsSubMenuOpen;
+    private readonly List<GameObject> m_activeMenus = new(5);
+    public List<GameObject> ActiveMenus => m_activeMenus;
 
     private void OnEnable()
     {
@@ -29,10 +29,8 @@ public class SubMenuHandler : MonoBehaviour
         {
             if (m_activeMenus.Contains(subMenu)) m_activeMenus.Remove(subMenu);
         }
-        IsSubMenuOpen?.Invoke(m_activeMenus.Count != 0);
         if (m_activeMenus.Count == 0)
         {
-            m_mainMenu.SetActive(true);
             m_returnButton.GetComponent<FadingMenu>().Disable();
         }
     }

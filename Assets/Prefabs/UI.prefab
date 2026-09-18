@@ -16544,6 +16544,7 @@ GameObject:
   - component: {fileID: 5475920639094956279}
   - component: {fileID: 673255230910216188}
   - component: {fileID: 8778438234460302149}
+  - component: {fileID: 2245205908266611756}
   m_Layer: 5
   m_Name: Settings Button
   m_TagString: Untagged
@@ -16689,6 +16690,18 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 1
         m_CallState: 2
+--- !u!114 &2245205908266611756
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1673695638477322041}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d826d21ea26d8a847bfcfc9a19b79cd2, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::SubMenuButton
 --- !u!1 &1681313679773224664
 GameObject:
   m_ObjectHideFlags: 0
@@ -30433,7 +30446,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b2784944049aa3648868d257d10bf502, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::PauseButton
-  m_pauseWindow: {fileID: 8590688371988654894}
 --- !u!114 &2764221153435551903
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -34786,12 +34798,14 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::EndscreenWindow
   m_windowTitle: {fileID: 1646431692748948353}
-  m_components: {fileID: 1286473247962636541}
-  m_background: {fileID: 3331560358521561643}
+  m_mainComps:
+  - {fileID: 1286473247962636541}
+  - {fileID: 3331560358521561643}
   m_otherWindows:
-  - {fileID: 8317821236317428818}
-  - {fileID: 1870847784639525463}
-  - {fileID: 4817935786508990682}
+  - {fileID: 4513311002225849075}
+  - {fileID: 1555514612624157479}
+  - {fileID: 1261260172561914165}
+  m_submenuHandler: {fileID: 3221126632319259716}
 --- !u!114 &3221126632319259716
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -45194,6 +45208,7 @@ GameObject:
   - component: {fileID: 8202198491932716236}
   - component: {fileID: 2580565748628041447}
   - component: {fileID: 8036248732853042709}
+  - component: {fileID: 2368009969914060693}
   m_Layer: 5
   m_Name: Achievements Button
   m_TagString: Untagged
@@ -45339,6 +45354,18 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 1
         m_CallState: 2
+--- !u!114 &2368009969914060693
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4102977698146376583}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d826d21ea26d8a847bfcfc9a19b79cd2, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::SubMenuButton
 --- !u!1 &4103011862148076366
 GameObject:
   m_ObjectHideFlags: 0
@@ -52738,6 +52765,7 @@ GameObject:
   - component: {fileID: 7388435146318490587}
   - component: {fileID: 1261260172561914165}
   - component: {fileID: 2916516642666658863}
+  - component: {fileID: 3539921224333851363}
   m_Layer: 5
   m_Name: Return Button
   m_TagString: Untagged
@@ -52945,6 +52973,18 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::EnableObjWhenDisable
   m_gameObj: {fileID: 1286473247962636541}
+--- !u!114 &3539921224333851363
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4817935786508990682}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d826d21ea26d8a847bfcfc9a19b79cd2, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::SubMenuButton
 --- !u!1 &4820611322509045913
 GameObject:
   m_ObjectHideFlags: 0

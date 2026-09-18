@@ -3,7 +3,6 @@ using System.Collections;
 using TMPro;
 using UnityEditor;
 using UnityEngine;
-using UnityEngine.InputSystem;
 using UnityEngine.UI;
 
 public class Card : MonoBehaviour
@@ -73,10 +72,8 @@ public class Card : MonoBehaviour
                 "Player Bullet Speed" :
                 m_cardData.Effects[i].PlayerStatEffect == PlayerStat.Aimbot ?
                 "Player Unlock Aimbot" :
-                "Player " + m_cardData.Effects[i].PlayerStatEffect.ToString() :
-                "Enemy " + m_cardData.Effects[i].EnemyStatEffect.ToString();
-
-            type = ObjectNames.NicifyVariableName(type);
+                "Player " + StringFunctions.SpaceString(m_cardData.Effects[i].PlayerStatEffect.ToString()) :
+                "Enemy " + StringFunctions.SpaceString(m_cardData.Effects[i].EnemyStatEffect.ToString());
 
             m_effectTexts[i].color =
                 m_cardData.Effects[i].FramedAs == FramedAs.Buff ? Color.green : Color.red;

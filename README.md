@@ -19,7 +19,7 @@ WASD for movement.
 Esc to pause / leave submenus.
 R for quick retry.
 Kill the squares.
-Choose a card.
+Choose a card each 3 waves.
 Survive the longest.
 
 # Development Notes

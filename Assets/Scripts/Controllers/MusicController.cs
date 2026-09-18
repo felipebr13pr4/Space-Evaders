@@ -5,9 +5,9 @@ using UnityEngine.SceneManagement;
 public class MusicController : AudioBasics
 {
     [SerializeField] private AudioClip[] m_musics;
-    public static MusicController Instance { get; private set; }
     private string m_pastScene;
 
+    public static MusicController Instance { get; private set; }
     private void Awake()
     {
         if (Instance != null && Instance != this)

@@ -61,7 +61,7 @@ public class DataController : MonoBehaviour
         PlayerBehavior.OnPlayerDeathAchievement += IncreaseStat;
         PlayerBehavior.OnDamageTakenAchievement += IncreaseStat;
         EnemyBehavior.OnDeathAchievement += IncreaseKillStat;
-        // Put things when there is something to listen and increase stats.
+        EnemyBehavior.OnDamageTaken += IncreaseStat;
     }
 
     private void OnDisable()
@@ -69,7 +69,7 @@ public class DataController : MonoBehaviour
         PlayerBehavior.OnPlayerDeathAchievement -= IncreaseStat;
         PlayerBehavior.OnDamageTakenAchievement -= IncreaseStat;
         EnemyBehavior.OnDeathAchievement -= IncreaseKillStat;
-        // Put things when there is something to listen and increase stats.
+        EnemyBehavior.OnDamageTaken -= IncreaseStat;
     }
 
     private void IncreaseStat(int amount, AchievementType type)

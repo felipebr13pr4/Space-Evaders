@@ -1,12 +1,12 @@
 using System;
 using System.Collections;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 [RequireComponent(typeof(AudioHolder))]
 public class GameStateController : MonoBehaviour
 {
     private bool m_canUnpause;
-    private bool m_inSubMenu;
     private bool m_isGamePaused;
     public bool IsGamePaused => m_isGamePaused;
     public bool IsInSubMenu => m_canUnpause;
@@ -30,8 +30,8 @@ public class GameStateController : MonoBehaviour
 
     private void OnEnable()
     {
-        GlobalHotkeysController.OnOpenMenu += CheckIfCanPause;
-        SubMenuHandler.IsSubMenuOpen += UpdateIfSubMenu;
+        OverlayWindow.OnOpenWindow += CheckIfCanPause;
+        OverlayWindow.OnCloseWindow += CheckIfCanPause;
         CardHandler.OnCardsActivated += BlockThenTPause;
         Card.OnCardChosen += UnblockThenCheckPause;
         PlayerBehavior.OnPlayerDeath += BlockThenTPause;
@@ -41,8 +41,8 @@ public class GameStateController : MonoBehaviour
 
     private void OnDisable()
     {
-        GlobalHotkeysController.OnOpenMenu -= CheckIfCanPause;
-        SubMenuHandler.IsSubMenuOpen -= UpdateIfSubMenu;
+        OverlayWindow.OnOpenWindow -= CheckIfCanPause;
+        OverlayWindow.OnCloseWindow -= CheckIfCanPause;
         CardHandler.OnCardsActivated -= BlockThenTPause;
         Card.OnCardChosen -= UnblockThenCheckPause;
         PlayerBehavior.OnPlayerDeath -= BlockThenTPause;
@@ -61,11 +61,11 @@ public class GameStateController : MonoBehaviour
         TogglePause();
     }
 
-    public void UpdateIfSubMenu(bool isIn) => m_inSubMenu = isIn;
 
     public void CheckIfCanPause()
     {
-        if (!m_canUnpause || m_inSubMenu) return;
+        if (!m_canUnpause ||
+            SceneController.Instance.IsInMenu) return;
         TogglePause();
     }
 
@@ -73,6 +73,21 @@ public class GameStateController : MonoBehaviour
     {
         GetComponent<AudioHolder>().ActivateSound(0);
         Time.timeScale = Time.timeScale > 0 ? 0 : 1;
+        m_isGamePaused = Time.timeScale == 0;
+        OnGamePaused?.Invoke();
+        OnGamePausedWithIfLocked?.Invoke(m_canUnpause);
+    }
+
+    public void CheckIfCanPause(bool pause)
+    {
+        if (!m_canUnpause ||
+            SceneController.Instance.IsInMenu) return;
+        TogglePause(pause);
+    }
+
+    private void TogglePause(bool pause)
+    {
+        Time.timeScale = pause ? 0 : 1;
         m_isGamePaused = Time.timeScale == 0;
         OnGamePaused?.Invoke();
         OnGamePausedWithIfLocked?.Invoke(m_canUnpause);

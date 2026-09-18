@@ -134,5 +134,17 @@ public class PlayerBehavior : RangedEntityBehavior
     {
         BulletsData.Damage = 500;
     }
+
+    
+
+    [ContextMenu("test")]
+    private void Test()
+    {
+        string strrrr = "TestCoolTestOkayYeah";
+
+        strrrr = StringFunctions.SpaceString(strrrr);
+
+        print($"strrrr: {strrrr}");
+    }
 #endif
 }

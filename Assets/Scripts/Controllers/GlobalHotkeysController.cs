@@ -5,7 +5,6 @@ using UnityEngine.SceneManagement;
 
 public class GlobalHotkeysController : MonoBehaviour
 {
-    public static event Action OnOpenMenu;
     private string m_sceneName;
 
     public static GlobalHotkeysController Instance { get; private set; }
@@ -32,11 +31,6 @@ public class GlobalHotkeysController : MonoBehaviour
 
     private void Update()
     {
-        if (m_sceneName == SceneNames.MainMenu) return;
-
-        if (Keyboard.current.escapeKey.wasPressedThisFrame)
-            OnOpenMenu?.Invoke();
-
 #if UNITY_EDITOR || DEVELOPMENT_BUILD
         if (Keyboard.current.qKey.wasPressedThisFrame)
             if (Time.timeScale > 0.2f) Time.timeScale -= 0.1f;

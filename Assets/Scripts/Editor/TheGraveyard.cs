@@ -1,10 +1,13 @@
 #if UNITY_EDITOR
 using System;
 using TMPro;
+using Unity.VisualScripting;
 using UnityEngine;
+using UnityEngine.InputSystem;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 using UnityEngine.UIElements;
+using UnityEngine.UIElements.Experimental;
 
 public class TheGraveyard
 {
@@ -568,5 +571,104 @@ public class TheGraveyard
             card.interactable = state;
         }
     }*/
+
+    // I. One of the most annoying bugs I faced I think.
+    // The exact cause:
+    // Main comps open.
+    // I press setting buttons, that immediatly sets setting comps to active which starts to fade it in and does a disable for main comps making it start fading out.
+    // Before either of them finishes i press esc.
+    // And im preeetty sure its because the main comps didn't yet deactivate as they are fading. But at the same time im already at a point that i can press esc to close the settings comp and open the main comps but since main comps is already active i think it does nothing.
+    // And so, both close. Leaving me only with my background.
+    // Then pressing esc again makes the main comps appear yet again, back to a functional state.
+    //
+    // Had to get help from Claude on it.
+    // The old overlaywindow code.
+    /*public class OverlayWindow : MonoBehaviour
+    {
+        [SerializeField] private TextMeshProUGUI m_windowTitle;
+        [SerializeField] private GameObject[] m_mainComps;
+        [SerializeField] private FadingMenu[] m_otherWindows;
+        [SerializeField] private SubMenuHandler m_submenuHandler;
+        private bool m_isPlayerDead;
+        public static event Action<bool> OnOpen;
+        public static event Action<bool> OnOpenWindow;
+        public static event Action<bool> OnCloseWindow;
+
+
+        private void OnEnable()
+        {
+            PlayerBehavior.OnPlayerDeath += PlayerDied;
+            PlayerBehavior.OnPlayerDeath += OpenOverlayWindowWrap;
+        }
+
+        private void OnDisable()
+        {
+            PlayerBehavior.OnPlayerDeath -= PlayerDied;
+            PlayerBehavior.OnPlayerDeath -= OpenOverlayWindowWrap;
+        }
+
+        private void Update()
+        {
+            if (Keyboard.current.escapeKey.wasPressedThisFrame)
+                OpenOverlayWindowWrap();
+        }
+
+        private void PlayerDied() => m_isPlayerDead = true;
+
+        private void OpenOverlayWindowWrap() => StartCoroutine(OpenOverlayWindow());
+
+        private IEnumerator OpenOverlayWindow()
+        {
+            yield return null;
+            ErrorLogger.DebugLog("reached openoverlay");
+            bool shouldActivate = !m_mainComps[0].activeInHierarchy;
+            yield return null;
+            if (m_submenuHandler.ActiveMenus.Count == 0 && shouldActivate)
+                OnOpenWindow?.Invoke(true);
+            else if (m_submenuHandler.ActiveMenus.Count == 0 && !shouldActivate)
+                OnCloseWindow?.Invoke(false);
+            EnableOrDisable(shouldActivate);
+            m_windowTitle.text = HandleTitle();
+        }
+
+        private void EnableOrDisable(bool shouldActivate)
+        {
+            foreach (GameObject obj in m_mainComps)
+            {
+                if (shouldActivate)
+                {
+                    obj.SetActive(true);
+                    if (obj.activeSelf) { obj.SetActive(false); obj.SetActive(true); }
+                }
+                else if (!m_isPlayerDead &&
+                        !SceneController.Instance.IsInMenu)
+                {
+                    obj.GetComponent<FadingMenu>().Disable();
+                }
+            }
+            if (shouldActivate)
+                foreach (FadingMenu window in m_otherWindows) window.Disable();
+            OnOpen?.Invoke(shouldActivate);
+        }
+
+        private string HandleTitle()
+        {
+            // Put here ifs and else ifs when there are other things that can make this open.
+            if (m_isPlayerDead)
+            {
+                return "You Died.";
+            }
+            else if (Time.timeScale == 0)
+            {
+                return "Game Paused.";
+            }
+            else if (SceneController.Instance.IsInMenu)
+            {
+                return "Space Evaders";
+            }
+            return "Game Paused.";
+        }
+    }
+    */
 }
 #endif

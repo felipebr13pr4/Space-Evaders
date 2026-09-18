@@ -4,7 +4,8 @@ using UnityEngine.SceneManagement;
 
 public class SceneController : MonoBehaviour
 {
-    private string m_currentScene;
+    private string m_currentScene = SceneNames.MainMenu;
+    public bool IsInMenu => m_currentScene == SceneNames.MainMenu;
 
 
     public static SceneController Instance { get; private set; }
@@ -33,7 +34,7 @@ public class SceneController : MonoBehaviour
 
     private void Update()
     {
-        if (m_currentScene == SceneNames.MainMenu) return;
+        // if (m_currentScene == SceneNames.MainMenu) return;
         if (Keyboard.current.rKey.wasPressedThisFrame)
             ReloadScene();
     }
@@ -48,6 +49,7 @@ public class SceneController : MonoBehaviour
             _ => SceneNames.MainMenu,
         };
 
+        m_currentScene = sceneToLoad;
         SceneManager.LoadScene(sceneToLoad);
     }
 
