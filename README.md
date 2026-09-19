@@ -11,7 +11,7 @@ If you clone this project, be aware that your editor game window resolution must
 
 Project created at "created_at": "2026-08-19T13:39:35Z", according to this repo's data from https://api.github.com/repos/felipebr13pr4/Space-Evaders
 
-Link itch: (I'll add this when i have it which is after the project is entirely done)
+Link itch: https://felipebr13pr.itch.io/space-evaders
 
 # How to play
 
@@ -141,7 +141,7 @@ Se você clonar este projeto, saiba que a sua resolução de janela de jogo tem 
 
 Projeto criado em "created_at": "2026-08-19T13:39:35Z", de acordo com os dados do repo de https://api.github.com/repos/felipebr13pr4/Space-Evaders
 
-Link do itch: (Vou adicionar aqui quando criar.)
+Link do itch: https://felipebr13pr.itch.io/space-evaders
 
 # Como jogar
 
