@@ -1,7 +1,20 @@
 public enum AchievementType
 {
+    None = 16,
     EnemiesKilled = 0,
     TimesKilled = 1,
     DamageTaken = 2,
     DamageDealt = 3,
+    BasicKilled = 4,
+    AimbotKilled = 5,
+    TriKilled = 6,
+    AimbotTriKilled = 7,
+    FiveKilled = 8,
+    AimbotFiveKilled = 9,
+    SevenKilled = 10,
+    AimbotSevenKilled = 11,
+    TenKilled = 12,
+    AimbotTenKilled = 13,
+    BossKilled = 14,
+    AimbotBossKilled = 15,
 }

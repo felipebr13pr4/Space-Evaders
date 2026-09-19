@@ -1,14 +1,10 @@
 using UnityEngine;
 
 [RequireComponent(typeof(AudioSource))]
-public class AudioController : MonoBehaviour
+public class AudioController : AudioBasics
 {
-    private float m_audioVolume = 1;
-
-    [SerializeField] private AudioSource m_audioSource;
     [SerializeField] private AudioSource m_stoppableAudioSource;
 
-    public float AudioVolume => m_audioVolume;
 
     public static AudioController Instance { get; private set; }
 
@@ -25,21 +21,10 @@ public class AudioController : MonoBehaviour
         DontDestroyOnLoad(gameObject);
     }
 
-    private void OnEnable()
-    {
-        AudioHolder.OnAudio += PlayAudio;
-        AudioHolder.OnStoppableAudio += PlayStoppableAudio;
-    }
-
-    private void OnDisable()
-    {
-        AudioHolder.OnAudio -= PlayAudio;
-        AudioHolder.OnStoppableAudio -= PlayStoppableAudio;
-    }
-    
     private void Start()
     {
         m_audioVolume = PlayerPrefs.GetFloat(PrefKeys.Volume, 1f);
+        SetAudio(m_audioVolume);
     }
 
     public void PlayAudio(AudioData data)
@@ -57,10 +42,5 @@ public class AudioController : MonoBehaviour
         m_stoppableAudioSource.pitch = pitch;
         m_stoppableAudioSource.Stop();
         m_stoppableAudioSource.PlayOneShot(data.Clip, m_audioVolume);
-    }
-
-    public void SetAudio(float value)
-    {
-        m_audioVolume = value;
     }
 }

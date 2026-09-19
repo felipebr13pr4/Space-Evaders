@@ -16,14 +16,28 @@ public class ErrorLogger : MonoBehaviour
 
     [System.Diagnostics.Conditional("UNITY_EDITOR")]
     [HideInCallstack]
-    public static void LogError(int errorIndex, string varInfo = "")
+    public static void LogError(object msg)
+    {
+        Debug.LogError(msg);
+    }
+
+    [System.Diagnostics.Conditional("UNITY_EDITOR")]
+    [HideInCallstack]
+    public static void LogWarning(object msg)
+    {
+        Debug.LogWarning(msg);
+    }
+
+    [System.Diagnostics.Conditional("UNITY_EDITOR")]
+    [HideInCallstack]
+    public static void LogErrorType(int errorIndex, string varInfo = "")
     {
         HandleLogError(errorIndex, varInfo);
     }
 
     [System.Diagnostics.Conditional("UNITY_EDITOR")]
     [HideInCallstack]
-    public static void LogError(ErrorType errorType, string varInfo = "")
+    public static void LogErrorType(ErrorType errorType, string varInfo = "")
     {
         HandleLogError((int)errorType, varInfo);
     }

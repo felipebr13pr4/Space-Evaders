@@ -4,19 +4,17 @@ using UnityEngine;
 public class AudioHolder : MonoBehaviour
 {
     [SerializeField] private AudioData[] m_audioData = new AudioData[4];
-    public static event Action<AudioData> OnAudio;
-    public static event Action<AudioData> OnStoppableAudio;
 
     public void ActivateSound(params int[] indices)
     {
         for (int i = 0; i < indices.Length; i++)
-            OnAudio?.Invoke(m_audioData[indices[i]]);
+            AudioController.Instance.PlayAudio(m_audioData[indices[i]]);
     }
 
     public void ActivateStoppableSound(params int[] indices)
     {
         for (int i = 0; i < indices.Length; i++)
-            OnStoppableAudio?.Invoke(m_audioData[indices[i]]);
+            AudioController.Instance.PlayStoppableAudio(m_audioData[indices[i]]);
     }
 
     private void OnValidate()
