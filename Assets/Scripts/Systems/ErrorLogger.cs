@@ -1,6 +1,5 @@
 using UnityEngine;
 
-#if UNITY_EDITOR || DEVELOPMENT_BUILD
 public class ErrorLogger : MonoBehaviour
 {
     public enum ErrorType
@@ -56,4 +55,3 @@ public class ErrorLogger : MonoBehaviour
         }
     }
 }
-#endif

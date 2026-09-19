@@ -13,7 +13,6 @@ GameObject:
   - component: {fileID: 652038057728106698}
   - component: {fileID: 1740143773653515575}
   - component: {fileID: 3733873357981854089}
-  - component: {fileID: 7718659800390527072}
   - component: {fileID: 4658002157336454196}
   - component: {fileID: 8435187523340379893}
   - component: {fileID: 153299001657249685}
@@ -261,18 +260,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 59a8dd43a70406b4385c717369d08493, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::SavingController
---- !u!114 &7718659800390527072
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4939156520510865647}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: a5fd4a7b44a2b0f4d90570b9064066f0, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::GlobalHotkeysController
 --- !u!114 &4658002157336454196
 MonoBehaviour:
   m_ObjectHideFlags: 0
